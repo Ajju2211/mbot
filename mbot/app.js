@@ -9,18 +9,17 @@ const path = require("path");
 const userRouter = require("./routes/user");
 const sampleAPIRouter = require("./sample-api/router");
 
-
 const app = express();
 
 // UN comment whenever required to see whois accesing logs
 // // log All STDOUT
-const fs = require('fs');
-let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
- 
+const fs = require("fs");
+let accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+  flags: "a",
+});
+
 // // setup the logger
-app.use(morgan('combined', { stream: accessLogStream }))
-
-
+app.use(morgan("combined", { stream: accessLogStream }));
 
 //Middleware
 //Implement cors
@@ -39,12 +38,10 @@ app.use(express.urlencoded({ extended: true }));
 // server statuc file
 app.use("/", express.static(path.join(__dirname, "public")));
 
-
 // sample-api for testing replaced with original
 app.use("/api/v1", sampleAPIRouter);
 
 app.use("/user", userRouter);
-
 
 //Handling unexpected routes
 app.all("*", (req, res, next) => {

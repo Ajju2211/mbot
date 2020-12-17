@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const { buildResponse } = require("../utils/make-response");
 const axios = require("axios");
-const BASE_URL = "http://client-bot-server.herokuapp.com";
+const BASE_URL = process.env.API_BASE_URL;
 const db = [
   {
     email: "test@mail.com",
@@ -34,6 +34,7 @@ exports.logout = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
+  console.log("base URL:"+BASE_URL+":");
 
   // 1) Check if email and password exist
   if (!email || !password) {
@@ -75,8 +76,10 @@ exports.login = async (req, res) => {
     res.cookie("jwt", token, {
       maxAge: 1000 * 60 * 60 * 24 * 7,
       httpOnly: true,
-      sameSite: "none",
-      secure: true,
+      // DISABLING SAMESITE
+      // sameSite: "none",
+      // DISABLING ONLY HTTPS MODE
+      // secure: true,
     });
     res.status(200).json({
       status: "success",
@@ -84,6 +87,7 @@ exports.login = async (req, res) => {
       data: user.result,
     });
   } catch (error) {
+    console.log(error.message);
     return res.status(400).json({
       status: "failed",
       data: "Invalid email and password",

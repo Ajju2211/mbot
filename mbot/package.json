@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/naaniz/client-bot-server.git"
+    "url": "https://github.com/Ajju2211/mbot.git"
   },
   "author": "Ajju2211",
   "license": "ISC",
@@ -19,7 +19,6 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-subdomain": "^1.0.5",
     "helmet": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
