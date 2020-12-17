@@ -1,0 +1,29 @@
+****************************************verifyUser API***********************************
+****************This API will check email_id exists or not in DB*************************
+*******************For JWT decoded email_id validation, this API for protecting every secured routes ***********************************
+***********************************************
+ENDPOINT: BASE_URL/api/v1/user/verifyUser
+REQUEST_MODE: POST					
+**********************************************
+REQUEST:
+// If any headers for securing the API access only for the chatbot
+// space in between Bearer and token
+headers:{
+	"authorization":"Bearer <token>"
+}
+BODY=
+{
+	"email_id":"test@mail.com"
+}
+
+RESPONSE=
+{
+	"status": "success",
+      "result": {
+        "brand_id": "23",
+        "manager_id": "2",
+        "email_id": "test@mail.com",
+      },
+}
+
+

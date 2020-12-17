@@ -1,0 +1,580 @@
+*********************************************************************************					
+**********************  HEADERS FOR ALL API's *****************************
+*********************************************************************************				
+authtoken = md5encryption of manager id + md5encryption of brand_id
+
+
+
+*********************************************************************************					
+**********************  REQUEST JSON FOR ALL apis *****************************
+*********************************************************************************					
+
+Request json={
+"from":"2020-10-26",
+"to":"2020-10-26",
+"for":"today"
+}
+
+
+Request json={
+"from":"2020-10-25",
+"to":"2020-10-25",
+"for":"yesterday"
+}
+
+
+Request json={
+"from":"2020-10-18",
+"to":"2020-10-25",
+"for":"week"
+}
+
+Request json={
+"from":"2020-09-01",
+"to":"2020-09-30",
+"for":"month"
+}
+
+Request json={
+"from":"2020-09-01",
+"to":"2020-09-30",
+"for":"custom"
+}
+
+
+*********************************************************************************					
+*************************  Pending Purchases ************************************
+*********************************************************************************	
+ENDPOINT: BASE_URL/api/v1/inventory/pending-purchases
+MODE: POST
+
+// card graph
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "po_number": "XXXXXXXX",
+            "requested_date": "2020-10-28",
+            "delivery_date": "2020-10-28",
+            "products": [
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                },
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                }
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "po_number": "XXXXXXXX",
+            "requested_date": "2020-10-28",
+            "delivery_date": "2020-10-28",
+            "products": [
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                },
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                }
+            ]
+        },
+        {
+            "outletname": "Mohan test",
+            "po_number": "XXXXXXXX",
+            "requested_date": "2020-10-28",
+            "delivery_date": "2020-10-28",
+            "products": [
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                },
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                }
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************					
+***********************  Pending Vendor Payments  *****************************
+*********************************************************************************
+ENDPOINT: BASE_URL/api/v1/inventory/pending-vendor-payments
+MODE: POST
+
+//  card graph
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "dishes":[
+            	{
+		            "vendor_name": "Vendor",
+			        "amount": 10000
+            	},
+            	{
+		            "vendor_name": "Vendor2",
+			        "amount": 20000
+            	}
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+            	{
+		            "vendor_name": "Vendor",
+			        "amount": 10000
+            	},
+            	{
+		            "vendor_name": "Vendor2",
+			        "amount": 20000
+            	}
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************					
+**************************  Pending Indents  *********************************
+*********************************************************************************		
+ENDPOINT: BASE_URL/api/v1/inventory/pending-indents
+MODE: POST
+
+// card graph			
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "indent_number": "XXXXXXXX",
+            "requested_date": "2020-10-28",
+            "delivery_date": "2020-10-28",
+            "products": [
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                },
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                }
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "indent_number": "XXXXXXXX",
+            "requested_date": "2020-10-28",
+            "delivery_date": "2020-10-28",
+            "products": [
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                },
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                }
+            ]
+        },
+        {
+            "outletname": "Mohan test",
+            "indent_number": "XXXXXXXX",
+            "requested_date": "2020-10-28",
+            "delivery_date": "2020-10-28",
+            "products": [
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                },
+                {
+                    "name": "product_name",
+                    "requested_quantity": 10,
+                    "pending_quantity": 10
+                }
+            ]
+        }
+    ]
+}
+
+
+
+*********************************************************************************					
+************************ Pending Physical Checks *******************************
+*********************************************************************************	
+ENDPOINT: BASE_URL/api/v1/inventory/pending-physical-checks
+MODE: POST
+
+// card graph				
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "dishes":[
+            	{
+		            "category_name": "category",
+		            "physical_check_date": "2020-10-28"
+            	},
+            	{
+		            "category_name": "category2",
+		            "physical_check_date": "2020-10-28"
+            	}
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+            	{
+		            "category_name": "category",
+		            "physical_check_date": "2020-10-28"
+            	},
+            	{
+		            "category_name": "category2",
+		            "physical_check_date": "2020-10-28"
+            	}
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************					
+************************** Pending Productions **********************************
+*********************************************************************************	
+ENDPOINT: BASE_URL/api/v1/inventory/pending-productions
+MODE: POST
+
+// card graph
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "dishes":[
+            	{
+	            "category_name": "category",
+	            "physical_check_date": "2020-10-28"
+            	},
+		        {
+	            "category_name": "category1",
+	            "physical_check_date": "2020-10-28"
+		        }
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+            	{
+	            "category_name": "category",
+	            "physical_check_date": "2020-10-28"
+            	},
+		        {
+	            "category_name": "category1",
+	            "physical_check_date": "2020-10-28"
+		        }
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************					
+******************************* Wastages ***************************************
+*********************************************************************************
+ENDPOINT: BASE_URL/api/v1/inventory/wastages
+MODE: POST					
+// card graph
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "dishes":[
+            	{
+		            "dish_name": "dish",
+		            "wastage_qty": 20,
+		            "cost": 20903.09,
+			    "type": "food"
+            	},
+            	{
+		            "dish_name": "dish2",
+		            "wastage_qty": 20,
+		            "cost": 20903.09,
+			    "type": "raw_material"
+            	}
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+            	{
+		            "dish_name": "dish",
+		            "wastage_qty": 20,
+		            "cost": 20903.09,
+			    "type": "food"
+            	},
+            	{
+		            "dish_name": "dish2",
+		            "wastage_qty": 20,
+		            "cost": 20903.09,
+			    "type": "raw_material"
+            	}
+            ]
+        }
+    ]
+}
+
+
+
+*********************************************************************************					
+****************************** Cost of Goods ***********************************
+*********************************************************************************
+ENDPOINT: BASE_URL/api/v1/inventory/cost-of-goods
+MODE: POST
+
+// card graph
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "dishes":[
+            	{
+            		"category_name": "category",
+		            "dish_name": "dish",
+		            "cost": 10
+            	},
+            	{
+            		"category_name": "category",
+		            "dish_name": "dish2",
+		            "cost": 20
+            	},
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+            	{
+            		"category_name": "category",
+		            "dish_name": "dish",
+		            "cost": 10
+            	},
+            	{
+            		"category_name": "category",
+		            "dish_name": "dish2",
+		            "cost": 20
+            	},
+            ]
+        },
+    ]
+}
+
+
+*********************************************************************************					
+****************************** Food Cost ***********************************
+*********************************************************************************
+ENDPOINT: BASE_URL/api/v1/inventory/food-cost
+MODE: POST
+
+// show in table
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "dishes":[
+            	{
+	            "category_name": "category",
+	            "dish_name": "dish",
+	            "dish_sold": 10,
+	            "average_dish_selling_price": 5320,
+	            "food_cost": 20,
+	            "wastage_amount": 20
+            	},
+            	{
+	            "category_name": "category",
+	            "dish_name": "dish2",
+	            "dish_sold": 10,
+	            "average_dish_selling_price": 5320,
+	            "food_cost": 20,
+	            "wastage_amount": 20
+            	}
+            ]
+        },
+		{
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+            	{
+	            "category_name": "category",
+	            "dish_name": "dish",
+	            "dish_sold": 10,
+	            "average_dish_selling_price": 5320,
+	            "food_cost": 20,
+	            "wastage_amount": 20
+            	},
+            	{
+	            "category_name": "category",
+	            "dish_name": "dish2",
+	            "dish_sold": 10,
+	            "average_dish_selling_price": 5320,
+	            "food_cost": 20,
+	            "wastage_amount": 20
+            	}
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************					
+****************************** High/Low Margin Items ***********************************
+*********************************************************************************
+ENDPOINT: BASE_URL/api/v1/inventory/high-low-margins
+MODE: POST
+
+// card graph
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "NANDHA OUTLET",
+            "dishes":[
+            	{
+            "category_name": "category",
+            "dish_name": "dish",
+            "ordertype": [
+                {
+                    "order_type": "Swiggy",
+                    "amount": 500
+                },
+                {
+                    "order_type": "Zomato",
+                    "amount": 490
+                },
+                {
+                    "order_type": "Dinein",
+                    "amount": 500
+                }
+            ]
+            	},
+            	{
+            "category_name": "category",
+            "dish_name": "dish2",
+            "ordertype": [
+                {
+                    "order_type": "Swiggy",
+                    "amount": 500
+                },
+                {
+                    "order_type": "Zomato",
+                    "amount": 500
+                },
+                {
+                    "order_type": "Dinein",
+                    "amount": 500
+                }
+            ]
+            	}
+            ]
+
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+            	{
+            "category_name": "category",
+            "dish_name": "dish",
+            "ordertype": [
+                {
+                    "order_type": "Swiggy",
+                    "amount": 500
+                },
+                {
+                    "order_type": "Zomato",
+                    "amount": 500
+                },
+                {
+                    "order_type": "Dinein",
+                    "amount": 500
+                }
+            ]
+            	}
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************					
+****************************** Loss Making Items ***********************************
+*********************************************************************************
+ENDPOINT: BASE_URL/api/v1/inventory/loss-making-items
+MODE: POST
+
+// card graph
+
+
+{
+    "status": "success",
+    "result": [
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+	            	{
+			            "category_name": "category",
+			            "dish_name": "dish1",
+		            		"ordertype": [
+			                {
+			                    "order_type": "Zomato",
+			                    "quantity": -5
+			                },
+			                {
+			                    "order_type": "Dinein",
+			                    "quantity": -5
+			                }
+		          		  ]
+	            	}
+            ]
+        },
+        {
+            "outletname": "KARTHIKDXB",
+            "dishes":[
+	            	{
+			            "category_name": "category",
+			            "dish_name": "dish1",
+		            		"ordertype": [
+			                {
+			                    "order_type": "Zomato",
+			                    "quantity": -5
+			                },
+			                {
+			                    "order_type": "Dinein",
+			                    "quantity": -5
+			                }
+		          		  ]
+	            	}
+            ]
+        }
+    ]
+}

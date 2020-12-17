@@ -1,0 +1,418 @@
+*********************************************************************************					
+**********************  HEADERS FOR ALL API's *****************************
+*********************************************************************************				
+authtoken = md5encryption of manager id + md5encryption of brand_id
+
+
+
+*********************************************************************************					
+**********************  REQUEST JSON FOR ALL apis *****************************
+*********************************************************************************					
+
+Request json={
+"from":"2020-10-26",
+"to":"2020-10-26",
+"for":"today"
+}
+
+
+Request json={
+"from":"2020-10-25",
+"to":"2020-10-25",
+"for":"yesterday"
+}
+
+
+Request json={
+"from":"2020-10-18",
+"to":"2020-10-25",
+"for":"week"
+}
+
+Request json={
+"from":"2020-09-01",
+"to":"2020-09-30",
+"for":"month"
+}
+
+Request json={
+"from":"2020-09-01",
+"to":"2020-09-30",
+"for":"custom"
+}
+
+*****************************************
+For All Variance
+ENDPOINT: BASE_URL/api/v1/reconciliation/variance
+MODE: POST
+********************************************
+// variance cards
+*********************************************************************************					
+*************************  Yesterday's Variance *********************************
+*********************************************************************************					
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "variance_amount": 2000
+        },
+        {
+            "outlet_name": "outlet2",
+            "variance_amount": 2000
+        }
+    ]
+}
+
+*********************************************************************************                   
+*************************  Weekly's Variance *********************************
+*********************************************************************************                   
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "variance_amount": 2000
+        },
+        {
+            "outlet_name": "outlet2",
+            "variance_amount": 2000
+        }
+    ]
+}
+
+
+*********************************************************************************                   
+*************************  Monthly's Variance *********************************
+*********************************************************************************                   
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "variance_amount": 2000
+        },
+        {
+            "outlet_name": "outlet2",
+            "variance_amount": 2000
+        }
+    ]
+}
+
+// amt will added , card -> ask , graph
+*********************************************************************************                   
+*************************  Cancellations *********************************
+*********************************************************************************     
+*****************************************
+For All Variance
+ENDPOINT: BASE_URL/api/v1/reconciliation/cancellations
+MODE: POST
+********************************************
+
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "details": [
+                {
+                    "reason": "Restaurants Not Accepting Orders",
+                    "cancelled_count": 0
+                },
+                {
+                    "reason": "Aggregator Dispute",
+                    "cancelled_count": 0
+                },
+                {
+                    "reason": "Iteam Not Available",
+                    "cancelled_count": 0
+                },
+                {
+                    "reason": "Restaurants Closed",
+                    "cancelled_count": 0
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "details": [
+                {
+                    "reason": "Restaurants Not Accepting Orders",
+                    "cancelled_count": 0
+                },
+                {
+                    "reason": "Aggregator Dispute",
+                    "cancelled_count": 0
+                },
+                {
+                    "reason": "Iteam Not Available",
+                    "cancelled_count": 0
+                },
+                {
+                    "reason": "Restaurants Closed",
+                    "cancelled_count": 0
+                }
+            ]
+        }
+    ]
+}
+
+// Bank Deposits , card graph
+*********************************************************************************                   
+****************************  Cash Deposit Report *******************************
+*********************************************************************************  
+*****************************************
+For All Variance
+ENDPOINT: BASE_URL/api/v1/reconciliation/bankdepositreport
+MODE: POST
+********************************************
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "details": [
+                {
+                    "aggregator": "Swiggy",
+                    "deposited_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Zomato",
+                    "deposited_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "deposited_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "deposited_amount": 0,
+                    "total_amount": 0
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "details": [
+                {
+                    "aggregator": "Swiggy",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Zomato",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                }
+            ]
+        }
+    ]
+}
+
+// same graph
+*********************************************************************************                   
+*******************************  EDC Report *************************************
+*********************************************************************************  
+*****************************************
+For All Variance
+ENDPOINT: BASE_URL/api/v1/reconciliation/edcreport
+MODE: POST
+********************************************
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "details": [
+                {
+                    "aggregator": "Swiggy",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Zomato",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "sales": 0,
+                    "amount_credited": 0
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "details": [
+                {
+                    "aggregator": "Swiggy",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Zomato",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "sales": 0,
+                    "amount_credited": 0
+                }
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************                   
+******************************  Expense Tab *************************************
+*********************************************************************************  
+*****************************************
+For All Variance
+ENDPOINT: BASE_URL/api/v1/reconciliation/expensetab
+MODE: POST
+********************************************
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "details": [
+                {
+                    "main_category": "HR",
+                    "sub_category": "HR",
+                    "amount": 0
+                },
+                {
+                    "main_category": "Office",
+                    "sub_category": "Laptop",
+                    "amount": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "sales": 0,
+                    "amount_credited": 0
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "details": [
+                {
+                    "aggregator": "Swiggy",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Zomato",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "sales": 0,
+                    "amount_credited": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "sales": 0,
+                    "amount_credited": 0
+                }
+            ]
+        }
+    ]
+}
+
+
+*********************************************************************************                   
+*************************  Pending Payouts *********************************
+*********************************************************************************       
+*****************************************
+For All Variance
+ENDPOINT: BASE_URL/api/v1/reconciliation/pendingpayouts
+MODE: POST
+********************************************            
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "details": [
+                {
+                    "aggregator": "Swiggy",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Zomato",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "details": [
+                {
+                    "aggregator": "Swiggy",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Zomato",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Dunzo",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                },
+                {
+                    "aggregator": "Amazon",
+                    "pending_amount": 0,
+                    "total_amount": 0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,334 @@
+*********************************************************************************					
+**********************  HEADERS FOR ALL API's *****************************
+*********************************************************************************				
+authtoken = md5encryption of manager id + md5encryption of brand_id
+
+
+
+*********************************************************************************					
+**********************  REQUEST JSON FOR ALL apis *****************************
+*********************************************************************************					
+
+Request json={
+"from":"2020-10-26",
+"to":"2020-10-26",
+"for":"today"
+}
+
+
+Request json={
+"from":"2020-10-25",
+"to":"2020-10-25",
+"for":"yesterday"
+}
+
+
+Request json={
+"from":"2020-10-18",
+"to":"2020-10-25",
+"for":"week"
+}
+
+Request json={
+"from":"2020-09-01",
+"to":"2020-09-30",
+"for":"month"
+}
+
+Request json={
+"from":"2020-09-01",
+"to":"2020-09-30",
+"for":"custom"
+}
+
+*****************************************
+For All Absentees
+ENDPOINT: BASE_URL/api/v1/payroll/absentees
+MODE: POST
+********************************************
+
+*********************************************************************************					
+*************************  Yesterday's Absentees *********************************
+*********************************************************************************
+
+
+// only table					// 
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "category_name": "Admin",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "category_name": "HR",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        }
+    ]
+}
+
+
+
+*********************************************************************************                   
+*************************  Todays Absentees *********************************
+*********************************************************************************                   
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "category_name": "Admin",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "category_name": "HR",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        }
+    ]
+}
+
+
+
+*********************************************************************************                   
+*************************  Weekly Absentees *********************************
+*********************************************************************************                   
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "category_name": "Admin",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "category_name": "HR",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        }
+    ]
+}
+
+
+
+*********************************************************************************                   
+*************************  Monthly Absentees *********************************
+*********************************************************************************                   
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "category_name": "Admin",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "category_name": "HR",
+            "absentees_count": 1,
+            "details": [
+                {
+                    "name": "employee name"
+                },
+                {
+                    "name": "employee name"
+                }
+            ]
+        }
+    ]
+}
+
+
+
+*********************************************************************************                   
+*************************  Avg Working Hours  *********************************
+*********************************************************************************  
+ENDPOINT: BASE_URL/api/v1/payroll/avg-working-hours
+MODE: POST
+
+// card graph  with meta data
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "category_name": "Admin",
+            "total_working_hours": 1,
+            "details": [
+                {
+                    "name": "employee name",
+                    "avg_working_hours": 1
+                },
+                {
+                    "name": "employee name",
+                    "avg_working_hours": 1
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "category_name": "HR",
+            "total_working_hours": 1,
+            "details": [
+                {
+                    "name": "employee name",
+                    "avg_working_hours": 1
+                },
+                {
+                    "name": "employee name",
+                    "avg_working_hours": 1
+                }
+            ]
+        }
+    ]
+}
+
+
+
+************************For All avg-costing **************
+************ ENDPOINT: BASE_URL/api/v1/payroll/avg-costing
+************                MODE: POST      ************** 
+**********************************************************
+
+*********************************************************************************                   
+*************************  Avg Daily Costing  *********************************
+*********************************************************************************    
+
+
+// card graph with metadata
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "category_name": "Admin",
+            "total_costing": 1,
+            "details": [
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                },
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "category_name": "HR",
+            "total_costing": 1,
+            "details": [
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                },
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                }
+            ]
+        }
+    ]
+}
+
+
+
+*********************************************************************************                   
+*************************  Avg Monthly Costing  *********************************
+*********************************************************************************  
+// card graph with metadata                
+{
+    "status": "success",
+    "result": [
+        {
+            "outlet_name": "outlet1",
+            "category_name": "Admin",
+            "total_costing": 1,
+            "details": [
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                },
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                }
+            ]
+        },
+        {
+            "outlet_name": "outlet2",
+            "category_name": "HR",
+            "total_costing": 1,
+            "details": [
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                },
+                {
+                    "name": "employee name",
+                    "avg_costing": 1
+                }
+            ]
+        }
+    ]
+}
+
