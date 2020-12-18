@@ -45,7 +45,8 @@ $(document).ready(function () {
     $("#userInput").prop('disabled', true);
 
     // Bot will display welcome message
-    action_trigger();
+    // FOR TESTING
+    // action_trigger();
 
     // setUserResponse("hi");
     //     setBotResponse([{"text":"welcome to chatbot","image":"https://i.imgur.com/TQ2o0ch.jpeg"},
@@ -125,97 +126,97 @@ $(document).ready(function () {
     //     //     }
     //     // }]);
     // // SimpleCardsCarousel
-    //     setBotResponse([
-    //         {
-    //             "custom":{
-    //                 "payload":"simpleCardsCarousel",
-    //                 "data":[{
-    //                 "table":{
-    //                     "tableData":[{
-    //                         id:1,
-    //                         name:"Shampoo",
-    //                         price:80,
-    //                         qty:1
-    //                     },
-    //                     {
-    //                         id:2,
-    //                         name:"Meera",
-    //                         price:30.454,
-    //                         qty:2
-    //                     },
-    //                     {
-    //                         id:3,
-    //                         name:"Veera",
-    //                         price:30.45,
-    //                         qty:0
-    //                     },
-    //                     {
-    //                         id:4,
-    //                         name:"Coora",
-    //                         price:30.45,
-    //                         qty:10
-    //                     },
-    //                     {
-    //                         id:5,
-    //                         name:"Clinic",
-    //                         price:30.45,
-    //                         qty:5
-    //                     },
-    //                     {
-    //                         id:6,
-    //                         name:"Pantene",
-    //                         price:25.65,
-    //                         qty:3
-    //                     }],
-    //                     "columns":[{
-    //                         title:"Name",
-    //                         field:"name"
-    //                     },{
-    //                         title:"Price",
-    //                         field:"price",
-    //                         sorter:"number"
-    //                     },
-    //                     {
-    //                         title:"Quantity",
-    //                         field:"qty",
-    //                         sorter:"number"
-    //                     }],
-    //                     "initialSort":[{column:"name", dir:"asc"}]
-    //                 },
-    //                 "metadata":{
-    //                     title:"Nandha Outlet",
-    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-    //                 }
-    //                 },
-    //                 {
-    //                 "metadata":{
-    //                     title:"Nandha Outlet",
-    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-    //                 },
-    //                 },
-    //                 {
-    //                     "metadata":{
-    //                         title:"Nandha Outlet",
-    //                         data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                         {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                         {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-    //                     },
-    //                 },
-    //                 {
-    //                     "metadata":{
-    //                         title:"Nandha Outlet",
-    //                         data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                         {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-    //                         {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-    //                     },
-    //                 }
-    //                 ]
-    //             }
-    //         }]);
+        // setBotResponse([
+        //     {
+        //         "custom":{
+        //             "payload":"simpleCardsCarousel",
+        //             "data":[{
+        //             "table":{
+        //                 "tableData":[{
+        //                     id:1,
+        //                     name:"Shampoo",
+        //                     price:80,
+        //                     qty:1
+        //                 },
+        //                 {
+        //                     id:2,
+        //                     name:"Meera",
+        //                     price:30.454,
+        //                     qty:2
+        //                 },
+        //                 {
+        //                     id:3,
+        //                     name:"Veera",
+        //                     price:30.45,
+        //                     qty:0
+        //                 },
+        //                 {
+        //                     id:4,
+        //                     name:"Coora",
+        //                     price:30.45,
+        //                     qty:10
+        //                 },
+        //                 {
+        //                     id:5,
+        //                     name:"Clinic",
+        //                     price:30.45,
+        //                     qty:5
+        //                 },
+        //                 {
+        //                     id:6,
+        //                     name:"Pantene",
+        //                     price:25.65,
+        //                     qty:3
+        //                 }],
+        //                 "columns":[{
+        //                     title:"Name",
+        //                     field:"name"
+        //                 },{
+        //                     title:"Price",
+        //                     field:"price",
+        //                     sorter:"number"
+        //                 },
+        //                 {
+        //                     title:"Quantity",
+        //                     field:"qty",
+        //                     sorter:"number"
+        //                 }],
+        //                 "initialSort":[{column:"name", dir:"asc"}]
+        //             },
+        //             "metadata":{
+        //                 title:"Nandha Outlet",
+        //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+        //             }
+        //             },
+        //             {
+        //             "metadata":{
+        //                 title:"Nandha Outlet",
+        //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+        //             },
+        //             },
+        //             {
+        //                 "metadata":{
+        //                     title:"Nandha Outlet",
+        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                     {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+        //                 },
+        //             },
+        //             {
+        //                 "metadata":{
+        //                     title:"Nandha Outlet",
+        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+        //                 },
+        //             }
+        //             ]
+        //         }
+        //     }]);
 
     // // GraphCardsCarousel
         // setBotResponse([
@@ -251,6 +252,98 @@ $(document).ready(function () {
         //     }
 
         //     ]);
+        //show  multiSimpleCardsCarousel
+        setBotResponse([
+            {
+                "custom":{
+                    "payload":"multiSimpleCardsCarousel",
+                    "data":[{
+                    "table":{
+                        "tableData":[{
+                            id:1,
+                            name:"Shampoo",
+                            price:80,
+                            qty:1
+                        },
+                        {
+                            id:2,
+                            name:"Meera",
+                            price:30.454,
+                            qty:2
+                        },
+                        {
+                            id:3,
+                            name:"Veera",
+                            price:30.45,
+                            qty:0
+                        },
+                        {
+                            id:4,
+                            name:"Coora",
+                            price:30.45,
+                            qty:10
+                        },
+                        {
+                            id:5,
+                            name:"Clinic",
+                            price:30.45,
+                            qty:5
+                        },
+                        {
+                            id:6,
+                            name:"Pantene",
+                            price:25.65,
+                            qty:3
+                        }],
+                        "columns":[{
+                            title:"Name",
+                            field:"name"
+                        },{
+                            title:"Price",
+                            field:"price",
+                            sorter:"number"
+                        },
+                        {
+                            title:"Quantity",
+                            field:"qty",
+                            sorter:"number"
+                        }],
+                        "initialSort":[{column:"name", dir:"asc"}]
+                    },
+                    "metadata":{
+                        title:"Nandha Outlet",
+                        data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                        {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                        {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                    }
+                    },
+                    {
+                    "metadata":{
+                        title:"Nandha Outlet",
+                        data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                        {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                        {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                    },
+                    },
+                    {
+                        "metadata":{
+                            title:"Nandha Outlet",
+                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                            {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                        },
+                    },
+                    {
+                        "metadata":{
+                            title:"Nandha Outlet",
+                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+                            {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                        },
+                    }
+                    ]
+                }
+            }]);
     // setBotResponse([
     //     {
     //         "custom":{
@@ -529,6 +622,16 @@ function setBotResponse(response) {
                         // return;
                     }
 
+                    // check if the custom payload type is "multiSimpleCardCarousel"
+                    if (response[i].custom.payload == "multiSimpleCardsCarousel") {
+                        let resData = (response[i].custom.data)
+                        setTimeout(()=>{
+                            showMultiSimpleCardsCarousel(resData);
+                        },1000);
+                        // showMultiSimpleCardsCarousel(resData);
+                        continue;
+                        // return;
+                    }
                     //check if the custom payload type is "chart"
                     if (response[i].custom.payload == "chart") {
 
@@ -817,7 +920,7 @@ function createSimpleCardsCarousel(cardsData) {
             </p>
             </div>`;
         }
-        else if (metadata.data.length <= 2) {
+        else if (metadata.data.length > 2) {
             item = `<div class="simple_carousel_cards in-left">
             <div class="simpleCardHeader"><span class="cardTitle" title="${title}">${title}</span>
             <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
@@ -1087,6 +1190,152 @@ function createGraphCardsCarousel(cardsData) {
 }
 
 //====================================== Quick Replies ==================================================
+
+
+// ===================================== multiSimpleCardCarousel =============================================
+
+function showMultiSimpleCardsCarousel(cardsToAdd) {
+    var cards = createMultiSimpleCardsCarousel(cardsToAdd);
+
+    $(cards).appendTo(".chats").show();
+
+
+
+    for (var i = 0; i < cardsToAdd.length; i++) {
+        $(".multi_simple_cards_scroller>div.multi_simple_carousel_cards:nth-of-type(" + i + ")").fadeIn(3000);
+    }
+    $(".cards .arrow.prev").fadeIn("3000");
+    $(".cards .arrow.next").fadeIn("3000");
+
+    scrollToBottomOfResults();
+
+    const card = document.querySelector("#paginated_cards");
+    const card_scroller = card.querySelector(".multi_simple_cards_scroller");
+    var card_item_size = 225;
+
+    card.querySelector(".arrow.next").addEventListener("click", scrollToNextPage);
+    card.querySelector(".arrow.prev").addEventListener("click", scrollToPrevPage);
+
+
+    // For paginated scrolling, simply scroll the card one item in the given
+    // direction and let css scroll snaping handle the specific alignment.
+    function scrollToNextPage() {
+        card_scroller.scrollBy(card_item_size, 0);
+    }
+
+    function scrollToPrevPage() {
+        card_scroller.scrollBy(-card_item_size, 0);
+    }
+
+}
+
+
+function createMultiSimpleCardsCarousel(cardsData) {
+
+    let cards = "";
+
+    for (i = 0; i < cardsData.length; i++) {
+        let title = cardsData[i].metadata.title;
+        let ele1 = cardsData[i].metadata.data[0];
+        let ele2 = cardsData[i].metadata.data[1];
+        let table = cardsData[i].table;
+        let metadata = cardsData[i].metadata;
+        let item;
+        if (table && metadata.data.length > 2) {
+            item = `<div class="multi_simple_carousel_cards in-left">
+            <div class="multi_simpleCardHeader"><span class="cardTitle" title="${title}">${title}</span>
+            <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+            <i class="fa fa-eye"  aria-hidden="true"></i></span>
+            </div>
+            <div class="multi_simpleCardMainBody">
+            <div class="row multi_simpleCardContents">
+            <div class="multi_simpleCardMiniHeader">
+            <span>OUTLETNAME</span>
+            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+            <i class="fa fa-external-link col" style="float:right;margin-right:0px;padding:0px" aria-hidden="true"></i></span>
+            </div>
+            <div class="multi_simpleCardMiniBody">
+                <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+                <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </div>
+            </div>
+            <div class="row multi_simpleCardContents">
+            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
+            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </div>
+            <div class="row multi_simpleCardContents">
+            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
+            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </div>
+            <div class="row multi_simpleCardContents">
+            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
+            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </div>
+            <div class="row multi_simpleCardContents">
+            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
+            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </div>
+            </div>
+            </div>`;
+
+        }
+        else if (table) {
+            item = `<div class="multi_simple_carousel_cards in-left">
+            <div class="multi_simpleCardHeader"><span class="cardTitle" title="${title}">${title}</span>
+            </div>
+            <p>
+            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+            <i class="fa fa-external-link" style="margin-top:40px;" aria-hidden="true"></i></span>
+            <span class="multi_simpleCardCounts">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+            <span class="multi_simpleCardAmount">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </p>
+            </div>`;
+        }
+        else if (metadata.data.length > 2) {
+            item = `<div class="multi_simple_carousel_cards in-left">
+            <div class="multi_simpleCardHeader"><span class="cardTitle" title="${title}">${title}</span>
+            <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+            <i class="fa fa-eye"  aria-hidden="true"></i></span>
+            </div>
+            <p>
+            <span class="multi_simpleCardCounts">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+            <span class="multi_simpleCardAmount">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </p>
+            </div>`;
+        }
+        else {
+            item = `<div class="multi_simple_carousel_cards in-left">
+            <div class="multi_simpleCardHeader"><span class="cardTitle" title="${title}">${title}</span>
+            </div>
+            <p>
+            <span class="multi_simpleCardCounts">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+            <span class="multi_simpleCardAmount">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+            </p>
+            </div>`;
+        }
+
+        cards += item;
+    }
+
+    let cardContents = `<div id="paginated_cards" class="cards">
+                         <div class="multi_simple_cards_scroller">${cards}
+                         <span class="arrow prev fa fa-chevron-circle-left "></span> 
+                         <span class="arrow next fa fa-chevron-circle-right" ></span> 
+                         </div> </div>`;
+
+    return cardContents;
+}
+
+
+// End Of MultiSimpleCardsCarousel functions
 
 function showQuickReplies(quickRepliesData) {
     setTimeout(function(){

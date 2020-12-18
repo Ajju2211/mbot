@@ -1,0 +1,292 @@
+
+
+*******************************   API NO. =>1   **************************************************					
+********************** outletwise Consolidated sales  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/sales/consolidated
+REQUEST_MODE: POST
+
+Response json={
+	"status": "success", 
+	"result": {
+		"totaldata":{
+			"bill_count":89,
+			"totalsale":299033.00
+		},
+		"data":[{
+			"outletname": "NANDHA OUTLET",
+			"bill_count": 20,
+			"totalsale": 20903.09
+			},
+			{
+			"outletname": "KARTHIKDXB",
+			"bill_count": 20,
+			"totalsale": 2093.09
+			},
+			{
+			"outletname": "NANDHA OUTLET",
+			"bill_count": 20,
+			"totalsale": 20903.09
+			},
+			{
+			"outletname": "Mohan test",
+			"bill_count": 20,
+			"totalsale": 20903.09
+			}
+		]
+			
+	}
+}
+
+
+
+
+***********************************  API NO. =>2 **********************************************					
+********************** outletwise  Top Order types wise *****************************************
+*********************************************************************************		
+ENDPOINT: BASE_URL/api/v1/sales/topordertypes
+REQUEST_MODE: POST								
+
+Response json={
+    "status": "success",
+    "result": {
+        "totaldata": {
+            "total_qty": 89,
+            "total_amt": 299033
+        },
+        "data": [
+            {
+                "outletname": "NANDHA OUTLET",
+                "order_type": [
+                    {
+                        "itemname": "Dinein",
+                        "total_amt": 20903.09
+                    },
+                    {
+                        "itemname": "Take Away",
+                        "total_amt": 20903.09
+                    }
+                ]
+            },
+            {
+                "outletname": "Mohan test",
+                "order_type": [
+                    {
+                        "itemname": "Home Delivery",
+                        "total_amt": 20903.09
+                    },
+                    {
+                        "itemname": "Take Away",
+                        "total_amt": 20903.09
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
+
+**********************************  API NO. =>3 ***********************************************					
+********************** outletwise Top paymemnt types wise*****************************************
+*********************************************************************************		
+ENDPOINT: BASE_URL/api/v1/sales/top_paymemnt_types
+REQUEST_MODE: POST								
+
+Response json={
+    "status": "success",
+    "result": {
+        "totaldata": {
+            "total_qty": 89,
+            "total_amt": 299033
+        },
+        "data": [
+            {
+                "outletname": "NANDHA OUTLET",
+                "paymemnt_type": [
+                    {
+                        "itemname": "online",
+                        "total_amt": 20903.09
+                    },
+                    {
+                        "itemname": "cash",
+                        "total_amt": 20903.09
+                    },
+                    {
+                        "itemname": "swiggy",
+                        "total_amt": 20903.09
+                    }
+                ]
+            },
+            {
+                "outletname": "Mohan test",
+                "paymemnt_type": [
+                    {
+                        "itemname": "card",
+                        "total_amt": 20903.09
+                    },
+                    {
+                        "itemname": "cash",
+                        "total_amt": 20903.09
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
+
+**********************************  API NO. =>4 ***********************************************					
+********************** outletwise Sales Recommncile Table paymemnt type wise *****************************************
+*********************************************************************************		
+REQUEST_MODE: POST								
+
+Response json={
+    "status": "success",
+    "result": {
+        "data": [
+            {
+                "outletname": "OUTLET A",
+                "paymemnt_type": [
+                    {
+                        "itemname": "card",
+                        "details":{
+							"deduction": 0,
+							"total": 5357.3,
+							"commission": 53.573,
+							"expected_deposit": 5303.727,
+							"recorded_deposit":	5303.727
+						},
+                    },
+                    {
+                        "itemname": "cash",
+                        "details":{
+							"deduction": 0,
+							"total": 4417,
+							"commission": 44.17,
+							"expected_deposit": 4196.15,
+							"recorded_deposit":	5303
+						},
+                    },
+                    {
+                        "itemname": "swiggy",
+                        "details":{
+							"deduction": 55.32,
+							"total": 226610,
+							"commission": 94.62,
+							"expected_deposit": 226610,
+							"recorded_deposit":	226610
+						},
+                    }
+                ]
+            },
+            {
+                "outletname": "OUTLET B",
+                "paymemnt_type": [
+                    {
+                        "itemname": "zomato",
+                        "details":{
+							"deduction": 0,
+							"total": 5357.3,
+							"commission": 53.573,
+							"expected_deposit": 5303.727,
+							"recorded_deposit":	5303
+						},
+                    },
+                    {
+                        "itemname": "cash",
+                        "details":{
+							"deduction": 0,
+							"total": 4417,
+							"commission": 44.17,
+							"expected_deposit": 4196.15,
+							"recorded_deposit":	4196.15
+						},
+                    },
+                    {
+                        "itemname": "swiggy",
+                        "details":{
+							"deduction": 55.32,
+							"total": 226610,
+							"commission": 94.62,
+							"expected_deposit": 226610,
+							"recorded_deposit":	5303
+						},
+                    }
+                ]
+            },
+			{
+                "outletname": "OUTLET C",
+                "paymemnt_type": [
+                    {
+                        "itemname": "card",
+                        "details":{
+							"deduction": 0,
+							"total": 5357.3,
+							"commission": 53.573,
+							"expected_deposit": 5303.727,
+							"recorded_deposit":	4196
+						},
+                    },
+                    {
+                        "itemname": "cash",
+                        "details":{
+							"deduction": 0,
+							"total": 4417,
+							"commission": 44.17,
+							"expected_deposit": 4196.15,
+							"recorded_deposit":	4196
+						},
+                    },
+                    {
+                        "itemname": "swiggy",
+                        "details":{
+							"deduction": 55.32,
+							"total": 226610,
+							"commission": 94.62,
+							"expected_deposit": 226610,
+							"recorded_deposit":	4196
+						},
+                    }
+                ]
+            },
+			{
+                "outletname": "OUTLET D",
+                "paymemnt_type": [
+                    {
+                        "itemname": "card",
+                        "details":{
+							"deduction": 0,
+							"total": 5357.3,
+							"commission": 53.573,
+							"expected_deposit": 5303.727,
+							"recorded_deposit":	4196
+						},
+                    },
+                    {
+                        "itemname": "cash",
+                        "details":{
+							"deduction": 0,
+							"total": 4417,
+							"commission": 44.17,
+							"expected_deposit": 4196.15,
+							"recorded_deposit":	4196
+						},
+                    },
+                    {
+                        "itemname": "swiggy",
+                        "details":{
+							"deduction": 55.32,
+							"total": 226610,
+							"commission": 94.62,
+							"expected_deposit": 226610,
+							"recorded_deposit":	4196
+						},
+                    }
+                ]
+            }
+        ]
+    }
+}
