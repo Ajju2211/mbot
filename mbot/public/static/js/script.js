@@ -1241,50 +1241,79 @@ function createMultiSimpleCardsCarousel(cardsData) {
         let table = cardsData[i].table;
         let metadata = cardsData[i].metadata;
         let item;
+        let miniCard;
         if (table && metadata.data.length > 2) {
-            item = `<div class="multi_simple_carousel_cards in-left">
-            <div class="multi_simpleCardHeader"><span class="cardTitle" title="${title}">${title}</span>
-            <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
-            <i class="fa fa-eye"  aria-hidden="true"></i></span>
+            item = `
+        <div class="multi_simple_carousel_cards in-left">
+            <div class="multi_simpleCardHeader">
+                <span class="cardTitle" title="${title}">${title}</span>
+                <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+                    <i class="fa fa-eye"  aria-hidden="true"></i>
+                </span>
             </div>
             <div class="multi_simpleCardMainBody">
-            <div class="row multi_simpleCardContents">
-            <div class="multi_simpleCardMiniHeader">
-            <span>OUTLETNAME</span>
-            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
-            <i class="fa fa-external-link col" style="float:right;margin-right:0px;padding:0px" aria-hidden="true"></i></span>
+                <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size:0.85em">OUTLETNAME</span>
+                        <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+                            <i class="fa fa-external-link col" style="float:right;margin-right:0px;padding:0px" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>
+                <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size:0.85em">OUTLETNAME</span>
+                        <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+                            <i class="fa fa-external-link col" style="float:right;margin-right:0px;padding:0px" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>
+                <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size:0.85em">OUTLETNAME</span>
+                        <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+                            <i class="fa fa-external-link col" style="float:right;margin-right:0px;padding:0px" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>
+                <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size:0.85em">OUTLETNAME</span>
+                        <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+                            <i class="fa fa-external-link col" style="float:right;margin-right:0px;padding:0px" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>
+                <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size:0.85em">OUTLETNAME</span>
+                        <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
+                            <i class="fa fa-external-link col" style="float:right;margin-right:0px;padding:0px" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>
             </div>
-            <div class="multi_simpleCardMiniBody">
-                <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
-                <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
-            </div>
-            </div>
-            <div class="row multi_simpleCardContents">
-            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
-            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
-            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
-            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
-            </div>
-            <div class="row multi_simpleCardContents">
-            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
-            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
-            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
-            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
-            </div>
-            <div class="row multi_simpleCardContents">
-            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
-            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
-            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
-            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
-            </div>
-            <div class="row multi_simpleCardContents">
-            <span class="modal-trigger-table" data-payload = '${JSON.stringify(table)}' id="modaltableexp" title="Table" href="#modal3">
-            <i class="fa fa-external-link col"  aria-hidden="true"></i></span>
-            <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
-            <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
-            </div>
-            </div>
-            </div>`;
+        </div>`;
 
         }
         else if (table) {
