@@ -1260,6 +1260,9 @@ function createMultiSimpleCardsCarousel(cardsData) {
                         </span>
                     </div>
                     <div class="multi_simpleCardMiniBody">
+                        <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+                            <i class="fa fa-eye"  aria-hidden="true"></i>
+                        </span>
                         <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
                         <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
                     </div>
@@ -1272,6 +1275,9 @@ function createMultiSimpleCardsCarousel(cardsData) {
                         </span>
                     </div>
                     <div class="multi_simpleCardMiniBody">
+                        <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+                            <i class="fa fa-eye"  aria-hidden="true"></i>
+                        </span>
                         <span class="multi_simpleCardCounts col s12">${ele1.title}:<br><span class="countamount">${ele1.value}</span></span>
                         <span class="multi_simpleCardAmount col s12">${ele2.title}:<br><span class="countamount">${ele2.value}</span></span>
                     </div>
