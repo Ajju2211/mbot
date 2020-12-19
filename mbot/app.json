@@ -1,0 +1,25 @@
+{
+  "name": "mbot",
+  "description": "This is a demo app",
+  "keywords": [
+  ],
+  "repository": "https://github.com/Ajju2211/mbot/tree/master/mbot",
+  "logo": "https://small-sharp-tool.com/logo.svg",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "node server.js"
+  },
+  "env": {
+    "PORT": {
+      "description": "Port number for the app",
+      "value": 8000
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "standard-1x"
+    }
+  },
+  "image": "heroku/nodejs"
+}
