@@ -1,0 +1,8 @@
+POST http://mindfulautomations.com/api/topordertypes HTTP/1.1
+
+
+{
+    "bid":"1",
+    "from":"2020-12-01",
+    "to":"2020-12-31"
+}

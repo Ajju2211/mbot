@@ -51,7 +51,7 @@ module.exports.consolidated = async (data, token) => {
       payload: "/greetings.welcome",
     },
   ];
-  return buildResponse({ text: textMessage, cards: cards }).concat(
+  return buildResponse({ text: textMessage, multiSimpleCards: cards }).concat(
     buildResponse({
       quickReplies: quickReplies1,
     })

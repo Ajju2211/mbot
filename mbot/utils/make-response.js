@@ -5,6 +5,7 @@ module.exports.buildResponse = ({
   quickReplies,
   cards,
   chartCards,
+  multiSimpleCards,
   custom,
 }) => {
   /**
@@ -41,6 +42,12 @@ module.exports.buildResponse = ({
     response.custom = {
       payload: "graphCardsCarousel",
       outlets: chartCards,
+    };
+  }
+  if (multiSimpleCards) {
+    response.custom = {
+      payload: "multiSimpleCardsCarousel",
+      data: multiSimpleCards,
     };
   }
   if (custom) {
