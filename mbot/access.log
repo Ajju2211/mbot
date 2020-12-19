@@ -5997,3 +5997,8 @@
 ::ffff:127.0.0.1 - - [19/Dec/2020:11:00:54 +0000] "POST /api/v1/user/verifyUser HTTP/1.1" 200 91 "-" "axios/0.20.0"
 ::ffff:127.0.0.1 - - [19/Dec/2020:11:00:54 +0000] "POST /api/v1/sales/consolidated HTTP/1.1" 200 354 "-" "axios/0.20.0"
 ::ffff:127.0.0.1 - - [19/Dec/2020:11:00:54 +0000] "POST /user/bot/webhook HTTP/1.1" 200 917 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"
+::ffff:127.0.0.1 - - [19/Dec/2020:11:05:48 +0000] "POST /api/v1/user/verifyUser HTTP/1.1" 200 91 "-" "axios/0.20.0"
+::ffff:127.0.0.1 - - [19/Dec/2020:11:05:48 +0000] "POST /user/bot/webhook HTTP/1.1" 200 422 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"
+::ffff:127.0.0.1 - - [19/Dec/2020:11:05:52 +0000] "POST /api/v1/user/verifyUser HTTP/1.1" 200 91 "-" "axios/0.20.0"
+::ffff:127.0.0.1 - - [19/Dec/2020:11:05:52 +0000] "POST /api/v1/sales/consolidated HTTP/1.1" 200 354 "-" "axios/0.20.0"
+::ffff:127.0.0.1 - - [19/Dec/2020:11:05:52 +0000] "POST /user/bot/webhook HTTP/1.1" 200 950 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"
