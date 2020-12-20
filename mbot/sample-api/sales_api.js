@@ -110,73 +110,63 @@ const db = [
       ],
     },
     topordertypes: {
-      totaldata: {
-        total_qty: 89,
-        total_amt: 299033,
-      },
-      data: [
-        {
-          outletname: "NANDHA OUTLET",
-          order_type: [
-            {
-              itemname: "Dinein",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Take Away",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Dinein1",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Take Away1",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Dinein2",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Take Away2",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Dinein3",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Take Awaysddsdssdsdsddsd",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-          ],
+        totaldata: {
+          total_qty: 89,
+          total_amt: 299033,
         },
-        {
-          outletname: "Mohan test",
-          order_type: [
-            {
-              itemname: "Home Delivery",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-            {
-              itemname: "Take Away",
-              total_qty: 20,
-              total_amt: 20903.09,
-            },
-          ],
-        },
-      ],
-    },
+        data: [
+          {
+            order_type: "Dinein",
+            outlets: [
+              {
+                name: "NANDA OUTLET",
+                total_qty: 20,
+                total_amt: 20903.09,
+              },
+              {
+                name: "AZHAR OUTLET",
+                total_qty: 20,
+                total_amt: 20903.09,
+              },
+            ],
+          },
+          {
+            order_type: "Swiggy",
+            outlets: [
+              {
+                name: "NANDA OUTLET",
+                total_qty: 20,
+                total_amt: 20903.09,
+              },
+              {
+                name: "AZHAR OUTLET",
+                total_qty: 100,
+                total_amt: 35352.99,
+              },
+              {
+                name: "KHAN OUTLET",
+                total_qty: 120,
+                total_amt: 28282.89,
+              },
+              {
+                name: "MANSOOR OUTLET",
+                total_qty: 200,
+                total_amt: 29297.12,
+              },
+              {
+                name: "KHALIL OUTLET",
+                total_qty: 180,
+                total_amt: 25431.5,
+              },
+              {
+                name: "BAWARCHI",
+                total_qty: 150,
+                total_amt: 30129.45,
+              },
+            ],
+          },
+        ],
+      }
   },
 ];
 

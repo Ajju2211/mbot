@@ -59,3 +59,14 @@ module.exports.generateBackgroundColors = (numOfColors) => {
   }
   return result;
 };
+
+
+module.exports.capitalizedCamelCase = (str) => {
+  const camelCase = str.toLowerCase().trim().replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+    return index == 0 ? word.toLowerCase() : word.toUpperCase();
+  }).replace(/\s+/g, '');
+
+  // First Letter As Capitalised
+
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};

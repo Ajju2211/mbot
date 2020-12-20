@@ -1,7 +1,7 @@
 const axios = require("axios");
 const BASE_URL = process.env.API_BASE_URL;
 const { buildResponse } = require("../../utils/make-response");
-const { renameKeys, generateBackgroundColors } = require("../../utils");
+const { renameKeys, generateBackgroundColors, capitalizedCamelCase } = require("../../utils");
 
 module.exports.consolidated = async (data, token) => {
   const URL = BASE_URL + "/api/v1/sales/consolidated";
@@ -200,22 +200,24 @@ module.exports.topordertypes = async (data, token) => {
     d = "Last Week";
     textMessage = `${d}'s Top OrderTypes from ${data.from} - ${data.to}`;
   }
+  console.log(result);
   textMessage += `\n Total Quantities - ${result.totaldata.total_qty} \n Total Amount - ${result.totaldata.total_amt}`;
   const CHARTTYPE = "bar";
   const DIPLAYLEGEND = "true";
-  result.data.forEach((outlet) => {
+  result.data.forEach((order) => {
+    console.log(order);
     let labels = [];
     // Y-Axis
     let chartData = [];
     // Intersection of X-Y axes.
     let chartIntersectData = [];
-    outlet.order_type.forEach((item) => {
-      labels.push(item.itemname);
+    order.outlets.forEach((item) => {
+      labels.push(capitalizedCamelCase(item.name));
       chartData.push(item.total_amt);
       chartIntersectData.push(item.total_qty);
     });
     cardWithGraph.push({
-      title: outlet.outletname,
+      title: order.order_type,
       label1: "Amount",
       label2: "Qty",
       labels: labels,
