@@ -926,13 +926,13 @@ function setBotResponse(response) {
                         // return;
                     }
 
-                    // check if the custom payload type is "multiSimpleCardCarousel"
-                    if (response[i].custom.payload == "multiSimpleCardsCarousel") {
+                    // check if the custom payload type is "groupedSimpleCardCarousel"
+                    if (response[i].custom.payload == "groupedSimpleCardsCarousel") {
                         let resData = (response[i].custom.data)
                         setTimeout(()=>{
-                            showMultiSimpleCardsCarousel(resData);
+                            showGroupedSimpleCardsCarousel(resData,response[i].custom.minicardlimit);
                         },1000);
-                        // showMultiSimpleCardsCarousel(resData);
+                        // showgroupedSimpleCardsCarousel(resData);
                         continue;
                         // return;
                     }
@@ -1498,8 +1498,8 @@ function createGraphCardsCarousel(cardsData) {
 
 // ===================================== multiSimpleCardCarousel =============================================
 
-function showMultiSimpleCardsCarousel(cardsToAdd) {
-    var cards = createMultiSimpleCardsCarousel(cardsToAdd);
+function showMultiSimpleCardsCarousel(cardsToAdd,cardLimit) {
+    var cards = createMultiSimpleCardsCarousel(cardsToAdd,cardLimit);
 
     $(cards).appendTo(".chats").show();
 
@@ -1534,11 +1534,11 @@ function showMultiSimpleCardsCarousel(cardsToAdd) {
 }
 
 
-function createMultiSimpleCardsCarousel(cardsData) {
+function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
 
     let cards = "";
     // Number Of Mini Cards to display On Card.
-    const MINICARDLIMIT = 5;
+    const MINICARDLIMIT = cardLimit || 5;
     const NoOfCards = cardsData.length;
     let i=0;
     let startIndex = 0;
@@ -1554,6 +1554,7 @@ function createMultiSimpleCardsCarousel(cardsData) {
         }
         
         let miniCards = '';
+        let item;
         for(let j=startIndex;j<i;j++){
             console.log(cardsData[j]);
         let title = cardsData[j].metadata.title;
@@ -1561,7 +1562,6 @@ function createMultiSimpleCardsCarousel(cardsData) {
         let ele2 = cardsData[j].metadata.data[1] || emptyEle;
         let table = cardsData[j].table;
         let metadata = cardsData[j].metadata;
-        let item;
         let miniCard;
         if (table && metadata.data.length > 2) {
             miniCard = `
@@ -1641,7 +1641,7 @@ function createMultiSimpleCardsCarousel(cardsData) {
         miniCards = miniCards + miniCard;
 
         }
-        // 
+        // Large Card Preview Button
     //     <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
     //     <i class="fa fa-eye"  aria-hidden="true"></i>
     // </span>
@@ -1670,6 +1670,183 @@ function createMultiSimpleCardsCarousel(cardsData) {
 
 // End Of MultiSimpleCardsCarousel functions
 
+
+// ===================================== groupedSimpleCardCarousel =============================================
+// UI Is same for groupedSimpleCardCarousel and multiSimpleCardCarousel
+function showGroupedSimpleCardsCarousel(cardsToAdd,cardLimit) {
+    var cards = createGroupedSimpleCardsCarousel(cardsToAdd,cardLimit);
+
+    $(cards).appendTo(".chats").show();
+
+
+
+    for (var i = 0; i < cardsToAdd.length; i++) {
+        $(".multi_simple_cards_scroller>div.multi_simple_carousel_cards:nth-of-type(" + i + ")").fadeIn(3000);
+    }
+    $(".cards .arrow.prev").fadeIn("3000");
+    $(".cards .arrow.next").fadeIn("3000");
+
+    scrollToBottomOfResults();
+
+    const card = document.querySelector("#paginated_cards");
+    const card_scroller = card.querySelector(".multi_simple_cards_scroller");
+    var card_item_size = 225;
+
+    card.querySelector(".arrow.next").addEventListener("click", scrollToNextPage);
+    card.querySelector(".arrow.prev").addEventListener("click", scrollToPrevPage);
+
+
+    // For paginated scrolling, simply scroll the card one item in the given
+    // direction and let css scroll snaping handle the specific alignment.
+    function scrollToNextPage() {
+        card_scroller.scrollBy(card_item_size, 0);
+    }
+
+    function scrollToPrevPage() {
+        card_scroller.scrollBy(-card_item_size, 0);
+    }
+
+}
+
+
+function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
+
+    let cards = "";
+    // Number Of Mini Cards to display On Card.
+    const MINICARDLIMIT = cardLimit || 5;
+    const NoOfCards = cardsData.length;
+    let i=0;
+    let startIndex = 0;
+    const emptyEle = {title:"",value:""};
+    while(i < NoOfCards){
+        if(i+ MINICARDLIMIT <= NoOfCards){
+            startIndex = i;
+            i = i + MINICARDLIMIT;
+        }
+        else {
+            startIndex = i;
+            i = NoOfCards;
+        }
+        
+        let miniCards = '';
+        let item;
+        for(let j=startIndex;j<i;j++){
+            console.log(cardsData[j]);
+        let title = cardsData[j].metadata.title;
+        let ele1 = cardsData[j].metadata.data[0] || emptyEle;
+        let ele2 = cardsData[j].metadata.data[1] || emptyEle;
+        let table = cardsData[j].table;
+        let metadata = cardsData[j].metadata;
+        let miniCard;
+        if (table && metadata.data.length > 2) {
+            miniCard = `
+            <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size: 0.85em">${title}</span>
+                        <span class="modal-trigger-table" data-payload='${JSON.stringify(table)}' id="modaltableexp" title="Table"
+                            href="#modal3">
+                            <i class="fa fa-external-link col" style="float: right; margin-right: 0px; padding: 0px"
+                                aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="modal-trigger-card" data-payload='${JSON.stringify(metadata)}' id="modalcardexp"
+                            title="modalcardexp" href="#modal2">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </span>
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br /><span
+                                class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br /><span
+                                class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>`;
+        }
+        else if (table) {
+            miniCard = `
+            <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size: 0.85em">${title}</span>
+                        <span class="modal-trigger-table" data-payload='${JSON.stringify(table)}' id="modaltableexp" title="Table"
+                            href="#modal3">
+                            <i class="fa fa-external-link col" style="float: right; margin-right: 0px; padding: 0px"
+                                aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br /><span
+                                class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br /><span
+                                class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>`;
+        }
+        else if (metadata.data.length > 2) {
+            miniCard = `
+            <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size: 0.85em">${title}</span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="modal-trigger-card" data-payload='${JSON.stringify(metadata)}' id="modalcardexp"
+                            title="modalcardexp" href="#modal2">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </span>
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br /><span
+                                class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br /><span
+                                class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>`;
+        }
+        else {
+            miniCard = `
+            <div class="row multi_simpleCardContents">
+                    <div class="multi_simpleCardMiniHeader">
+                        <span class="cardTitle" style="font-size: 0.85em">${title}</span>
+                    </div>
+                    <div class="multi_simpleCardMiniBody">
+                        <span class="multi_simpleCardCounts col s12">${ele1.title}:<br /><span
+                                class="countamount">${ele1.value}</span></span>
+                        <span class="multi_simpleCardAmount col s12">${ele2.title}:<br /><span
+                                class="countamount">${ele2.value}</span></span>
+                    </div>
+                </div>`;
+        }
+
+        miniCards = miniCards + miniCard;
+
+        }
+        // Large Card Preview Button
+    //     <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+    //     <i class="fa fa-eye"  aria-hidden="true"></i>
+    // </span>
+        item = `
+        <div class="multi_simple_carousel_cards in-left">
+            <div class="multi_simpleCardHeader">
+                <span class="cardTitle" title="${startIndex+1}-${i}">${startIndex+1} - ${i}</span>
+            </div>
+            <div class="multi_simpleCardMainBody">
+                ${miniCards}
+            </div>
+        </div>`;
+        
+        cards += item;
+    }
+
+    let cardContents = `<div id="paginated_cards" class="cards">
+                         <div class="multi_simple_cards_scroller">${cards}
+                         <span class="arrow prev fa fa-chevron-circle-left "></span> 
+                         <span class="arrow next fa fa-chevron-circle-right" ></span> 
+                         </div> </div>`;
+
+    return cardContents;
+}
+
+
+// End Of MultiSimpleCardsCarousel functions
+
+
+// ===================================== showQuickReplies =======================================
 function showQuickReplies(quickRepliesData) {
     setTimeout(function(){
         var chips = ""

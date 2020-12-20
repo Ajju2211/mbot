@@ -47,7 +47,8 @@ module.exports.buildResponse = ({
   if (multiSimpleCards) {
     response.custom = {
       payload: "multiSimpleCardsCarousel",
-      data: multiSimpleCards,
+      data: multiSimpleCards.cards,
+      minicardlimit:multiSimpleCards.minicardlimit
     };
   }
   if (custom) {

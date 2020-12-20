@@ -3,14 +3,7 @@ const { promisify } = require("util");
 const { buildResponse } = require("../utils/make-response");
 const axios = require("axios");
 const BASE_URL = process.env.API_BASE_URL;
-const db = [
-  {
-    email: "test@mail.com",
-    password: "mbot@2020",
-    brand_id: "34",
-    manager_id: "2",
-  },
-];
+
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -45,7 +38,6 @@ exports.login = async (req, res) => {
   }
 
   // 2) Check if user exists && password is correct
-  // const user = db.find((ele) => ele.email == email && ele.password == password);
   const URL = BASE_URL + "/api/v1/login";
   const reqBody = {
     email_id: email,
