@@ -1252,6 +1252,50 @@ text-align: center;
     box-shadow: 2px 3px 9px 0px #9a82847a;
     margin-top: 5px;
 }
+/*
+Added these classes
+
+.chart-container > canvas {
+	position: absolute;
+	left:0;
+	top:0;
+	pointer-events:none;
+	overflow-x: scroll;
+}
+.chartAreaWrapper {
+	width:200px;
+	overflow-x: scroll;
+}
+/*
+upto here added
+*/
+
+/*
+SCROLL CHART TEST
+*/
+
+.chartWrapper {
+  position: relative;
+}
+
+.chartWrapper > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.chartAreaWrapper {
+  width: 600px;
+  overflow-x: scroll;
+}
+
+
+
+/*
+UPTO HERE*/
+
+
 .chart-container1{
 
  
