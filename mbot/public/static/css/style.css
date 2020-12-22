@@ -1276,18 +1276,40 @@ SCROLL CHART TEST
 
 .chartWrapper {
   position: relative;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 0px;
+  margin-left: 6%;
 }
 
 .chartWrapper > canvas {
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  top: 0;
+  top: 0; */
+  position: absolute;
   pointer-events: none;
+  height: auto;
+  border-radius: 10px 10px 10px 10px;
+  background: white;
+  box-shadow: 2px 3px 9px 0px #9a82847a;
+  margin-top: 5px;
 }
 
+.chartAreaWrapper2 > canvas {
+    border-radius: 10px 10px 10px 10px;
+    background: white;
+    box-shadow: 2px 3px 9px 0px #9a82847a;
+    margin-top: 5px;
+    padding-right: 6%;
+}
+
+.chartAreaWrapper2 {
+    margin-bottom: 15px;
+}
 .chartAreaWrapper {
-  width: 600px;
+  width: calc(100% - 3em);
   overflow-x: scroll;
+  padding: 5px;
 }
 
 

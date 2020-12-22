@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap" rel="stylesheet">
 
     <!--Import Font Awesome Icon Font-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
 
     <!--Import materialize.css-->
     <link rel="stylesheet" type="text/css" href="static/css/materialize.min.css">
@@ -32,21 +33,23 @@
             <canvas id="modal-chart"></canvas>
         </div>
         <!-- Modal for the metadata table -->
-        <div id="modal2" style="z-index: 1003;opacity: 1;top: 10%;transform: scaleX(1) scaleY(1)" class="modal meta-modal">
+        <div id="modal2" style="z-index: 1003;opacity: 1;top: 10%;transform: scaleX(1) scaleY(1)"
+            class="modal meta-modal">
         </div>
         <!-- modal for the tabular data -->
         <div id="modal3" style="z-index: 1003;opacity: 1;top: 10%;transform: scaleX(1) scaleY(1);" class="modaltable">
         </div>
 
         <!-- SCROLL CHART TEST -->
-        <div class="chartWrapper">
-  <div class="chartAreaWrapper">
-  <div class="chartAreaWrapper2">
-      <canvas id="chart-Test" height="300" width="1200"></canvas>
-  </div>
-  </div>
-  <canvas id="axis-Test" height="300" width="0"></canvas>
-</div>
+        <!-- <div class="chartWrapper">
+            <canvas id="axis-Test" height="300" width="0"></canvas>
+            <div class="chartAreaWrapper">
+                <div class="chartAreaWrapper2">
+                    <canvas id="chart-Test" height="85%"></canvas>
+                </div>
+            </div>
+
+        </div> -->
 
         <!-- ENDS HERE -->
 
@@ -54,22 +57,25 @@
         <div class="widget">
             <div class="chat_header">
                 <!--Add the name of the bot here -->
-                <span class="chat_header_title" style="margin : 1% auto auto 3%"><img style="width: 40px;height: 40px;border-radius:50%;" src="static/img/logo.png"></span>
-                <span  class="chat_header_title">MBOT</span>
-                
+                <span class="chat_header_title" style="margin : 1% auto auto 3%"><img
+                        style="width: 40px;height: 40px;border-radius:50%;" src="static/img/logo.png"></span>
+                <span class="chat_header_title">MBOT</span>
+
                 <span class="dropdown-trigger" href='#' data-target='dropdown1'>
-                  <i class="material-icons">
-                  more_vert
-                  </i>
-               </span>
+                    <i class="material-icons">
+                        more_vert
+                    </i>
+                </span>
 
                 <!-- Dropdown menu-->
                 <ul id='dropdown1' class='dropdown-content'>
                     <!-- <li><a href="#" id="clear">Clear</a></li> -->
-                    <li id="restart"><span style="white-space: nowrap;"><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i>
-                    Restart</a></span></li>
-                    <li id="logout"><span style="white-space: nowrap;"><a href="#"><i style="color: red" class="fa fa-power-off" aria-hidden="true"></i>
-                    Logout</a></span></li>
+                    <li id="restart"><span style="white-space: nowrap;"><a href="#"><i class="fa fa-refresh"
+                                    aria-hidden="true"></i>
+                                Restart</a></span></li>
+                    <li id="logout"><span style="white-space: nowrap;"><a href="#"><i style="color: red"
+                                    class="fa fa-power-off" aria-hidden="true"></i>
+                                Logout</a></span></li>
                 </ul>
             </div>
 
@@ -79,7 +85,8 @@
 
             </div>
 
-            <!--keypad for user to type the message --><!-- 
+            <!--keypad for user to type the message -->
+            <!-- 
             <div class="keypad">
                 <textarea id="userInput" placeholder="Type a message..." class="usrInput"></textarea>
                 <div id="sendButton"><i class="fa fa-paper-plane" aria-hidden="true"></i></div>
@@ -109,23 +116,25 @@
     <script type="text/javascript" src="static/js/script.js"></script>
 
     <!-- Moment.js Script -->
-	<script type="text/javascript" src="static/js/moment.min.js"></script>
+    <script type="text/javascript" src="static/js/moment.min.js"></script>
 
     <!--Chart.js Script -->
     <script type="text/javascript" src="static/js/chart.min.js"></script>
 
     <!-- Hammer.js Script -->
-	<script type="text/javascript" src="static/js/hammer.min.js"></script>
-	
-	<!-- chartjs-plugin-zoom.js Script -->
-	<script type="text/javascript" src="static/js/chartjs-plugin-zoom.min.js"></script>
+    <script type="text/javascript" src="static/js/hammer.min.js"></script>
+
+    <!-- chartjs-plugin-zoom.js Script -->
+    <script type="text/javascript" src="static/js/chartjs-plugin-zoom.min.js"></script>
 
     <!-- tabulator js Script -->
     <script type="text/javascript" src="static/js/tabulator.min.js"></script>
     <!-- MD5 Script -->
-   <script type="text/javascript" src="static/js/md5.min.js"></script>
-   <!-- moment.js script -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/js/md5.min.js"></script>
+    <!-- moment.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

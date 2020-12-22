@@ -25,114 +25,107 @@ $(document).ready(function () {
 SCROLL CHART TEST
 */
 
-    function generateLabels() {
-        var chartLabels = [];
-        for (x = 0; x < 100; x++) {
-            chartLabels.push("Label" + x);
-        }
-        return chartLabels;
-    }
-
-    function generateData() {
-        var chartData = [];
-        for (x = 0; x < 100; x++) {
-            chartData.push(Math.floor((Math.random() * 100) + 1));
-        }
-        return chartData;
-    }
-
-    function addData(numData, chart) {
-        for (var i = 0; i < numData; i++) {
-            chart.data.datasets[0].data.push(Math.random() * 100);
-            chart.data.labels.push("Label" + i);
-            var newwidth = $('.chartAreaWrapper2').width() + 60;
-            $('.chartAreaWrapper2').width(newwidth);
-        }
-    }
-
-    var chartData = {
-        labels: generateLabels(),
-        datasets: [{
-            label: "Test Data Set",
-            data: generateData()
-        }]
-    };
 
 
 
-    $(function () {
-        var rectangleSet = false;
+    // function  drawScrollChart(charts_data, axis_id, chart_id) {
+    //     let chartData = {
+    //         labels: [],
+    //         datasets: [{
+    //             label: charts_data.title,
+    //             data: []
+    //         }]
+    //     };
+    //     let rectangleSet = false;
 
-        var canvasTest = $('#chart-Test');
-        var chartTest = new Chart(canvasTest, {
-            type: 'bar',
-            data: chartData,
-            maintainAspectRatio: false,
-            responsive: true,
-            options: {
-                tooltips: {
-                    titleFontSize: 0,
-                    titleMarginBottom: 0,
-                    bodyFontSize: 12
-                },
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontSize: 12,
-                            display: false
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            fontSize: 12,
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                animation: {
-                    onComplete: function () {
-                        if (!rectangleSet) {
-                            var scale = window.devicePixelRatio;                       
+    //     let canvasTest = $(chart_id);
+    //     let chartTest = new Chart(canvasTest, {
+    //         type: 'bar',
+    //         data: chartData,
+    //         maintainAspectRatio: false,
+    //         // responsive: true,
+    //         options: {
+    //             tooltips: {
+    //                 titleFontSize: 0,
+    //                 titleMarginBottom: 0,
+    //                 bodyFontSize: 12
+    //             },
+    //             legend: {
+    //                 display: true
+    //             },
+    //             scales: {
+    //                 xAxes: [{
+    //                     ticks: {
+    //                         fontSize: 12,
+    //                         display: true
+    //                     }
+    //                 }],
+    //                 yAxes: [{
+    //                     ticks: {
+    //                         fontSize: 12,
+    //                         beginAtZero: true
+    //                     }
+    //                 }]
+    //             },
+    //             animation: {
+    //                 onComplete: function () {
+    //                     if (!rectangleSet) {
+    //                         let scale = window.devicePixelRatio;                       
 
-                            var sourceCanvas = chartTest.chart.canvas;
-                            var copyWidth = chartTest.scales['y-axis-0'].width - 10;
-                            var copyHeight = chartTest.scales['y-axis-0'].height + chartTest.scales['y-axis-0'].top + 10;
+    //                         let sourceCanvas = chartTest.chart.canvas;
+    //                         let copyWidth = chartTest.scales['y-axis-0'].width - 10;
+    //                         let copyHeight = chartTest.scales['y-axis-0'].height + chartTest.scales['y-axis-0'].top + 10;
 
-                            var targetCtx = document.getElementById("axis-Test").getContext("2d");
+    //                         let targetCtx = document.getElementById(axis_id).getContext("2d");
 
-                            targetCtx.scale(scale, scale);
-                            targetCtx.canvas.width = copyWidth * scale;
-                            targetCtx.canvas.height = copyHeight * scale;
+    //                         targetCtx.scale(scale, scale);
+    //                         targetCtx.canvas.width = copyWidth * scale;
+    //                         targetCtx.canvas.height = copyHeight * scale;
 
-                            targetCtx.canvas.style.width = `${copyWidth}px`;
-                            targetCtx.canvas.style.height = `${copyHeight}px`;
-                            targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth * scale, copyHeight * scale, 0, 0, copyWidth * scale, copyHeight * scale);
+    //                         targetCtx.canvas.style.width = `${copyWidth}px`;
+    //                         targetCtx.canvas.style.height = `${copyHeight}px`;
+    //                         targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth * scale, copyHeight * scale, 0, 0, copyWidth * scale, copyHeight * scale);
 
-                            var sourceCtx = sourceCanvas.getContext('2d');
+    //                         let sourceCtx = sourceCanvas.getContext('2d');
 
-                            // Normalize coordinate system to use css pixels.
+    //                         // Normalize coordinate system to use css pixels.
 
-                            sourceCtx.clearRect(0, 0, copyWidth * scale, copyHeight * scale);
-                            rectangleSet = true;
-                        }
-                    },
-                    onProgress: function () {
-                        if (rectangleSet === true) {
-                            var copyWidth = chartTest.scales['y-axis-0'].width;
-                            var copyHeight = chartTest.scales['y-axis-0'].height + chartTest.scales['y-axis-0'].top + 10;
+    //                         sourceCtx.clearRect(0, 0, copyWidth * scale, copyHeight * scale);
+    //                         rectangleSet = true;
+    //                     }
+    //                 },
+    //                 onProgress: function () {
+    //                     if (rectangleSet === true) {
+    //                         let copyWidth = chartTest.scales['y-axis-0'].width;
+    //                         let copyHeight = chartTest.scales['y-axis-0'].height + chartTest.scales['y-axis-0'].top + 10;
 
-                            var sourceCtx = chartTest.chart.canvas.getContext('2d');
-                            sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
-                        }
-                    }
-                }
-            }
-        });
-        addData(5, chartTest);
-    });
+    //                         let sourceCtx = chartTest.chart.canvas.getContext('2d');
+    //                         sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     });
+    //     function addData(chart_data, chart) {
+    //         chart.data.datasets[0].data = [];
+    //         chart.data.labels = [];
+    //         for (let i = 0; i < chart_data.data.length; i++) {
+    //             chart.data.datasets[0].data.push(chart_data.data[i]);
+    //             chart.data.labels.push(chart_data.labels[i]);
+    //             let newwidth = $('.chartAreaWrapper2').width() + 60;
+    //             $('.chartAreaWrapper2').width(newwidth);
+    //         }
+    //         console.log(chart.data);
+    //     }
+        
+    //     addData(charts_data, chartTest);
+    // };
+    // drawScrollChart(
+    //     {
+    //     title:"Test Data Set",
+    //     data: [12,23,43,23,54,67,87],
+    //     labels: ["a","b","c","d","e","f","g"]
+    // },'axis-Test','#chart-Test');
 /*ENDS HERE*/
     //Bot pop-up intro
     $("div").removeClass("tap-target-origin")
@@ -160,8 +153,9 @@ SCROLL CHART TEST
     // FOR TESTING
     // action_trigger();
 
-    setUserResponse("hi");
-        setBotResponse([{"text":"welcome to chatbot","image":"https://i.imgur.com/TQ2o0ch.jpeg"},
+    // setUserResponse("hi");
+        setBotResponse([
+            {"text":"welcome to chatbot"},
             {"image":"https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_181/f_auto,q_auto,w_1100/v1554932288/shape/mentalfloss/12531-istock-637790866.jpg"},
             {"custom":{
             "payload":"chartscroll",
@@ -1874,7 +1868,9 @@ function setBotResponse(response) {
                         displayLegend = chartData.displayLegend;
 
                         // pass the above variable to createChart function
-                        createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend)
+                        setTimeout(()=>{
+                            createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend);
+                        },1000);
                         return;
                     }
 
@@ -3095,6 +3091,101 @@ function createChart(title, labels, backgroundColor, chartsData, chartType, disp
 
 
 //function to create the  scrollable charts & render it to the canvas
+
+function  drawScrollChart(charts_data, axis_id, chart_id) {
+    let chartData = {
+        labels: [],
+        datasets: [{
+            label: charts_data.title,
+            data: []
+        }]
+    };
+    let rectangleSet = false;
+    console.log("CHARTID "+chart_id+" Axis_ID "+axis_id);
+    let canvasTest = $("#"+chart_id);
+    let chartTest = new Chart(canvasTest, {
+        type: 'bar',
+        data: chartData,
+        maintainAspectRatio: false,
+        // responsive: true,
+        options: {
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0,
+                bodyFontSize: 12
+            },
+            legend: {
+                display: true
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        fontSize: 12,
+                        display: true
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontSize: 12,
+                        beginAtZero: true
+                    }
+                }]
+            },
+            animation: {
+                onComplete: function () {
+                    if (!rectangleSet) {
+                        let scale = window.devicePixelRatio;                       
+
+                        let sourceCanvas = chartTest.chart.canvas;
+                        let copyWidth = chartTest.scales['y-axis-0'].width - 10;
+                        let copyHeight = chartTest.scales['y-axis-0'].height + chartTest.scales['y-axis-0'].top + 10;
+
+                        let targetCtx = document.getElementById(axis_id).getContext("2d");
+
+                        targetCtx.scale(scale, scale);
+                        targetCtx.canvas.width = copyWidth * scale;
+                        targetCtx.canvas.height = copyHeight * scale;
+
+                        targetCtx.canvas.style.width = `${copyWidth}px`;
+                        targetCtx.canvas.style.height = `${copyHeight}px`;
+                        targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth * scale, copyHeight * scale, 0, 0, copyWidth * scale, copyHeight * scale);
+
+                        let sourceCtx = sourceCanvas.getContext('2d');
+
+                        // Normalize coordinate system to use css pixels.
+
+                        sourceCtx.clearRect(0, 0, copyWidth * scale, copyHeight * scale);
+                        rectangleSet = true;
+                    }
+                },
+                onProgress: function () {
+                    if (rectangleSet === true) {
+                        let copyWidth = chartTest.scales['y-axis-0'].width;
+                        let copyHeight = chartTest.scales['y-axis-0'].height + chartTest.scales['y-axis-0'].top + 10;
+
+                        let sourceCtx = chartTest.chart.canvas.getContext('2d');
+                        sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
+                    }
+                }
+            }
+        }
+    });
+    function addData(chart_data, chart) {
+        chart.data.datasets[0].data = [];
+        chart.data.labels = [];
+        for (let i = 0; i < chart_data.data.length; i++) {
+            chart.data.datasets[0].data.push(chart_data.data[i]);
+            chart.data.labels.push(chart_data.labels[i]);
+            let newwidth = $('.chartAreaWrapper2').width() + 60;
+            $('.chartAreaWrapper2').width(newwidth);
+        }
+        console.log(chart.data);
+    }
+    
+    addData(charts_data, chartTest);
+};
+
+
 function createChartScroll(title, labels, backgroundColor, chartsData, chartType, displayLegend, chartsIntersectData) {
 
     //create the ".chart-container" div that will render the charts in canvas as required by charts.js,
@@ -3103,8 +3194,9 @@ function createChartScroll(title, labels, backgroundColor, chartsData, chartType
 
     // creating unique id
     let uniqueID = getCurrentChartIndex() + 1;
-    let expandID = `#expand`;
-    let canvasID = `chat-chart${uniqueID}`;
+    let expandID = `#scrollexpand`;
+    let canvasID = `scroll-chart${uniqueID}`;
+    let axisID = `axis-chart${uniqueID}`;
     let chartData = {
         "title": title,
         "labels": labels,
@@ -3115,118 +3207,28 @@ function createChartScroll(title, labels, backgroundColor, chartsData, chartType
     };
     // Add to memory
     setChartData(uniqueID, chartData);
-    let html = `<div class="chart-container"> <span class="modal-trigger" data-payload = '${JSON.stringify(chartData)}' id="${expandID}" title="${expandID}" href="#modal1">
-                <i class="fa fa-external-link" aria-hidden="true"></i></span>
-                <canvas id="${canvasID}" ></canvas>
-            </div> <div class="clearfix"></div>`;
+    
+    let html = `
+    <div class="chartWrapper">
+        <canvas id="${axisID}" height="300" width="0"></canvas>
+        <div class="chartAreaWrapper">
+            <div class="chartAreaWrapper2">
+                <canvas id="${canvasID}" height="85%" ></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>`;
     $(html).appendTo('.chats');
 
-    //create the context that will draw the charts over the canvas in the ".chart-container" div
-    var ctx = $(`#${canvasID}`);
-
-    // Once you have the element or context, instantiate the chart-type by passing the configuration,
-    //for more info. refer: https://www.chartjs.org/docs/latest/configuration/
-    if (chartsIntersectData) {
-        var data = {
-            labels: labels,
-            datasets: [{
-                label: title,
-                backgroundColor: backgroundColor,
-                data: chartsData,
-                id: "y-axis-0",
-                fill: false
-            },
+    setTimeout(()=>{
+        drawScrollChart(
             {
-                label: title,
-                backgroundColor: backgroundColor,
-                data: chartsIntersectData,
-                id: "y-axis-1",
-                fill: false
-            }]
-        };
-        var options = {
-            title: {
-                display: true,
-                text: title
-            },
-            layout: {
-                padding: {
-                    left: 5,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
-                }
-            },
-            legend: {
-                display: displayLegend,
-                position: "right",
-                labels: {
-                    boxWidth: 5,
-                    fontSize: 10
-                }
-            },
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    stacked: true,
-                    position: "left",
-                    id: "y-axis-0",
-                }, {
-                    stacked: false,
-                    position: "right",
-                    id: "y-axis-1",
-                }]
-            }
-        }
-    }
-    else {
-        var data = {
-            labels: labels,
-            datasets: [{
-                label: title,
-                backgroundColor: backgroundColor,
-                data: chartsData,
-                fill: false
-            }]
-        };
-        var options = {
-            title: {
-                display: true,
-                text: title
-            },
-            layout: {
-                padding: {
-                    left: 5,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
-                }
-            },
-            legend: {
-                display: displayLegend,
-                position: "right",
-                labels: {
-                    boxWidth: 5,
-                    fontSize: 10
-                }
-            },
-            scales: {
-                xAxes: [{
-                    barThickness:6
-                }]
-            }
-        }
-    }
+            title:"Test Data Set",
+            data: [12,23,43,23,54,67,87],
+            labels: ["a","b","c","d","e","f","g"]
+        },axisID,canvasID);
+    },5000);
 
-
-    //draw the chart by passing the configuration
-    chatChart = new Chart(ctx, {
-        type: chartType,
-        data: data,
-        options: options
-    });
 
     scrollToBottomOfResults();
 }
