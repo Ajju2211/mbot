@@ -6,6 +6,8 @@ module.exports.buildResponse = ({
   cards,
   chartCards,
   multiSimpleCards,
+  groupedSimpleCards,
+  scrollableChart,
   custom,
 }) => {
   /**
@@ -48,7 +50,20 @@ module.exports.buildResponse = ({
     response.custom = {
       payload: "multiSimpleCardsCarousel",
       data: multiSimpleCards.cards,
-      minicardlimit:multiSimpleCards.minicardlimit
+      minicardlimit: multiSimpleCards.minicardlimit
+    };
+  }
+  if (groupedSimpleCards) {
+    response.custom = {
+      payload: "groupedSimpleCardsCarousel",
+      cards: groupedSimpleCards.cards,
+      minicardlimit: groupedSimpleCards.minicardlimit
+    };
+  }
+  if (scrollableChart) {
+    response.custom = {
+      payload: "chartscroll",
+      data: scrollableChart,
     };
   }
   if (custom) {

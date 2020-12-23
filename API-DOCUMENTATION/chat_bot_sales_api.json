@@ -3,17 +3,17 @@
 ***********************************************************************************					
 
 Request  json={
-"email_id":"foodie@gmail.com",
-"password":"program@1234"
+    "email_id": "foodie@gmail.com",
+    "password": "program@1234"
 }
 
 Response json={
-	"status": "success", 
-	"result": {
-	"brand_id":	"34",
-	"manager_id": "2",
-	"email_id":"foodie@gmail.com"
-	} 
+    "status": "success",
+    "result": {
+        "brand_id": "34",
+        "manager_id": "2",
+        "email_id": "foodie@gmail.com"
+    }
 }
 
 
@@ -28,35 +28,35 @@ authtoken = md5encryption of manager id + md5encryption of brand_id
 *********************************************************************************					
 
 Request json={
-"from":"2020-10-26",
-"to":"2020-10-26",
-"for":"today"
+    "from": "2020-10-26",
+    "to": "2020-10-26",
+    "for": "today"
 }
 
 
 Request json={
-"from":"2020-10-25",
-"to":"2020-10-25",
-"for":"yesterday"
+    "from": "2020-10-25",
+    "to": "2020-10-25",
+    "for": "yesterday"
 }
 
 
 Request json={
-"from":"2020-10-18",
-"to":"2020-10-25",
-"for":"week"
+    "from": "2020-10-18",
+    "to": "2020-10-25",
+    "for": "week"
 }
 
 Request json={
-"from":"2020-09-01",
-"to":"2020-09-30",
-"for":"month"
+    "from": "2020-09-01",
+    "to": "2020-09-30",
+    "for": "month"
 }
 
 Request json={
-"from":"2020-09-01",
-"to":"2020-09-30",
-"for":"custom"
+    "from": "2020-09-01",
+    "to": "2020-09-30",
+    "for": "custom"
 }
 
 
@@ -69,35 +69,35 @@ ENDPOINT: BASE_URL/api/v1/sales/consolidated
 REQUEST_MODE: POST
 
 Response json={
-	"status": "success", 
-	"result": {
-		"totaldata":{
-			"bill_count":89,
-			"totalsale":299033.00
-		},
-		"data":[{
-			"outletname": "NANDHA OUTLET",
-			"bill_count": 20,
-			"totalsale": 20903.09
-			},
-			{
-			"outletname": "KARTHIKDXB",
-			"bill_count": 20,
-			"totalsale": 2093.09
-			},
-			{
-			"outletname": "NANDHA OUTLET",
-			"bill_count": 20,
-			"totalsale": 20903.09
-			},
-			{
-			"outletname": "Mohan test",
-			"bill_count": 20,
-			"totalsale": 20903.09
-			}
-		]
-			
-	}
+    "status": "success",
+    "result": {
+        "totaldata": {
+            "bill_count": 89,
+            "totalsale": 299033.00
+        },
+        "data": [
+            {
+                "outletname": "NANDHA OUTLET",
+                "bill_count": 20,
+                "totalsale": 20903.09
+            },
+            {
+                "outletname": "KARTHIKDXB",
+                "bill_count": 20,
+                "totalsale": 2093.09
+            },
+            {
+                "outletname": "NANDHA OUTLET",
+                "bill_count": 20,
+                "totalsale": 20903.09
+            },
+            {
+                "outletname": "Mohan test",
+                "bill_count": 20,
+                "totalsale": 20903.09
+            }
+        ]
+    }
 }
 
 
@@ -259,6 +259,10 @@ Response json={
         "data": [
             {
                 "order_type": "Dinein",
+                "total": {
+                    "qty": "40",
+                    "amt": 41806.18
+                },
                 "outlets": [
                     {
                         "name": "NANDA OUTLET",
@@ -274,6 +278,10 @@ Response json={
             },
             {
                 "order_type": "Swiggy",
+                "total": {
+                    "qty": "500",
+                    "amt": 41823.18
+                },
                 "outlets": [
                     {
                         "name": "NANDA OUTLET",
@@ -310,8 +318,3 @@ Response json={
         ]
     }
 }
-
-
-
-
-

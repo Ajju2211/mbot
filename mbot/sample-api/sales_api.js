@@ -110,63 +110,71 @@ const db = [
       ],
     },
     topordertypes: {
-        totaldata: {
-          total_qty: 89,
-          total_amt: 299033,
+      "totaldata": {
+        "total_qty": 89,
+        "total_amt": 299033
+      },
+      "data": [
+        {
+          "order_type": "Dinein",
+          "total": {
+            "qty": "40",
+            "amt": 41806.18
+          },
+          "outlets": [
+            {
+              "name": "NANDA OUTLET",
+              "total_qty": 20,
+              "total_amt": 20903.09
+            },
+            {
+              "name": "AZHAR OUTLET",
+              "total_qty": 20,
+              "total_amt": 20903.09
+            }
+          ]
         },
-        data: [
-          {
-            order_type: "Dinein",
-            outlets: [
-              {
-                name: "NANDA OUTLET",
-                total_qty: 20,
-                total_amt: 20903.09,
-              },
-              {
-                name: "AZHAR OUTLET",
-                total_qty: 20,
-                total_amt: 20903.09,
-              },
-            ],
+        {
+          "order_type": "Swiggy",
+          "total": {
+            "qty": "500",
+            "amt": 41823.18
           },
-          {
-            order_type: "Swiggy",
-            outlets: [
-              {
-                name: "NANDA OUTLET",
-                total_qty: 20,
-                total_amt: 20903.09,
-              },
-              {
-                name: "AZHAR OUTLET",
-                total_qty: 100,
-                total_amt: 35352.99,
-              },
-              {
-                name: "KHAN OUTLET",
-                total_qty: 120,
-                total_amt: 28282.89,
-              },
-              {
-                name: "MANSOOR OUTLET",
-                total_qty: 200,
-                total_amt: 29297.12,
-              },
-              {
-                name: "KHALIL OUTLET",
-                total_qty: 180,
-                total_amt: 25431.5,
-              },
-              {
-                name: "BAWARCHI",
-                total_qty: 150,
-                total_amt: 30129.45,
-              },
-            ],
-          },
-        ],
-      }
+          "outlets": [
+            {
+              "name": "NANDA OUTLET",
+              "total_qty": 20,
+              "total_amt": 20903.09
+            },
+            {
+              "name": "AZHAR OUTLET",
+              "total_qty": 100,
+              "total_amt": 35352.99
+            },
+            {
+              "name": "KHAN OUTLET",
+              "total_qty": 120,
+              "total_amt": 28282.89
+            },
+            {
+              "name": "MANSOOR OUTLET",
+              "total_qty": 200,
+              "total_amt": 29297.12
+            },
+            {
+              "name": "KHALIL OUTLET",
+              "total_qty": 180,
+              "total_amt": 25431.50
+            },
+            {
+              "name": "BAWARCHI",
+              "total_qty": 150,
+              "total_amt": 30129.45
+            },
+          ]
+        },
+      ]
+    }
   },
 ];
 

@@ -51,7 +51,7 @@ module.exports.consolidated = async (data, token) => {
       payload: "/greetings.welcome",
     },
   ];
-  return buildResponse({ text: textMessage, multiSimpleCards: {cards:cards, minicardlimit:5} }).concat(
+  return buildResponse({ text: textMessage, multiSimpleCards: { cards: cards, minicardlimit: 5 } }).concat(
     buildResponse({
       quickReplies: quickReplies1,
     })
@@ -260,39 +260,56 @@ module.exports.topordertypes = async (data, token) => {
   let result = resp.data.result;
   let d = data.for;
   let textMessage = `${d}'s Top OrderTypes`;
-  let cardWithGraph = [];
   if (data.for === "week" || data.for === "month") {
     d = "Last Week";
     textMessage = `${d}'s Top OrderTypes from ${data.from} - ${data.to}`;
   }
   console.log(result);
   textMessage += `\n Total Quantities - ${result.totaldata.total_qty} \n Total Amount - ${result.totaldata.total_amt}`;
-  const CHARTTYPE = "bar";
-  const DIPLAYLEGEND = "true";
+  let chart = {};
+  let labels = [];
+  let data1 = [];
+  let data2 = [];
+  let cards = [];
   result.data.forEach((order) => {
     console.log(order);
-    let labels = [];
-    // Y-Axis
-    let chartData = [];
-    // Intersection of X-Y axes.
-    let chartIntersectData = [];
+    let cardObj = {};
+    let minicards = [];
+    labels.push(capitalizedCamelCase(order.order_type));
+    // For the Chart
+    data1.push(order.total.qty);
+    data2.push(order.total.amt);
+    // For the cards
+    cardObj.title = order.order_type;
+    // cards.push();
     order.outlets.forEach((item) => {
-      labels.push(capitalizedCamelCase(item.name));
-      chartData.push(item.total_amt);
-      chartIntersectData.push(item.total_qty);
+      let miniCardObj = {};
+      miniCardObj.metadata = {};
+      miniCardObj.metadata.title = item.name;
+      miniCardObj.metadata.data = [
+        {
+          title: "TotalQty",
+          value: item.total_qty,
+        },
+        {
+          title: "TotalAmt",
+          value: item.total_amt,
+        }
+      ];
+
+      minicards.push(miniCardObj);
     });
-    cardWithGraph.push({
-      title: order.order_type,
-      label1: "Amount",
-      label2: "Qty",
-      labels: labels,
-      chartsData: chartData,
-      chartsIntersectData: chartIntersectData,
-      backgroundColor: generateBackgroundColors(chartData.length),
-      chartType: CHARTTYPE,
-      displayLegend: DIPLAYLEGEND,
-    });
+    cardObj.minicards = minicards;
+    cards.push(cardObj);
+
   });
+  chart = {
+    title1: "Qty",
+    title2: "Amt",
+    labels: labels,
+    data1: data1,
+    data2: data2,
+  };
   let quickReplies1 = [
     {
       title: "Back",
@@ -307,10 +324,13 @@ module.exports.topordertypes = async (data, token) => {
       payload: "/greetings.welcome",
     },
   ];
-  return buildResponse({ text: textMessage, chartCards: cardWithGraph }).concat(
+
+  return buildResponse({ scrollableChart: chart, text: textMessage }).concat(buildResponse({
+     groupedSimpleCards: {cards: cards}
+  }).concat(
     buildResponse({
       quickReplies: quickReplies1,
     })
-  );
+  ));
 };
 
