@@ -1287,7 +1287,7 @@ SCROLL CHART TEST
   left: 0;
   top: 0; */
   position: absolute;
-  pointer-events: none;
+  /* pointer-events: none; */
   height: auto;
   /* border-radius: 10px 10px 10px 10px; */
   background: white;
@@ -1302,6 +1302,7 @@ SCROLL CHART TEST
     box-shadow: 2px 3px 9px 0px #9a82847a;
     margin-top: 5px;
     padding-right: 6%;
+    touch-action: pan-x !important;
 }
 
 .chartAreaWrapper2 {
