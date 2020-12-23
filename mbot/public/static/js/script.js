@@ -1,7 +1,7 @@
 // overriding console.log in production
 // Debugging allowed only in localhost
-if(window.location.hostname != "localhost") {
-    console.log = function(){};
+if (window.location.hostname != "localhost") {
+    console.log = function () { };
 }
 
 //Bot pop-up intro
@@ -21,21 +21,51 @@ var card_chart_data = [];
 //initialization
 $(document).ready(function () {
 
-/*
-SCROLL CHART TEST
-*/
+    /*
+    SCROLL CHART TEST
+    */
 
 
 
 
     // function  drawScrollChart(charts_data, axis_id, chart_id) {
-    //     let chartData = {
-    //         labels: [],
-    //         datasets: [{
-    //             label: charts_data.title,
-    //             data: []
-    //         }]
-    //     };
+    //     let chartData;
+    //     // let xAxes;
+    //     if(charts_data.title2){
+    //         chartData = {
+    //             labels: [],
+    //             datasets: [{
+    //                 type: "bar",
+    //                 backgroundColor: "red",
+    //                 id: "y-axis-0",
+    //                 fill: false,
+    //                 label: charts_data.title1,
+    //                 data: []
+    //             },
+    //             {
+    //                 type: "bar",
+    //                 backgroundColor: "blue",
+    //                 id: "y-axis-0",
+    //                 fill: false,
+    //                 label: charts_data.title2,
+    //                 data: []
+    //             }]
+    //         };
+    //     }
+    //     else{
+    //         chartData = {
+    //             labels: [],
+    //             datasets: [{
+    //                 type: "bar",
+    //                 backgroundColor: "red",
+    //                 id: "y-axis-0",
+    //                 fill: false,
+    //                 label: charts_data.title1,
+    //                 data: []
+    //             }]
+    //         };
+    //     }
+
     //     let rectangleSet = false;
 
     //     let canvasTest = $(chart_id);
@@ -55,12 +85,16 @@ SCROLL CHART TEST
     //             },
     //             scales: {
     //                 xAxes: [{
+    //                     stacked: false,
     //                     ticks: {
     //                         fontSize: 12,
     //                         display: true
     //                     }
     //                 }],
     //                 yAxes: [{
+    //                     stacked: false,
+    //                     position: "left",
+    //                     id: "y-axis-0",
     //                     ticks: {
     //                         fontSize: 12,
     //                         beginAtZero: true
@@ -107,26 +141,31 @@ SCROLL CHART TEST
     //         }
     //     });
     //     function addData(chart_data, chart) {
-    //         chart.data.datasets[0].data = [];
     //         chart.data.labels = [];
-    //         for (let i = 0; i < chart_data.data.length; i++) {
-    //             chart.data.datasets[0].data.push(chart_data.data[i]);
+    //         for (let i = 0; i < chart_data.labels.length; i++) {
+    //             chart.data.datasets[0].data.push(chart_data.data1[i]);
+    //             if(chart_data.data2){
+    //                 chart.data.datasets[1].data.push(chart_data.data2[i]);
+    //             }
+
     //             chart.data.labels.push(chart_data.labels[i]);
     //             let newwidth = $('.chartAreaWrapper2').width() + 60;
     //             $('.chartAreaWrapper2').width(newwidth);
     //         }
     //         console.log(chart.data);
     //     }
-        
+
     //     addData(charts_data, chartTest);
     // };
     // drawScrollChart(
     //     {
-    //     title:"Test Data Set",
-    //     data: [12,23,43,23,54,67,87],
-    //     labels: ["a","b","c","d","e","f","g"]
+    //     title1:"Test Data Set1",
+    //     // title2:"Test Data Set2",
+    //     data1: [12,23,43,23,54,67,87],
+    //     // data2:[14,33,63,13,34,77,37],
+    //     labels: ["a","b","c","d","e","f","g"],
     // },'axis-Test','#chart-Test');
-/*ENDS HERE*/
+    /*ENDS HERE*/
     //Bot pop-up intro
     $("div").removeClass("tap-target-origin")
 
@@ -154,15 +193,22 @@ SCROLL CHART TEST
     // action_trigger();
 
     // setUserResponse("hi");
-        setBotResponse([
-            {"text":"welcome to chatbot"},
-            {"image":"https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_181/f_auto,q_auto,w_1100/v1554932288/shape/mentalfloss/12531-istock-637790866.jpg"},
-            {"custom":{
-            "payload":"chartscroll",
-            "data":{ "title": "Leaves", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave", "A", "b", "c", "d","e","f","g","h","i","j","k","l","A", "b", "c", "d","e","f","g","h","i","j","k","l"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3,10, 15, 17,20, 10, 22, 3,10, 15, 17,20,5, 10, 22, 3,10, 15, 17,20, 10, 22, 3,10, 15, 17,20], "chartType": "bar", "displayLegend": "true" }
-        }
+    setBotResponse([
+        { "text": "welcome to chatbot" },
+        { "image": "https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_181/f_auto,q_auto,w_1100/v1554932288/shape/mentalfloss/12531-istock-637790866.jpg" },
+        {
+            "custom": {
+                "payload": "chartscroll",
+                "data": {
+                    "title1": "Leaves",
+                    "title2": "Leaves2",
+                    "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave", "A", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "A", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"],
+                    "data1": [5, 10, 22, 3, 10, 15, 17, 20, 10, 22, 3, 10, 15, 17, 20, 5, 10, 22, 3, 10, 15, 17, 20, 10, 22, 3, 10, 15, 17, 20],
+                    "data2": [5, 10, 22, 3, 10, 15, 17, 20, 10, 22, 3, 10, 15, 17, 20, 5, 10, 22, 3, 10, 15, 17, 20, 10, 22, 3, 10, 15, 17, 20],
+                }
             }
-        ]);
+        }
+    ]);
 
     //     setBotResponse([
     //         {"custom":{
@@ -232,529 +278,529 @@ SCROLL CHART TEST
     //     //     }
     //     // }]);
     // // SimpleCardsCarousel
-        // setBotResponse([
-        //     {
-        //         "custom":{
-        //             "payload":"simpleCardsCarousel",
-        //             "data":[{
-        //             "table":{
-        //                 "tableData":[{
-        //                     id:1,
-        //                     name:"Shampoo",
-        //                     price:80,
-        //                     qty:1
-        //                 },
-        //                 {
-        //                     id:2,
-        //                     name:"Meera",
-        //                     price:30.454,
-        //                     qty:2
-        //                 },
-        //                 {
-        //                     id:3,
-        //                     name:"Veera",
-        //                     price:30.45,
-        //                     qty:0
-        //                 },
-        //                 {
-        //                     id:4,
-        //                     name:"Coora",
-        //                     price:30.45,
-        //                     qty:10
-        //                 },
-        //                 {
-        //                     id:5,
-        //                     name:"Clinic",
-        //                     price:30.45,
-        //                     qty:5
-        //                 },
-        //                 {
-        //                     id:6,
-        //                     name:"Pantene",
-        //                     price:25.65,
-        //                     qty:3
-        //                 }],
-        //                 "columns":[{
-        //                     title:"Name",
-        //                     field:"name"
-        //                 },{
-        //                     title:"Price",
-        //                     field:"price",
-        //                     sorter:"number"
-        //                 },
-        //                 {
-        //                     title:"Quantity",
-        //                     field:"qty",
-        //                     sorter:"number"
-        //                 }],
-        //                 "initialSort":[{column:"name", dir:"asc"}]
-        //             },
-        //             "metadata":{
-        //                 title:"Nandha Outlet",
-        //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //             }
-        //             },
-        //             {
-        //             "metadata":{
-        //                 title:"Nandha Outlet",
-        //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //             },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             }
-        //             ]
-        //         }
-        //     }]);
+    // setBotResponse([
+    //     {
+    //         "custom":{
+    //             "payload":"simpleCardsCarousel",
+    //             "data":[{
+    //             "table":{
+    //                 "tableData":[{
+    //                     id:1,
+    //                     name:"Shampoo",
+    //                     price:80,
+    //                     qty:1
+    //                 },
+    //                 {
+    //                     id:2,
+    //                     name:"Meera",
+    //                     price:30.454,
+    //                     qty:2
+    //                 },
+    //                 {
+    //                     id:3,
+    //                     name:"Veera",
+    //                     price:30.45,
+    //                     qty:0
+    //                 },
+    //                 {
+    //                     id:4,
+    //                     name:"Coora",
+    //                     price:30.45,
+    //                     qty:10
+    //                 },
+    //                 {
+    //                     id:5,
+    //                     name:"Clinic",
+    //                     price:30.45,
+    //                     qty:5
+    //                 },
+    //                 {
+    //                     id:6,
+    //                     name:"Pantene",
+    //                     price:25.65,
+    //                     qty:3
+    //                 }],
+    //                 "columns":[{
+    //                     title:"Name",
+    //                     field:"name"
+    //                 },{
+    //                     title:"Price",
+    //                     field:"price",
+    //                     sorter:"number"
+    //                 },
+    //                 {
+    //                     title:"Quantity",
+    //                     field:"qty",
+    //                     sorter:"number"
+    //                 }],
+    //                 "initialSort":[{column:"name", dir:"asc"}]
+    //             },
+    //             "metadata":{
+    //                 title:"Nandha Outlet",
+    //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //             }
+    //             },
+    //             {
+    //             "metadata":{
+    //                 title:"Nandha Outlet",
+    //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //             },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             }
+    //             ]
+    //         }
+    //     }]);
 
     // // GraphCardsCarousel
-        // setBotResponse([
-        //     {
-        //         "text":"Displaying card with Graph",
-        //         "custom":{
-        //             "payload":"graphCardsCarousel",
-        //             "outlets":[
-        //             {
-        //             "metadata":{
-        //                 title:"Nandha Outlet",
-        //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //             },
-        //             "label1":"Label1.",
-        //             "label2":"Label2.",
-        //             "chartsIntersectData":[2, 4, 12, 9],
-        //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
-        //             },
-        //             {
-        //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
-        //             },
-        //             {
-        //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
-        //             },
-        //             {
-        //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
-        //             } 
+    // setBotResponse([
+    //     {
+    //         "text":"Displaying card with Graph",
+    //         "custom":{
+    //             "payload":"graphCardsCarousel",
+    //             "outlets":[
+    //             {
+    //             "metadata":{
+    //                 title:"Nandha Outlet",
+    //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //             },
+    //             "label1":"Label1.",
+    //             "label2":"Label2.",
+    //             "chartsIntersectData":[2, 4, 12, 9],
+    //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
+    //             },
+    //             {
+    //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
+    //             },
+    //             {
+    //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
+    //             },
+    //             {
+    //      "title": "Nandha Outlet", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "bar", "displayLegend": "true"              
+    //             } 
 
-        //             ]
-        //         }
-        //     }
+    //             ]
+    //         }
+    //     }
 
-        //     ]);
-        //show  multiSimpleCardsCarousel
-        // setBotResponse([
-        //     {
-        //         "custom":{
-        //             "payload":"multiSimpleCardsCarousel",
-        //             "data":[
-        //                 {
-        //             "table":{
-        //                 "tableData":[{
-        //                     id:1,
-        //                     name:"Shampoo",
-        //                     price:80,
-        //                     qty:1
-        //                 },
-        //                 {
-        //                     id:2,
-        //                     name:"Meera",
-        //                     price:30.454,
-        //                     qty:2
-        //                 },
-        //                 {
-        //                     id:3,
-        //                     name:"Veera",
-        //                     price:30.45,
-        //                     qty:0
-        //                 },
-        //                 {
-        //                     id:4,
-        //                     name:"Coora",
-        //                     price:30.45,
-        //                     qty:10
-        //                 },
-        //                 {
-        //                     id:5,
-        //                     name:"Clinic",
-        //                     price:30.45,
-        //                     qty:5
-        //                 },
-        //                 {
-        //                     id:6,
-        //                     name:"Pantene",
-        //                     price:25.65,
-        //                     qty:3
-        //                 }],
-        //                 "columns":[{
-        //                     title:"Name",
-        //                     field:"name"
-        //                 },{
-        //                     title:"Price",
-        //                     field:"price",
-        //                     sorter:"number"
-        //                 },
-        //                 {
-        //                     title:"Quantity",
-        //                     field:"qty",
-        //                     sorter:"number"
-        //                 }],
-        //                 "initialSort":[{column:"name", dir:"asc"}]
-        //             },
-        //             "metadata":{
-        //                 title:"Nandha Outlet1",
-        //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //             }
-        //             },
-        //             {
-        //                 "table":{
-        //                     "tableData":[{
-        //                         id:1,
-        //                         name:"Shampoo",
-        //                         price:80,
-        //                         qty:1
-        //                     },
-        //                     {
-        //                         id:2,
-        //                         name:"Meera",
-        //                         price:30.454,
-        //                         qty:2
-        //                     },
-        //                     {
-        //                         id:3,
-        //                         name:"Veera",
-        //                         price:30.45,
-        //                         qty:0
-        //                     },
-        //                     {
-        //                         id:4,
-        //                         name:"Coora",
-        //                         price:30.45,
-        //                         qty:10
-        //                     },
-        //                     {
-        //                         id:5,
-        //                         name:"Clinic",
-        //                         price:30.45,
-        //                         qty:5
-        //                     },
-        //                     {
-        //                         id:6,
-        //                         name:"Pantene",
-        //                         price:25.65,
-        //                         qty:3
-        //                     }],
-        //                     "columns":[{
-        //                         title:"Name",
-        //                         field:"name"
-        //                     },{
-        //                         title:"Price",
-        //                         field:"price",
-        //                         sorter:"number"
-        //                     },
-        //                     {
-        //                         title:"Quantity",
-        //                         field:"qty",
-        //                         sorter:"number"
-        //                     }],
-        //                     "initialSort":[{column:"name", dir:"asc"}]
-        //                 },
-        //                 "metadata":{
-        //                     title:"Nandha Outlet2",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 }
-        //                 },
-        //                 {
-        //                     "table":{
-        //                         "tableData":[{
-        //                             id:1,
-        //                             name:"Shampoo",
-        //                             price:80,
-        //                             qty:1
-        //                         },
-        //                         {
-        //                             id:2,
-        //                             name:"Meera",
-        //                             price:30.454,
-        //                             qty:2
-        //                         },
-        //                         {
-        //                             id:3,
-        //                             name:"Veera",
-        //                             price:30.45,
-        //                             qty:0
-        //                         },
-        //                         {
-        //                             id:4,
-        //                             name:"Coora",
-        //                             price:30.45,
-        //                             qty:10
-        //                         },
-        //                         {
-        //                             id:5,
-        //                             name:"Clinic",
-        //                             price:30.45,
-        //                             qty:5
-        //                         },
-        //                         {
-        //                             id:6,
-        //                             name:"Pantene",
-        //                             price:25.65,
-        //                             qty:3
-        //                         }],
-        //                         "columns":[{
-        //                             title:"Name",
-        //                             field:"name"
-        //                         },{
-        //                             title:"Price",
-        //                             field:"price",
-        //                             sorter:"number"
-        //                         },
-        //                         {
-        //                             title:"Quantity",
-        //                             field:"qty",
-        //                             sorter:"number"
-        //                         }],
-        //                         "initialSort":[{column:"name", dir:"asc"}]
-        //                     },
-        //                     "metadata":{
-        //                         title:"Nandha Outlet3",
-        //                         data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                         {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                         {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                     }
-        //                     },
-        //                     {
-        //                         "table":{
-        //                             "tableData":[{
-        //                                 id:1,
-        //                                 name:"Shampoo",
-        //                                 price:80,
-        //                                 qty:1
-        //                             },
-        //                             {
-        //                                 id:2,
-        //                                 name:"Meera",
-        //                                 price:30.454,
-        //                                 qty:2
-        //                             },
-        //                             {
-        //                                 id:3,
-        //                                 name:"Veera",
-        //                                 price:30.45,
-        //                                 qty:0
-        //                             },
-        //                             {
-        //                                 id:4,
-        //                                 name:"Coora",
-        //                                 price:30.45,
-        //                                 qty:10
-        //                             },
-        //                             {
-        //                                 id:5,
-        //                                 name:"Clinic",
-        //                                 price:30.45,
-        //                                 qty:5
-        //                             },
-        //                             {
-        //                                 id:6,
-        //                                 name:"Pantene",
-        //                                 price:25.65,
-        //                                 qty:3
-        //                             }],
-        //                             "columns":[{
-        //                                 title:"Name",
-        //                                 field:"name"
-        //                             },{
-        //                                 title:"Price",
-        //                                 field:"price",
-        //                                 sorter:"number"
-        //                             },
-        //                             {
-        //                                 title:"Quantity",
-        //                                 field:"qty",
-        //                                 sorter:"number"
-        //                             }],
-        //                             "initialSort":[{column:"name", dir:"asc"}]
-        //                         },
-        //                         "metadata":{
-        //                             title:"Nandha Outlet4",
-        //                             data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                             {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                             {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                         }
-        //                         },
-        //                         {
-        //                             "table":{
-        //                                 "tableData":[{
-        //                                     id:1,
-        //                                     name:"Shampoo",
-        //                                     price:80,
-        //                                     qty:1
-        //                                 },
-        //                                 {
-        //                                     id:2,
-        //                                     name:"Meera",
-        //                                     price:30.454,
-        //                                     qty:2
-        //                                 },
-        //                                 {
-        //                                     id:3,
-        //                                     name:"Veera",
-        //                                     price:30.45,
-        //                                     qty:0
-        //                                 },
-        //                                 {
-        //                                     id:4,
-        //                                     name:"Coora",
-        //                                     price:30.45,
-        //                                     qty:10
-        //                                 },
-        //                                 {
-        //                                     id:5,
-        //                                     name:"Clinic",
-        //                                     price:30.45,
-        //                                     qty:5
-        //                                 },
-        //                                 {
-        //                                     id:6,
-        //                                     name:"Pantene",
-        //                                     price:25.65,
-        //                                     qty:3
-        //                                 }],
-        //                                 "columns":[{
-        //                                     title:"Name",
-        //                                     field:"name"
-        //                                 },{
-        //                                     title:"Price",
-        //                                     field:"price",
-        //                                     sorter:"number"
-        //                                 },
-        //                                 {
-        //                                     title:"Quantity",
-        //                                     field:"qty",
-        //                                     sorter:"number"
-        //                                 }],
-        //                                 "initialSort":[{column:"name", dir:"asc"}]
-        //                             },
-        //                             "metadata":{
-        //                                 title:"Nandha Outlet5",
-        //                                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                             }
-        //                             },
-        //             {
-        //             "metadata":{
-        //                 title:"Nandha Outlet6",
-        //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //             },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet7",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet8",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet9",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet10",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet11",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet12",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet13",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet14",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet15",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             },
-        //             {
-        //                 "metadata":{
-        //                     title:"Nandha Outlet16",
-        //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-        //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-        //                 },
-        //             }                    
-        //             ]
-        //         }
-        //     }]);
+    //     ]);
+    //show  multiSimpleCardsCarousel
+    // setBotResponse([
+    //     {
+    //         "custom":{
+    //             "payload":"multiSimpleCardsCarousel",
+    //             "data":[
+    //                 {
+    //             "table":{
+    //                 "tableData":[{
+    //                     id:1,
+    //                     name:"Shampoo",
+    //                     price:80,
+    //                     qty:1
+    //                 },
+    //                 {
+    //                     id:2,
+    //                     name:"Meera",
+    //                     price:30.454,
+    //                     qty:2
+    //                 },
+    //                 {
+    //                     id:3,
+    //                     name:"Veera",
+    //                     price:30.45,
+    //                     qty:0
+    //                 },
+    //                 {
+    //                     id:4,
+    //                     name:"Coora",
+    //                     price:30.45,
+    //                     qty:10
+    //                 },
+    //                 {
+    //                     id:5,
+    //                     name:"Clinic",
+    //                     price:30.45,
+    //                     qty:5
+    //                 },
+    //                 {
+    //                     id:6,
+    //                     name:"Pantene",
+    //                     price:25.65,
+    //                     qty:3
+    //                 }],
+    //                 "columns":[{
+    //                     title:"Name",
+    //                     field:"name"
+    //                 },{
+    //                     title:"Price",
+    //                     field:"price",
+    //                     sorter:"number"
+    //                 },
+    //                 {
+    //                     title:"Quantity",
+    //                     field:"qty",
+    //                     sorter:"number"
+    //                 }],
+    //                 "initialSort":[{column:"name", dir:"asc"}]
+    //             },
+    //             "metadata":{
+    //                 title:"Nandha Outlet1",
+    //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //             }
+    //             },
+    //             {
+    //                 "table":{
+    //                     "tableData":[{
+    //                         id:1,
+    //                         name:"Shampoo",
+    //                         price:80,
+    //                         qty:1
+    //                     },
+    //                     {
+    //                         id:2,
+    //                         name:"Meera",
+    //                         price:30.454,
+    //                         qty:2
+    //                     },
+    //                     {
+    //                         id:3,
+    //                         name:"Veera",
+    //                         price:30.45,
+    //                         qty:0
+    //                     },
+    //                     {
+    //                         id:4,
+    //                         name:"Coora",
+    //                         price:30.45,
+    //                         qty:10
+    //                     },
+    //                     {
+    //                         id:5,
+    //                         name:"Clinic",
+    //                         price:30.45,
+    //                         qty:5
+    //                     },
+    //                     {
+    //                         id:6,
+    //                         name:"Pantene",
+    //                         price:25.65,
+    //                         qty:3
+    //                     }],
+    //                     "columns":[{
+    //                         title:"Name",
+    //                         field:"name"
+    //                     },{
+    //                         title:"Price",
+    //                         field:"price",
+    //                         sorter:"number"
+    //                     },
+    //                     {
+    //                         title:"Quantity",
+    //                         field:"qty",
+    //                         sorter:"number"
+    //                     }],
+    //                     "initialSort":[{column:"name", dir:"asc"}]
+    //                 },
+    //                 "metadata":{
+    //                     title:"Nandha Outlet2",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 }
+    //                 },
+    //                 {
+    //                     "table":{
+    //                         "tableData":[{
+    //                             id:1,
+    //                             name:"Shampoo",
+    //                             price:80,
+    //                             qty:1
+    //                         },
+    //                         {
+    //                             id:2,
+    //                             name:"Meera",
+    //                             price:30.454,
+    //                             qty:2
+    //                         },
+    //                         {
+    //                             id:3,
+    //                             name:"Veera",
+    //                             price:30.45,
+    //                             qty:0
+    //                         },
+    //                         {
+    //                             id:4,
+    //                             name:"Coora",
+    //                             price:30.45,
+    //                             qty:10
+    //                         },
+    //                         {
+    //                             id:5,
+    //                             name:"Clinic",
+    //                             price:30.45,
+    //                             qty:5
+    //                         },
+    //                         {
+    //                             id:6,
+    //                             name:"Pantene",
+    //                             price:25.65,
+    //                             qty:3
+    //                         }],
+    //                         "columns":[{
+    //                             title:"Name",
+    //                             field:"name"
+    //                         },{
+    //                             title:"Price",
+    //                             field:"price",
+    //                             sorter:"number"
+    //                         },
+    //                         {
+    //                             title:"Quantity",
+    //                             field:"qty",
+    //                             sorter:"number"
+    //                         }],
+    //                         "initialSort":[{column:"name", dir:"asc"}]
+    //                     },
+    //                     "metadata":{
+    //                         title:"Nandha Outlet3",
+    //                         data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                         {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                         {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                     }
+    //                     },
+    //                     {
+    //                         "table":{
+    //                             "tableData":[{
+    //                                 id:1,
+    //                                 name:"Shampoo",
+    //                                 price:80,
+    //                                 qty:1
+    //                             },
+    //                             {
+    //                                 id:2,
+    //                                 name:"Meera",
+    //                                 price:30.454,
+    //                                 qty:2
+    //                             },
+    //                             {
+    //                                 id:3,
+    //                                 name:"Veera",
+    //                                 price:30.45,
+    //                                 qty:0
+    //                             },
+    //                             {
+    //                                 id:4,
+    //                                 name:"Coora",
+    //                                 price:30.45,
+    //                                 qty:10
+    //                             },
+    //                             {
+    //                                 id:5,
+    //                                 name:"Clinic",
+    //                                 price:30.45,
+    //                                 qty:5
+    //                             },
+    //                             {
+    //                                 id:6,
+    //                                 name:"Pantene",
+    //                                 price:25.65,
+    //                                 qty:3
+    //                             }],
+    //                             "columns":[{
+    //                                 title:"Name",
+    //                                 field:"name"
+    //                             },{
+    //                                 title:"Price",
+    //                                 field:"price",
+    //                                 sorter:"number"
+    //                             },
+    //                             {
+    //                                 title:"Quantity",
+    //                                 field:"qty",
+    //                                 sorter:"number"
+    //                             }],
+    //                             "initialSort":[{column:"name", dir:"asc"}]
+    //                         },
+    //                         "metadata":{
+    //                             title:"Nandha Outlet4",
+    //                             data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                             {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                             {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                         }
+    //                         },
+    //                         {
+    //                             "table":{
+    //                                 "tableData":[{
+    //                                     id:1,
+    //                                     name:"Shampoo",
+    //                                     price:80,
+    //                                     qty:1
+    //                                 },
+    //                                 {
+    //                                     id:2,
+    //                                     name:"Meera",
+    //                                     price:30.454,
+    //                                     qty:2
+    //                                 },
+    //                                 {
+    //                                     id:3,
+    //                                     name:"Veera",
+    //                                     price:30.45,
+    //                                     qty:0
+    //                                 },
+    //                                 {
+    //                                     id:4,
+    //                                     name:"Coora",
+    //                                     price:30.45,
+    //                                     qty:10
+    //                                 },
+    //                                 {
+    //                                     id:5,
+    //                                     name:"Clinic",
+    //                                     price:30.45,
+    //                                     qty:5
+    //                                 },
+    //                                 {
+    //                                     id:6,
+    //                                     name:"Pantene",
+    //                                     price:25.65,
+    //                                     qty:3
+    //                                 }],
+    //                                 "columns":[{
+    //                                     title:"Name",
+    //                                     field:"name"
+    //                                 },{
+    //                                     title:"Price",
+    //                                     field:"price",
+    //                                     sorter:"number"
+    //                                 },
+    //                                 {
+    //                                     title:"Quantity",
+    //                                     field:"qty",
+    //                                     sorter:"number"
+    //                                 }],
+    //                                 "initialSort":[{column:"name", dir:"asc"}]
+    //                             },
+    //                             "metadata":{
+    //                                 title:"Nandha Outlet5",
+    //                                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                             }
+    //                             },
+    //             {
+    //             "metadata":{
+    //                 title:"Nandha Outlet6",
+    //                 data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                 {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //             },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet7",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet8",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet9",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet10",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet11",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet12",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet13",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet14",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet15",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             },
+    //             {
+    //                 "metadata":{
+    //                     title:"Nandha Outlet16",
+    //                     data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
+    //                     {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+    //                 },
+    //             }                    
+    //             ]
+    //         }
+    //     }]);
     // setBotResponse([
     //     {
     //         "custom":{
@@ -764,800 +810,800 @@ SCROLL CHART TEST
 
     // show groupedSimpleCardsCarousel
     setBotResponse([
-            {
-                "custom":{
-                    "payload":"groupedSimpleCardsCarousel",
-                    "cards":[
-                        {
-                        "title":"Zomato",
-                        "minicards":[
+        {
+            "custom": {
+                "payload": "groupedSimpleCardsCarousel",
+                "cards": [
+                    {
+                        "title": "Zomato",
+                        "minicards": [
                             {
-                        "table":{
-                            "tableData":[{
-                                id:1,
-                                name:"Shampoo",
-                                price:80,
-                                qty:1
-                            },
-                            {
-                                id:2,
-                                name:"Meera",
-                                price:30.454,
-                                qty:2
-                            },
-                            {
-                                id:3,
-                                name:"Veera",
-                                price:30.45,
-                                qty:0
-                            },
-                            {
-                                id:4,
-                                name:"Coora",
-                                price:30.45,
-                                qty:10
-                            },
-                            {
-                                id:5,
-                                name:"Clinic",
-                                price:30.45,
-                                qty:5
-                            },
-                            {
-                                id:6,
-                                name:"Pantene",
-                                price:25.65,
-                                qty:3
-                            }],
-                            "columns":[{
-                                title:"Name",
-                                field:"name"
-                            },{
-                                title:"Price",
-                                field:"price",
-                                sorter:"number"
-                            },
-                            {
-                                title:"Quantity",
-                                field:"qty",
-                                sorter:"number"
-                            }],
-                            "initialSort":[{column:"name", dir:"asc"}]
-                        },
-                        "metadata":{
-                            title:"Nandha Outlet1",
-                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                        }
-                        },
-                        {
-                            "table":{
-                                "tableData":[{
-                                    id:1,
-                                    name:"Shampoo",
-                                    price:80,
-                                    qty:1
-                                },
-                                {
-                                    id:2,
-                                    name:"Meera",
-                                    price:30.454,
-                                    qty:2
-                                },
-                                {
-                                    id:3,
-                                    name:"Veera",
-                                    price:30.45,
-                                    qty:0
-                                },
-                                {
-                                    id:4,
-                                    name:"Coora",
-                                    price:30.45,
-                                    qty:10
-                                },
-                                {
-                                    id:5,
-                                    name:"Clinic",
-                                    price:30.45,
-                                    qty:5
-                                },
-                                {
-                                    id:6,
-                                    name:"Pantene",
-                                    price:25.65,
-                                    qty:3
-                                }],
-                                "columns":[{
-                                    title:"Name",
-                                    field:"name"
-                                },{
-                                    title:"Price",
-                                    field:"price",
-                                    sorter:"number"
-                                },
-                                {
-                                    title:"Quantity",
-                                    field:"qty",
-                                    sorter:"number"
-                                }],
-                                "initialSort":[{column:"name", dir:"asc"}]
-                            },
-                            "metadata":{
-                                title:"Nandha Outlet2",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                            }
-                            },
-                            {
-                                "table":{
-                                    "tableData":[{
-                                        id:1,
-                                        name:"Shampoo",
-                                        price:80,
-                                        qty:1
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
                                     },
                                     {
-                                        id:2,
-                                        name:"Meera",
-                                        price:30.454,
-                                        qty:2
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
                                     },
                                     {
-                                        id:3,
-                                        name:"Veera",
-                                        price:30.45,
-                                        qty:0
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
                                     },
                                     {
-                                        id:4,
-                                        name:"Coora",
-                                        price:30.45,
-                                        qty:10
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
                                     },
                                     {
-                                        id:5,
-                                        name:"Clinic",
-                                        price:30.45,
-                                        qty:5
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
                                     },
                                     {
-                                        id:6,
-                                        name:"Pantene",
-                                        price:25.65,
-                                        qty:3
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
                                     }],
-                                    "columns":[{
-                                        title:"Name",
-                                        field:"name"
-                                    },{
-                                        title:"Price",
-                                        field:"price",
-                                        sorter:"number"
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
                                     },
                                     {
-                                        title:"Quantity",
-                                        field:"qty",
-                                        sorter:"number"
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
                                     }],
-                                    "initialSort":[{column:"name", dir:"asc"}]
+                                    "initialSort": [{ column: "name", dir: "asc" }]
                                 },
-                                "metadata":{
-                                    title:"Nandha Outlet3",
-                                    data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                    {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                    {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                                "metadata": {
+                                    title: "Nandha Outlet1",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
                                 }
-                                },
-                                {
-                                    "table":{
-                                        "tableData":[{
-                                            id:1,
-                                            name:"Shampoo",
-                                            price:80,
-                                            qty:1
-                                        },
-                                        {
-                                            id:2,
-                                            name:"Meera",
-                                            price:30.454,
-                                            qty:2
-                                        },
-                                        {
-                                            id:3,
-                                            name:"Veera",
-                                            price:30.45,
-                                            qty:0
-                                        },
-                                        {
-                                            id:4,
-                                            name:"Coora",
-                                            price:30.45,
-                                            qty:10
-                                        },
-                                        {
-                                            id:5,
-                                            name:"Clinic",
-                                            price:30.45,
-                                            qty:5
-                                        },
-                                        {
-                                            id:6,
-                                            name:"Pantene",
-                                            price:25.65,
-                                            qty:3
-                                        }],
-                                        "columns":[{
-                                            title:"Name",
-                                            field:"name"
-                                        },{
-                                            title:"Price",
-                                            field:"price",
-                                            sorter:"number"
-                                        },
-                                        {
-                                            title:"Quantity",
-                                            field:"qty",
-                                            sorter:"number"
-                                        }],
-                                        "initialSort":[{column:"name", dir:"asc"}]
-                                    },
-                                    "metadata":{
-                                        title:"Nandha Outlet4",
-                                        data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                        {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                        {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                                    }
+                            },
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
                                     },
                                     {
-                                        "table":{
-                                            "tableData":[{
-                                                id:1,
-                                                name:"Shampoo",
-                                                price:80,
-                                                qty:1
-                                            },
-                                            {
-                                                id:2,
-                                                name:"Meera",
-                                                price:30.454,
-                                                qty:2
-                                            },
-                                            {
-                                                id:3,
-                                                name:"Veera",
-                                                price:30.45,
-                                                qty:0
-                                            },
-                                            {
-                                                id:4,
-                                                name:"Coora",
-                                                price:30.45,
-                                                qty:10
-                                            },
-                                            {
-                                                id:5,
-                                                name:"Clinic",
-                                                price:30.45,
-                                                qty:5
-                                            },
-                                            {
-                                                id:6,
-                                                name:"Pantene",
-                                                price:25.65,
-                                                qty:3
-                                            }],
-                                            "columns":[{
-                                                title:"Name",
-                                                field:"name"
-                                            },{
-                                                title:"Price",
-                                                field:"price",
-                                                sorter:"number"
-                                            },
-                                            {
-                                                title:"Quantity",
-                                                field:"qty",
-                                                sorter:"number"
-                                            }],
-                                            "initialSort":[{column:"name", dir:"asc"}]
-                                        },
-                                        "metadata":{
-                                            title:"Nandha Outlet5",
-                                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                            {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                                        }
-                                        },
-                        {
-                        "metadata":{
-                            title:"Nandha Outlet6",
-                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                        },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet7",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet2",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet8",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
+                                    },
+                                    {
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet3",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet9",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
+                                    },
+                                    {
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet4",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet10",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
+                                    },
+                                    {
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet5",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet11",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet6",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet12",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet7",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val2", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet13",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet8",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet14",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet9",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet15",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet10",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet16",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet11",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        }                    
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet12",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet13",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet14",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet15",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet16",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            }
                         ]
                     },
                     {
-                        "title":"Swiggy",
-                        "minicards":[
+                        "title": "Swiggy",
+                        "minicards": [
                             {
-                        "table":{
-                            "tableData":[{
-                                id:1,
-                                name:"Shampoo",
-                                price:80,
-                                qty:1
-                            },
-                            {
-                                id:2,
-                                name:"Meera",
-                                price:30.454,
-                                qty:2
-                            },
-                            {
-                                id:3,
-                                name:"Veera",
-                                price:30.45,
-                                qty:0
-                            },
-                            {
-                                id:4,
-                                name:"Coora",
-                                price:30.45,
-                                qty:10
-                            },
-                            {
-                                id:5,
-                                name:"Clinic",
-                                price:30.45,
-                                qty:5
-                            },
-                            {
-                                id:6,
-                                name:"Pantene",
-                                price:25.65,
-                                qty:3
-                            }],
-                            "columns":[{
-                                title:"Name",
-                                field:"name"
-                            },{
-                                title:"Price",
-                                field:"price",
-                                sorter:"number"
-                            },
-                            {
-                                title:"Quantity",
-                                field:"qty",
-                                sorter:"number"
-                            }],
-                            "initialSort":[{column:"name", dir:"asc"}]
-                        },
-                        "metadata":{
-                            title:"Nandha Outlet1",
-                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                        }
-                        },
-                        {
-                            "table":{
-                                "tableData":[{
-                                    id:1,
-                                    name:"Shampoo",
-                                    price:80,
-                                    qty:1
-                                },
-                                {
-                                    id:2,
-                                    name:"Meera",
-                                    price:30.454,
-                                    qty:2
-                                },
-                                {
-                                    id:3,
-                                    name:"Veera",
-                                    price:30.45,
-                                    qty:0
-                                },
-                                {
-                                    id:4,
-                                    name:"Coora",
-                                    price:30.45,
-                                    qty:10
-                                },
-                                {
-                                    id:5,
-                                    name:"Clinic",
-                                    price:30.45,
-                                    qty:5
-                                },
-                                {
-                                    id:6,
-                                    name:"Pantene",
-                                    price:25.65,
-                                    qty:3
-                                }],
-                                "columns":[{
-                                    title:"Name",
-                                    field:"name"
-                                },{
-                                    title:"Price",
-                                    field:"price",
-                                    sorter:"number"
-                                },
-                                {
-                                    title:"Quantity",
-                                    field:"qty",
-                                    sorter:"number"
-                                }],
-                                "initialSort":[{column:"name", dir:"asc"}]
-                            },
-                            "metadata":{
-                                title:"Nandha Outlet2",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                            }
-                            },
-                            {
-                                "table":{
-                                    "tableData":[{
-                                        id:1,
-                                        name:"Shampoo",
-                                        price:80,
-                                        qty:1
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
                                     },
                                     {
-                                        id:2,
-                                        name:"Meera",
-                                        price:30.454,
-                                        qty:2
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
                                     },
                                     {
-                                        id:3,
-                                        name:"Veera",
-                                        price:30.45,
-                                        qty:0
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
                                     },
                                     {
-                                        id:4,
-                                        name:"Coora",
-                                        price:30.45,
-                                        qty:10
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
                                     },
                                     {
-                                        id:5,
-                                        name:"Clinic",
-                                        price:30.45,
-                                        qty:5
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
                                     },
                                     {
-                                        id:6,
-                                        name:"Pantene",
-                                        price:25.65,
-                                        qty:3
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
                                     }],
-                                    "columns":[{
-                                        title:"Name",
-                                        field:"name"
-                                    },{
-                                        title:"Price",
-                                        field:"price",
-                                        sorter:"number"
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
                                     },
                                     {
-                                        title:"Quantity",
-                                        field:"qty",
-                                        sorter:"number"
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
                                     }],
-                                    "initialSort":[{column:"name", dir:"asc"}]
+                                    "initialSort": [{ column: "name", dir: "asc" }]
                                 },
-                                "metadata":{
-                                    title:"Nandha Outlet3",
-                                    data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                    {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                    {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                                "metadata": {
+                                    title: "Nandha Outlet1",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
                                 }
-                                },
-                                {
-                                    "table":{
-                                        "tableData":[{
-                                            id:1,
-                                            name:"Shampoo",
-                                            price:80,
-                                            qty:1
-                                        },
-                                        {
-                                            id:2,
-                                            name:"Meera",
-                                            price:30.454,
-                                            qty:2
-                                        },
-                                        {
-                                            id:3,
-                                            name:"Veera",
-                                            price:30.45,
-                                            qty:0
-                                        },
-                                        {
-                                            id:4,
-                                            name:"Coora",
-                                            price:30.45,
-                                            qty:10
-                                        },
-                                        {
-                                            id:5,
-                                            name:"Clinic",
-                                            price:30.45,
-                                            qty:5
-                                        },
-                                        {
-                                            id:6,
-                                            name:"Pantene",
-                                            price:25.65,
-                                            qty:3
-                                        }],
-                                        "columns":[{
-                                            title:"Name",
-                                            field:"name"
-                                        },{
-                                            title:"Price",
-                                            field:"price",
-                                            sorter:"number"
-                                        },
-                                        {
-                                            title:"Quantity",
-                                            field:"qty",
-                                            sorter:"number"
-                                        }],
-                                        "initialSort":[{column:"name", dir:"asc"}]
-                                    },
-                                    "metadata":{
-                                        title:"Nandha Outlet4",
-                                        data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                        {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                        {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                                    }
+                            },
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
                                     },
                                     {
-                                        "table":{
-                                            "tableData":[{
-                                                id:1,
-                                                name:"Shampoo",
-                                                price:80,
-                                                qty:1
-                                            },
-                                            {
-                                                id:2,
-                                                name:"Meera",
-                                                price:30.454,
-                                                qty:2
-                                            },
-                                            {
-                                                id:3,
-                                                name:"Veera",
-                                                price:30.45,
-                                                qty:0
-                                            },
-                                            {
-                                                id:4,
-                                                name:"Coora",
-                                                price:30.45,
-                                                qty:10
-                                            },
-                                            {
-                                                id:5,
-                                                name:"Clinic",
-                                                price:30.45,
-                                                qty:5
-                                            },
-                                            {
-                                                id:6,
-                                                name:"Pantene",
-                                                price:25.65,
-                                                qty:3
-                                            }],
-                                            "columns":[{
-                                                title:"Name",
-                                                field:"name"
-                                            },{
-                                                title:"Price",
-                                                field:"price",
-                                                sorter:"number"
-                                            },
-                                            {
-                                                title:"Quantity",
-                                                field:"qty",
-                                                sorter:"number"
-                                            }],
-                                            "initialSort":[{column:"name", dir:"asc"}]
-                                        },
-                                        "metadata":{
-                                            title:"Nandha Outlet5",
-                                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                            {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                                        }
-                                        },
-                        {
-                        "metadata":{
-                            title:"Nandha Outlet6",
-                            data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                            {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
-                        },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet7",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val2",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet2",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet8",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
+                                    },
+                                    {
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet3",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet9",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
+                                    },
+                                    {
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet4",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet10",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "table": {
+                                    "tableData": [{
+                                        id: 1,
+                                        name: "Shampoo",
+                                        price: 80,
+                                        qty: 1
+                                    },
+                                    {
+                                        id: 2,
+                                        name: "Meera",
+                                        price: 30.454,
+                                        qty: 2
+                                    },
+                                    {
+                                        id: 3,
+                                        name: "Veera",
+                                        price: 30.45,
+                                        qty: 0
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "Coora",
+                                        price: 30.45,
+                                        qty: 10
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Clinic",
+                                        price: 30.45,
+                                        qty: 5
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Pantene",
+                                        price: 25.65,
+                                        qty: 3
+                                    }],
+                                    "columns": [{
+                                        title: "Name",
+                                        field: "name"
+                                    }, {
+                                        title: "Price",
+                                        field: "price",
+                                        sorter: "number"
+                                    },
+                                    {
+                                        title: "Quantity",
+                                        field: "qty",
+                                        sorter: "number"
+                                    }],
+                                    "initialSort": [{ column: "name", dir: "asc" }]
+                                },
+                                "metadata": {
+                                    title: "Nandha Outlet5",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                }
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet11",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet6",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet12",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet7",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val2", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet13",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet8",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet14",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet9",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet15",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet10",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        },
-                        {
-                            "metadata":{
-                                title:"Nandha Outlet16",
-                                data:[{title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1111111111111111111",value:"bbbbbbbbbbbbbbbbbbbabab"},
-                                {title:"val1",value:"bbbbbbbbbbbbbbbbbbbabab"}]
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet11",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
                             },
-                        }                    
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet12",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet13",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet14",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet15",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            },
+                            {
+                                "metadata": {
+                                    title: "Nandha Outlet16",
+                                    data: [{ title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1111111111111111111", value: "bbbbbbbbbbbbbbbbbbbabab" },
+                                    { title: "val1", value: "bbbbbbbbbbbbbbbbbbbabab" }]
+                                },
+                            }
                         ]
                     }
                 ],
-                "minicardlimit":6
-                }
-            }]);
+                "minicardlimit": 6
+            }
+        }]);
 
 })
 
@@ -1772,7 +1818,7 @@ function setBotResponse(response) {
                     //check if the custom payload type is "quickReplies"
                     if (response[i].custom.payload == "quickReplies") {
                         quickRepliesData = response[i].custom.data;
-                        setTimeout(showQuickReplies(quickRepliesData),2000);
+                        setTimeout(showQuickReplies(quickRepliesData), 2000);
                         // showQuickReplies(quickRepliesData);
                         return;
                     }
@@ -1809,9 +1855,9 @@ function setBotResponse(response) {
                     //check if the custom payload type is "cardsCarousel"
                     if (response[i].custom.payload == "simpleCardsCarousel") {
                         let resData = (response[i].custom.data)
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             showSimpleCardsCarousel(resData);
-                        },1000);
+                        }, 1000);
                         // showSimpleCardsCarousel(resData);
                         continue;
                         // return;
@@ -1822,9 +1868,9 @@ function setBotResponse(response) {
                         let resData = (response[i].custom.outlets)
                         // first make global data empty
                         card_chart_data = [];
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             showGraphCardsCarousel(resData);
-                        },1000);
+                        }, 1000);
                         // showGraphCardsCarousel(resData);
                         continue;
                         // return;
@@ -1833,9 +1879,9 @@ function setBotResponse(response) {
                     // check if the custom payload type is "multiSimpleCardCarousel"
                     if (response[i].custom.payload == "multiSimpleCardsCarousel") {
                         let resData = (response[i].custom.data)
-                        setTimeout(()=>{
-                            showMultiSimpleCardsCarousel(resData,response[i].custom.minicardlimit);
-                        },1000);
+                        setTimeout(() => {
+                            showMultiSimpleCardsCarousel(resData, response[i].custom.minicardlimit);
+                        }, 1000);
                         // showmultiSimpleCardsCarousel(resData);
                         continue;
                         // return;
@@ -1844,9 +1890,9 @@ function setBotResponse(response) {
                     // check if the custom payload type is "groupedSimpleCardCarousel"
                     if (response[i].custom.payload == "groupedSimpleCardsCarousel") {
                         let resData = (response[i].custom.cards)
-                        setTimeout(()=>{
-                            showGroupedSimpleCardsCarousel(resData,response[i].custom.minicardlimit);
-                        },1000);
+                        setTimeout(() => {
+                            showGroupedSimpleCardsCarousel(resData, response[i].custom.minicardlimit);
+                        }, 1000);
                         // showGroupedSimpleCardsCarousel(resData);
                         // continue;
                         return;
@@ -1868,9 +1914,9 @@ function setBotResponse(response) {
                         displayLegend = chartData.displayLegend;
 
                         // pass the above variable to createChart function
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend);
-                        },1000);
+                        }, 1000);
                         return;
                     }
 
@@ -1881,16 +1927,16 @@ function setBotResponse(response) {
 
                         //store the below parameters as global variable, 
                         // so that it can be used while displaying the charts in modal.
-                        chartData = (response[i].custom.data)
-                        title = chartData.title;
-                        labels = chartData.labels;
-                        backgroundColor = chartData.backgroundColor;
-                        chartsData = chartData.chartsData;
-                        chartType = chartData.chartType;
-                        displayLegend = chartData.displayLegend;
-
+                        let chartData = (response[i].custom.data);
+                        let title1 = chartData.title1;
+                        let title2 = chartData.title2;
+                        let labels = chartData.labels;
+                        let data1 = chartData.data1;
+                        let data2 = chartData.data2;
                         // pass the above variable to createChart function
-                        createChartScroll(title, labels, backgroundColor, chartsData, chartType, displayLegend)
+                        setTimeout(() => {
+                            createChartScroll({ title1: title1, title2: title2 }, labels, data1, data2);
+                        }, 1000);
                         return;
                     }
 
@@ -2435,8 +2481,8 @@ function createGraphCardsCarousel(cardsData) {
 
 // ===================================== multiSimpleCardCarousel =============================================
 
-function showMultiSimpleCardsCarousel(cardsToAdd,cardLimit) {
-    var cards = createMultiSimpleCardsCarousel(cardsToAdd,cardLimit);
+function showMultiSimpleCardsCarousel(cardsToAdd, cardLimit) {
+    var cards = createMultiSimpleCardsCarousel(cardsToAdd, cardLimit);
 
     $(cards).appendTo(".chats").show();
 
@@ -2477,11 +2523,11 @@ function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
     // Number Of Mini Cards to display On Card.
     const MINICARDLIMIT = cardLimit || 5;
     const NoOfCards = cardsData.length;
-    let i=0;
+    let i = 0;
     let startIndex = 0;
-    const emptyEle = {title:"",value:""};
-    while(i < NoOfCards){
-        if(i+ MINICARDLIMIT <= NoOfCards){
+    const emptyEle = { title: "", value: "" };
+    while (i < NoOfCards) {
+        if (i + MINICARDLIMIT <= NoOfCards) {
             startIndex = i;
             i = i + MINICARDLIMIT;
         }
@@ -2489,19 +2535,19 @@ function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
             startIndex = i;
             i = NoOfCards;
         }
-        
+
         let miniCards = '';
         let item;
-        for(let j=startIndex;j<i;j++){
+        for (let j = startIndex; j < i; j++) {
             console.log(cardsData[j]);
-        let title = cardsData[j].metadata.title;
-        let ele1 = cardsData[j].metadata.data[0] || emptyEle;
-        let ele2 = cardsData[j].metadata.data[1] || emptyEle;
-        let table = cardsData[j].table;
-        let metadata = cardsData[j].metadata;
-        let miniCard;
-        if (table && metadata.data.length > 2) {
-            miniCard = `
+            let title = cardsData[j].metadata.title;
+            let ele1 = cardsData[j].metadata.data[0] || emptyEle;
+            let ele2 = cardsData[j].metadata.data[1] || emptyEle;
+            let table = cardsData[j].table;
+            let metadata = cardsData[j].metadata;
+            let miniCard;
+            if (table && metadata.data.length > 2) {
+                miniCard = `
             <div class="row multi_simpleCardContents">
                     <div class="multi_simpleCardMiniHeader">
                         <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2522,9 +2568,9 @@ function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
                                 class="countamount">${ele2.value}</span></span>
                     </div>
                 </div>`;
-        }
-        else if (table) {
-            miniCard = `
+            }
+            else if (table) {
+                miniCard = `
             <div class="row multi_simpleCardContents">
                     <div class="multi_simpleCardMiniHeader">
                         <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2541,9 +2587,9 @@ function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
                                 class="countamount">${ele2.value}</span></span>
                     </div>
                 </div>`;
-        }
-        else if (metadata.data.length > 2) {
-            miniCard = `
+            }
+            else if (metadata.data.length > 2) {
+                miniCard = `
             <div class="row multi_simpleCardContents">
                     <div class="multi_simpleCardMiniHeader">
                         <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2559,9 +2605,9 @@ function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
                                 class="countamount">${ele2.value}</span></span>
                     </div>
                 </div>`;
-        }
-        else {
-            miniCard = `
+            }
+            else {
+                miniCard = `
             <div class="row multi_simpleCardContents">
                     <div class="multi_simpleCardMiniHeader">
                         <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2573,25 +2619,25 @@ function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
                                 class="countamount">${ele2.value}</span></span>
                     </div>
                 </div>`;
-        }
+            }
 
-        miniCards = miniCards + miniCard;
+            miniCards = miniCards + miniCard;
 
         }
         // Large Card Preview Button
-    //     <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
-    //     <i class="fa fa-eye"  aria-hidden="true"></i>
-    // </span>
+        //     <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+        //     <i class="fa fa-eye"  aria-hidden="true"></i>
+        // </span>
         item = `
         <div class="multi_simple_carousel_cards in-left">
             <div class="multi_simpleCardHeader">
-                <span class="cardTitle" title="${startIndex+1}-${i}">${startIndex+1} - ${i}</span>
+                <span class="cardTitle" title="${startIndex + 1}-${i}">${startIndex + 1} - ${i}</span>
             </div>
             <div class="multi_simpleCardMainBody">
                 ${miniCards}
             </div>
         </div>`;
-        
+
         cards += item;
     }
 
@@ -2610,8 +2656,8 @@ function createMultiSimpleCardsCarousel(cardsData, cardLimit) {
 
 // ===================================== groupedSimpleCardCarousel =============================================
 // UI Is same for groupedSimpleCardCarousel and multiSimpleCardCarousel
-function showGroupedSimpleCardsCarousel(cardsToAdd,cardLimit) {
-    var cards = createGroupedSimpleCardsCarousel(cardsToAdd,cardLimit);
+function showGroupedSimpleCardsCarousel(cardsToAdd, cardLimit) {
+    var cards = createGroupedSimpleCardsCarousel(cardsToAdd, cardLimit);
 
     $(cards).appendTo(".chats").show();
 
@@ -2650,17 +2696,17 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
 
     let cards = "";
     // Number Of Mini Cards to display On Card.
-    for(let k=0; k<cardsData.length; k++ ){
+    for (let k = 0; k < cardsData.length; k++) {
         let largeCardTitle = cardsData[k].title;
         let miniCardsData = cardsData[k].minicards;
         console.log(miniCardsData);
         let NoOfMiniCards = miniCardsData.length;
         let MINICARDLIMIT = cardLimit || NoOfMiniCards;
-        let i=0;
+        let i = 0;
         let startIndex = 0;
-        const emptyEle = {title:"",value:""};
-        while(i < NoOfMiniCards){
-            if(i+ MINICARDLIMIT <= NoOfMiniCards){
+        const emptyEle = { title: "", value: "" };
+        while (i < NoOfMiniCards) {
+            if (i + MINICARDLIMIT <= NoOfMiniCards) {
                 startIndex = i;
                 i = i + MINICARDLIMIT;
             }
@@ -2668,19 +2714,19 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
                 startIndex = i;
                 i = NoOfMiniCards;
             }
-            
+
             let miniCards = '';
             let item;
-            for(let j=startIndex;j<i;j++){
+            for (let j = startIndex; j < i; j++) {
                 console.log(miniCardsData[j]);
-            let title = miniCardsData[j].metadata.title;
-            let ele1 = miniCardsData[j].metadata.data[0] || emptyEle;
-            let ele2 = miniCardsData[j].metadata.data[1] || emptyEle;
-            let table = miniCardsData[j].table;
-            let metadata = miniCardsData[j].metadata;
-            let miniCard;
-            if (table && metadata.data.length > 2) {
-                miniCard = `
+                let title = miniCardsData[j].metadata.title;
+                let ele1 = miniCardsData[j].metadata.data[0] || emptyEle;
+                let ele2 = miniCardsData[j].metadata.data[1] || emptyEle;
+                let table = miniCardsData[j].table;
+                let metadata = miniCardsData[j].metadata;
+                let miniCard;
+                if (table && metadata.data.length > 2) {
+                    miniCard = `
                 <div class="row multi_simpleCardContents">
                         <div class="multi_simpleCardMiniHeader">
                             <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2701,9 +2747,9 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
                                     class="countamount">${ele2.value}</span></span>
                         </div>
                     </div>`;
-            }
-            else if (table) {
-                miniCard = `
+                }
+                else if (table) {
+                    miniCard = `
                 <div class="row multi_simpleCardContents">
                         <div class="multi_simpleCardMiniHeader">
                             <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2720,9 +2766,9 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
                                     class="countamount">${ele2.value}</span></span>
                         </div>
                     </div>`;
-            }
-            else if (metadata.data.length > 2) {
-                miniCard = `
+                }
+                else if (metadata.data.length > 2) {
+                    miniCard = `
                 <div class="row multi_simpleCardContents">
                         <div class="multi_simpleCardMiniHeader">
                             <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2738,9 +2784,9 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
                                     class="countamount">${ele2.value}</span></span>
                         </div>
                     </div>`;
-            }
-            else {
-                miniCard = `
+                }
+                else {
+                    miniCard = `
                 <div class="row multi_simpleCardContents">
                         <div class="multi_simpleCardMiniHeader">
                             <span class="cardTitle" style="font-size: 0.85em">${title}</span>
@@ -2752,31 +2798,31 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
                                     class="countamount">${ele2.value}</span></span>
                         </div>
                     </div>`;
-            }
-    
-            miniCards = miniCards + miniCard;
-    
+                }
+
+                miniCards = miniCards + miniCard;
+
             }
             // Large Card Preview Button
-        //     <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
-        //     <i class="fa fa-eye"  aria-hidden="true"></i>
-        // </span>
+            //     <span class="modal-trigger-card" data-payload = '${JSON.stringify(metadata)}' id="modalcardexp" title="modalcardexp" href="#modal2">
+            //     <i class="fa fa-eye"  aria-hidden="true"></i>
+            // </span>
             item = `
             <div class="multi_simple_carousel_cards in-left">
                 <div class="multi_simpleCardHeader">
-                    <span class="cardTitle" title="${largeCardTitle}(${startIndex+1}-${i})">${largeCardTitle}</span>
-                    <span class="cardTitle" title="${largeCardTitle}(${startIndex+1}-${i})">(${startIndex+1} - ${i})</span>
+                    <span class="cardTitle" title="${largeCardTitle}(${startIndex + 1}-${i})">${largeCardTitle}</span>
+                    <span class="cardTitle" title="${largeCardTitle}(${startIndex + 1}-${i})">(${startIndex + 1} - ${i})</span>
                 </div>
                 <div class="multi_simpleCardMainBody">
                     ${miniCards}
                 </div>
             </div>`;
-            
+
             cards += item;
         }
-    
+
     }
-    
+
     let cardContents = `<div id="paginated_cards" class="cards">
                          <div class="multi_simple_cards_scroller">${cards}
                          <span class="arrow prev fa fa-chevron-circle-left "></span> 
@@ -2792,13 +2838,13 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
 
 // ===================================== showQuickReplies =======================================
 function showQuickReplies(quickRepliesData) {
-    setTimeout(function(){
+    setTimeout(function () {
         var chips = ""
         for (i = 0; i < quickRepliesData.length; i++) {
             var chip = '<div class="chip" data-payload=\'' + (quickRepliesData[i].payload) + '\'>' + quickRepliesData[i].title + '</div>'
             chips += (chip)
         }
-    
+
         var quickReplies = '<div class="quickReplies">' + chips + '</div><div class="clearfix"></div>'
         $(quickReplies).appendTo(".chats").fadeIn(1000);
         scrollToBottomOfResults();
@@ -2806,7 +2852,7 @@ function showQuickReplies(quickRepliesData) {
         let isDown = false;
         let startX;
         let scrollLeft;
-    
+
         slider.addEventListener('mousedown', (e) => {
             isDown = true;
             slider.classList.add('active');
@@ -2829,7 +2875,7 @@ function showQuickReplies(quickRepliesData) {
             slider.scrollLeft = scrollLeft - walk;
         });
     }, 1000);
-    
+
 
 }
 
@@ -3070,7 +3116,7 @@ function createChart(title, labels, backgroundColor, chartsData, chartType, disp
             },
             scales: {
                 xAxes: [{
-                    barThickness:6
+                    barThickness: 6
                 }]
             }
         }
@@ -3092,17 +3138,47 @@ function createChart(title, labels, backgroundColor, chartsData, chartType, disp
 
 //function to create the  scrollable charts & render it to the canvas
 
-function  drawScrollChart(charts_data, axis_id, chart_id) {
-    let chartData = {
-        labels: [],
-        datasets: [{
-            label: charts_data.title,
-            data: []
-        }]
-    };
+function drawScrollChart(charts_data, axis_id, chart_id) {
+    let chartData;
+    // let xAxes;
+    if (charts_data.title2) {
+        chartData = {
+            labels: [],
+            datasets: [{
+                type: "bar",
+                backgroundColor: "red",
+                id: "y-axis-0",
+                fill: false,
+                label: charts_data.title1,
+                data: []
+            },
+            {
+                type: "bar",
+                backgroundColor: "blue",
+                id: "y-axis-0",
+                fill: false,
+                label: charts_data.title2,
+                data: []
+            }]
+        };
+    }
+    else {
+        chartData = {
+            labels: [],
+            datasets: [{
+                type: "bar",
+                backgroundColor: "red",
+                id: "y-axis-0",
+                fill: false,
+                label: charts_data.title1,
+                data: []
+            }]
+        };
+    }
+
     let rectangleSet = false;
-    console.log("CHARTID "+chart_id+" Axis_ID "+axis_id);
-    let canvasTest = $("#"+chart_id);
+
+    let canvasTest = $("#" + chart_id);
     let chartTest = new Chart(canvasTest, {
         type: 'bar',
         data: chartData,
@@ -3119,12 +3195,16 @@ function  drawScrollChart(charts_data, axis_id, chart_id) {
             },
             scales: {
                 xAxes: [{
+                    stacked: false,
                     ticks: {
                         fontSize: 12,
                         display: true
                     }
                 }],
                 yAxes: [{
+                    stacked: false,
+                    position: "left",
+                    id: "y-axis-0",
                     ticks: {
                         fontSize: 12,
                         beginAtZero: true
@@ -3134,7 +3214,7 @@ function  drawScrollChart(charts_data, axis_id, chart_id) {
             animation: {
                 onComplete: function () {
                     if (!rectangleSet) {
-                        let scale = window.devicePixelRatio;                       
+                        let scale = window.devicePixelRatio;
 
                         let sourceCanvas = chartTest.chart.canvas;
                         let copyWidth = chartTest.scales['y-axis-0'].width - 10;
@@ -3171,22 +3251,25 @@ function  drawScrollChart(charts_data, axis_id, chart_id) {
         }
     });
     function addData(chart_data, chart) {
-        chart.data.datasets[0].data = [];
         chart.data.labels = [];
-        for (let i = 0; i < chart_data.data.length; i++) {
-            chart.data.datasets[0].data.push(chart_data.data[i]);
+        for (let i = 0; i < chart_data.labels.length; i++) {
+            chart.data.datasets[0].data.push(chart_data.data1[i]);
+            if (chart_data.data2) {
+                chart.data.datasets[1].data.push(chart_data.data2[i]);
+            }
+
             chart.data.labels.push(chart_data.labels[i]);
             let newwidth = $('.chartAreaWrapper2').width() + 60;
             $('.chartAreaWrapper2').width(newwidth);
         }
         console.log(chart.data);
     }
-    
+
     addData(charts_data, chartTest);
 };
 
 
-function createChartScroll(title, labels, backgroundColor, chartsData, chartType, displayLegend, chartsIntersectData) {
+function createChartScroll(titles, labels, data1, data2) {
 
     //create the ".chart-container" div that will render the charts in canvas as required by charts.js,
     // for more info. refer: https://www.chartjs.org/docs/latest/getting-started/usage.html
@@ -3198,36 +3281,30 @@ function createChartScroll(title, labels, backgroundColor, chartsData, chartType
     let canvasID = `scroll-chart${uniqueID}`;
     let axisID = `axis-chart${uniqueID}`;
     let chartData = {
-        "title": title,
         "labels": labels,
-        "backgroundColor": backgroundColor,
-        "chartsData": chartsData,
-        "chartType": chartType,
-        "displayLegend": displayLegend
+        "title1": titles.title1,
+        "title2": titles.title2,
+        "data1": data1,
+        "data2": data2
     };
     // Add to memory
-    setChartData(uniqueID, chartData);
-    
+    setChartData(uniqueID, { data1: data1, data2: data2 });
+
     let html = `
     <div class="chartWrapper">
         <canvas id="${axisID}" height="300" width="0"></canvas>
         <div class="chartAreaWrapper">
             <div class="chartAreaWrapper2">
-                <canvas id="${canvasID}" height="85%" ></canvas>
+                <canvas id="${canvasID}" height="50%" ></canvas>
             </div>
         </div>
     </div>
     <div class="clearfix"></div>`;
     $(html).appendTo('.chats');
 
-    setTimeout(()=>{
-        drawScrollChart(
-            {
-            title:"Test Data Set",
-            data: [12,23,43,23,54,67,87],
-            labels: ["a","b","c","d","e","f","g"]
-        },axisID,canvasID);
-    },5000);
+    setTimeout(
+        drawScrollChart(chartData, axisID, canvasID)
+        , 1000);
 
 
     scrollToBottomOfResults();
@@ -3415,7 +3492,7 @@ function createChartinModal(chartName, titles, labels, backgroundColor, chartsDa
 function login() {
     let email = $("input[name='email']").val().trim();
     let password = $("input[name='password']").val().trim();
-    if(email.length < 1 || password.length < 1){
+    if (email.length < 1 || password.length < 1) {
         return;
     }
     // Disable click button untill action completes.To avoid multiple clicks

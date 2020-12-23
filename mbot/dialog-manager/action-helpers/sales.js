@@ -184,6 +184,71 @@ module.exports.topcategories = async (data, token) => {
   );
 };
 
+// module.exports.topordertypes = async (data, token) => {
+//   const URL = BASE_URL + "/api/v1/sales/topordertypes";
+//   const resp = await axios.post(URL, data, {
+//     headers: {
+//       "Content-Type": "application/json",
+//       authorization: `Bearer ${token}`,
+//     },
+//   });
+//   let result = resp.data.result;
+//   let d = data.for;
+//   let textMessage = `${d}'s Top OrderTypes`;
+//   let cardWithGraph = [];
+//   if (data.for === "week" || data.for === "month") {
+//     d = "Last Week";
+//     textMessage = `${d}'s Top OrderTypes from ${data.from} - ${data.to}`;
+//   }
+//   console.log(result);
+//   textMessage += `\n Total Quantities - ${result.totaldata.total_qty} \n Total Amount - ${result.totaldata.total_amt}`;
+//   const CHARTTYPE = "bar";
+//   const DIPLAYLEGEND = "true";
+//   result.data.forEach((order) => {
+//     console.log(order);
+//     let labels = [];
+//     // Y-Axis
+//     let chartData = [];
+//     // Intersection of X-Y axes.
+//     let chartIntersectData = [];
+//     order.outlets.forEach((item) => {
+//       labels.push(capitalizedCamelCase(item.name));
+//       chartData.push(item.total_amt);
+//       chartIntersectData.push(item.total_qty);
+//     });
+//     cardWithGraph.push({
+//       title: order.order_type,
+//       label1: "Amount",
+//       label2: "Qty",
+//       labels: labels,
+//       chartsData: chartData,
+//       chartsIntersectData: chartIntersectData,
+//       backgroundColor: generateBackgroundColors(chartData.length),
+//       chartType: CHARTTYPE,
+//       displayLegend: DIPLAYLEGEND,
+//     });
+//   });
+//   let quickReplies1 = [
+//     {
+//       title: "Back",
+//       payload: "/main.sales.topordertypes",
+//     },
+//     {
+//       title: "Sub Menu",
+//       payload: "/main.sales",
+//     },
+//     {
+//       title: "Main Menu",
+//       payload: "/greetings.welcome",
+//     },
+//   ];
+//   return buildResponse({ text: textMessage, chartCards: cardWithGraph }).concat(
+//     buildResponse({
+//       quickReplies: quickReplies1,
+//     })
+//   );
+// };
+
 module.exports.topordertypes = async (data, token) => {
   const URL = BASE_URL + "/api/v1/sales/topordertypes";
   const resp = await axios.post(URL, data, {
@@ -248,3 +313,4 @@ module.exports.topordertypes = async (data, token) => {
     })
   );
 };
+

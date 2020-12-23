@@ -1289,9 +1289,10 @@ SCROLL CHART TEST
   position: absolute;
   pointer-events: none;
   height: auto;
-  border-radius: 10px 10px 10px 10px;
+  /* border-radius: 10px 10px 10px 10px; */
   background: white;
-  box-shadow: 2px 3px 9px 0px #9a82847a;
+  /* box-shadow: 2px 3px 9px 0px #9a82847a; */
+  box-shadow: 2px 3px 9px 0px #d8cecf7a;
   margin-top: 5px;
 }
 
