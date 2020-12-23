@@ -112,25 +112,25 @@ const db = [
     topordertypes: {
       "totaldata": {
         "total_qty": 89,
-        "total_amt": 299033
+        "total_amt": 2990330
       },
       "data": [
         {
           "order_type": "Dinein",
           "total": {
             "qty": "40",
-            "amt": 41806.18
+            "amt": 418060.18
           },
           "outlets": [
             {
               "name": "NANDA OUTLET",
               "total_qty": 20,
-              "total_amt": 20903.09
+              "total_amt": 209030.09
             },
             {
               "name": "AZHAR OUTLET",
               "total_qty": 20,
-              "total_amt": 20903.09
+              "total_amt": 209030.09
             }
           ]
         },
@@ -138,38 +138,38 @@ const db = [
           "order_type": "Swiggy",
           "total": {
             "qty": "500",
-            "amt": 41823.18
+            "amt": 4182003.18
           },
           "outlets": [
             {
               "name": "NANDA OUTLET",
               "total_qty": 20,
-              "total_amt": 20903.09
+              "total_amt": 2090003.09
             },
             {
               "name": "AZHAR OUTLET",
               "total_qty": 100,
-              "total_amt": 35352.99
+              "total_amt": 3535002.99
             },
             {
               "name": "KHAN OUTLET",
               "total_qty": 120,
-              "total_amt": 28282.89
+              "total_amt": 2828200.89
             },
             {
               "name": "MANSOOR OUTLET",
               "total_qty": 200,
-              "total_amt": 29297.12
+              "total_amt": 2929700.12
             },
             {
               "name": "KHALIL OUTLET",
               "total_qty": 180,
-              "total_amt": 25431.50
+              "total_amt": 2543100.50
             },
             {
               "name": "BAWARCHI",
               "total_qty": 150,
-              "total_amt": 30129.45
+              "total_amt": 3012009.45
             },
           ]
         },

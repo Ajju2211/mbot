@@ -1277,7 +1277,7 @@ SCROLL CHART TEST
 .chartWrapper {
   position: relative;
   margin-top: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 4%;
   margin-right: 0px;
   margin-left: 6%;
 }
@@ -1290,10 +1290,12 @@ SCROLL CHART TEST
   /* pointer-events: none; */
   height: auto;
   /* border-radius: 10px 10px 10px 10px; */
-  background: white;
+  /* background: white; */
   /* box-shadow: 2px 3px 9px 0px #9a82847a; */
-  box-shadow: 2px 3px 9px 0px #d8cecf7a;
+  /* latest */
+  /* box-shadow: 2px 3px 9px 0px #d8cecf7a; */
   margin-top: 5px;
+  border: solid 3px #faf4e8d9;
 }
 
 .chartAreaWrapper2 > canvas {

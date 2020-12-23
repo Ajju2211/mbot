@@ -150,6 +150,7 @@ function send(message) {
     // Destroy others
     $(".chart-container").remove();
     $(".chart-container1").remove();
+    $(".chartWrapper").remove();
     if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
     $("#paginated_cards").remove();
     $(".quickReplies").remove();
