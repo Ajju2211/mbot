@@ -103,3 +103,26 @@ module.exports['main.sales.topordertypes.lastmonth'] = async (userObj) => {
     const data = dtUtil.getLastMonth();
     return await salesActions.topordertypes(data, token);
 }
+
+
+// top_payment_types
+module.exports['main.sales.top_payment_types.today'] = async (userObj) => {
+    const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+    const data = dtUtil.getToday();
+    return await salesActions.top_payment_types(data, token);
+}
+module.exports['main.sales.top_payment_types.yesterday'] = async (userObj) => {
+    const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+    const data = dtUtil.getYesterday();
+    return await salesActions.top_payment_types(data, token);
+}
+module.exports['main.sales.top_payment_types.lastweek'] = async (userObj) => {
+    const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+    const data = dtUtil.getLastWeek();
+    return await salesActions.top_payment_types(data, token);
+}
+module.exports['main.sales.top_payment_types.lastmonth'] = async (userObj) => {
+    const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+    const data = dtUtil.getLastMonth();
+    return await salesActions.top_payment_types(data, token);
+}

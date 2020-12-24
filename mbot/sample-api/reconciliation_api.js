@@ -259,6 +259,124 @@ const db = [
         ],
       },
     ],
+    sales_payment_wise: [
+      {
+        "outletname": "OUTLET A",
+        "payment_type": [
+          {
+            "itemname": "card",
+            "deduction": 0,
+            "total": 5357.3,
+            "commission": 53.573,
+            "expected_deposit": 5303.727,
+            "recorded_deposit": 5303.727
+          },
+          {
+            "itemname": "cash",
+            "deduction": 0,
+            "total": 4417,
+            "commission": 44.17,
+            "expected_deposit": 4196.15,
+            "recorded_deposit": 5303
+          },
+          {
+            "itemname": "swiggy",
+            "deduction": 55.32,
+            "total": 226610,
+            "commission": 94.62,
+            "expected_deposit": 226610,
+            "recorded_deposit": 226610
+          }
+        ]
+      },
+      {
+        "outletname": "OUTLET B",
+        "payment_type": [
+          {
+            "itemname": "zomato",
+            "deduction": 0,
+            "total": 5357.3,
+            "commission": 53.573,
+            "expected_deposit": 5303.727,
+            "recorded_deposit": 5303
+          },
+          {
+            "itemname": "cash",
+            "deduction": 0,
+            "total": 4417,
+            "commission": 44.17,
+            "expected_deposit": 4196.15,
+            "recorded_deposit": 4196.15
+          },
+          {
+            "itemname": "swiggy",
+            "deduction": 55.32,
+            "total": 226610,
+            "commission": 94.62,
+            "expected_deposit": 226610,
+            "recorded_deposit": 5303
+          }
+        ]
+      },
+      {
+        "outletname": "OUTLET C",
+        "payment_type": [
+          {
+            "itemname": "card",
+            "deduction": 0,
+            "total": 5357.3,
+            "commission": 53.573,
+            "expected_deposit": 5303.727,
+            "recorded_deposit": 4196
+          },
+          {
+            "itemname": "cash",
+            "deduction": 0,
+            "total": 4417,
+            "commission": 44.17,
+            "expected_deposit": 4196.15,
+            "recorded_deposit": 4196
+          },
+          {
+            "itemname": "swiggy",
+            "deduction": 55.32,
+            "total": 226610,
+            "commission": 94.62,
+            "expected_deposit": 226610,
+            "recorded_deposit": 4196
+          }
+        ]
+      },
+      {
+        "outletname": "OUTLET D",
+        "payment_type": [
+          {
+            "itemname": "card",
+            "deduction": 0,
+            "total": 5357.3,
+            "commission": 53.573,
+            "expected_deposit": 5303.727,
+            "recorded_deposit": 4196
+          },
+          {
+            "itemname": "cash",
+            "deduction": 0,
+            "total": 4417,
+            "commission": 44.17,
+            "expected_deposit": 4196.15,
+            "recorded_deposit": 4196
+          },
+          {
+            "itemname": "swiggy",
+            "deduction": 55.32,
+            "total": 226610,
+            "commission": 94.62,
+            "expected_deposit": 226610,
+            "recorded_deposit": 4196
+          }
+        ]
+      }
+    ]
   },
 ];
 
@@ -428,6 +546,36 @@ module.exports.pendingpayouts = async (req, res) => {
     return res.status(200).json({
       status: "success",
       result: data.pendingpayouts,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+};
+
+
+module.exports.sales_payment_wise = async (req, res) => {
+  try {
+    const authorization = req.headers.authorization;
+    const token = (
+      authorization.split("token")[1] || authorization.split("Bearer")[1]
+    ).trim();
+    console.log(token);
+
+    const data = db.find((ele) => ele.token == token);
+
+    if (!token || !data) {
+      return res.status(400).json({
+        status: "failed",
+        message: "INVALID AUTHORIZATION",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      result: data.sales_payment_wise,
     });
   } catch (err) {
     res.status(500).json({

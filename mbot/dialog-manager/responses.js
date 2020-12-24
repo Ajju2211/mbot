@@ -46,6 +46,10 @@ module.exports = {
           title: "Top OrderTypes",
           payload: "/main.sales.topordertypes",
         },
+        {
+          title: "Top PaymentTypes",
+          payload: "/main.sales.top_payment_types",
+        },
       ],
       quickReplies: [
         {
@@ -166,25 +170,25 @@ module.exports = {
         },
       ],
     }),
-  "main.sales.toppaymentmode": () =>
+  "main.sales.top_payment_types": () =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
         {
           title: "Today",
-          payload: "/main.sales.toppaymentmode.today",
+          payload: "/main.sales.top_payment_types.today",
         },
         {
           title: "Yesterday",
-          payload: "/main.sales.toppaymentmode.yesterday",
+          payload: "/main.sales.top_payment_types.yesterday",
         },
         {
           title: "LastWeek",
-          payload: "/main.sales.toppaymentmode.lastweek",
+          payload: "/main.sales.top_payment_types.lastweek",
         },
         {
           title: "LastMonth",
-          payload: "/main.sales.toppaymentmode.lastmonth",
+          payload: "/main.sales.top_payment_types.lastmonth",
         },
       ],
       quickReplies: [

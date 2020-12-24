@@ -1,7 +1,8 @@
 *********************************************************************************					
 **********************  HEADERS FOR ALL API's *****************************
 *********************************************************************************				
-authtoken = md5encryption of manager id + md5encryption of brand_id
+token = md5encryption of manager id + md5encryption of brand_id
+authorization: "Bearer "+token
 
 
 
@@ -10,35 +11,35 @@ authtoken = md5encryption of manager id + md5encryption of brand_id
 *********************************************************************************					
 
 Request json={
-"from":"2020-10-26",
-"to":"2020-10-26",
-"for":"today"
+    "from": "2020-10-26",
+    "to": "2020-10-26",
+    "for": "today"
 }
 
 
 Request json={
-"from":"2020-10-25",
-"to":"2020-10-25",
-"for":"yesterday"
+    "from": "2020-10-25",
+    "to": "2020-10-25",
+    "for": "yesterday"
 }
 
 
 Request json={
-"from":"2020-10-18",
-"to":"2020-10-25",
-"for":"week"
+    "from": "2020-10-18",
+    "to": "2020-10-25",
+    "for": "week"
 }
 
 Request json={
-"from":"2020-09-01",
-"to":"2020-09-30",
-"for":"month"
+    "from": "2020-09-01",
+    "to": "2020-09-30",
+    "for": "month"
 }
 
 Request json={
-"from":"2020-09-01",
-"to":"2020-09-30",
-"for":"custom"
+    "from": "2020-09-01",
+    "to": "2020-09-30",
+    "for": "custom"
 }
 
 *****************************************
@@ -98,7 +99,6 @@ MODE: POST
         }
     ]
 }
-
 // amt will added , card -> ask , graph
 *********************************************************************************                   
 *************************  Cancellations *********************************
@@ -156,7 +156,6 @@ MODE: POST
         }
     ]
 }
-
 // Bank Deposits , card graph
 *********************************************************************************                   
 ****************************  Cash Deposit Report *******************************
@@ -221,7 +220,6 @@ MODE: POST
         }
     ]
 }
-
 // same graph
 *********************************************************************************                   
 *******************************  EDC Report *************************************
@@ -411,6 +409,134 @@ MODE: POST
                     "aggregator": "Amazon",
                     "pending_amount": 0,
                     "total_amount": 0
+                }
+            ]
+        }
+    ]
+}
+
+*********************************************************************************
+********************** outletwise Sales Reconcile Table paymemnt type wise ****
+*********************************************************************************		
+ENDPOINT: BASE_URL/api/v1/reconciliation/sales_payment_wise
+REQUEST_MODE: POST
+
+Response json= {
+    "status": "success",
+    "result": [
+        {
+            "outletname": "OUTLET A",
+            "payment_type": [
+                {
+                    "itemname": "card",
+                    "deduction": 0,
+                    "total": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 5303.727
+                },
+                {
+                    "itemname": "cash",
+                    "deduction": 0,
+                    "total": 4417,
+                    "commission": 44.17,
+                    "expected_deposit": 4196.15,
+                    "recorded_deposit": 5303
+                },
+                {
+                    "itemname": "swiggy",
+                    "deduction": 55.32,
+                    "total": 226610,
+                    "commission": 94.62,
+                    "expected_deposit": 226610,
+                    "recorded_deposit": 226610
+                }
+            ]
+        },
+        {
+            "outletname": "OUTLET B",
+            "payment_type": [
+                {
+                    "itemname": "zomato",
+                    "deduction": 0,
+                    "total": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 5303
+                },
+                {
+                    "itemname": "cash",
+                    "deduction": 0,
+                    "total": 4417,
+                    "commission": 44.17,
+                    "expected_deposit": 4196.15,
+                    "recorded_deposit": 4196.15
+                },
+                {
+                    "itemname": "swiggy",
+                    "deduction": 55.32,
+                    "total": 226610,
+                    "commission": 94.62,
+                    "expected_deposit": 226610,
+                    "recorded_deposit": 5303
+                }
+            ]
+        },
+        {
+            "outletname": "OUTLET C",
+            "payment_type": [
+                {
+                    "itemname": "card",
+                    "deduction": 0,
+                    "total": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 4196
+                },
+                {
+                    "itemname": "cash",
+                    "deduction": 0,
+                    "total": 4417,
+                    "commission": 44.17,
+                    "expected_deposit": 4196.15,
+                    "recorded_deposit": 4196
+                },
+                {
+                    "itemname": "swiggy",
+                    "deduction": 55.32,
+                    "total": 226610,
+                    "commission": 94.62,
+                    "expected_deposit": 226610,
+                    "recorded_deposit": 4196
+                }
+            ]
+        },
+        {
+            "outletname": "OUTLET D",
+            "payment_type": [
+                {
+                    "itemname": "card",
+                    "deduction": 0,
+                    "total": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 4196
+                },
+                {
+                    "itemname": "cash",
+                    "deduction": 0,
+                    "total": 4417,
+                    "commission": 44.17,
+                    "expected_deposit": 4196.15,
+                    "recorded_deposit": 4196
+                },
+                {
+                    "itemname": "swiggy",
+                    "deduction": 55.32,
+                    "total": 226610,
+                    "commission": 94.62,
+                    "expected_deposit": 226610,
+                    "recorded_deposit": 4196
                 }
             ]
         }

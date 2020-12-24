@@ -11,7 +11,7 @@ router
     .post('/user/verifyUser', authController.getUserData);
 // Login API
 router
-    .post('/login', authController.login);
+    .post('/user/login', authController.login);
 // SALES API
 // consolidated sales
 router
@@ -28,6 +28,10 @@ router
 // topordertypes sales
 router
     .post('/sales/topordertypes', salesApi.topordertypes);
+
+// toppaymenttypes sales
+router
+    .post('/sales/top_payment_types', salesApi.toppayments);
 
 // reconciliation API
 // edcreport
@@ -48,6 +52,10 @@ router
 // expencetab
 router
     .post('/reconciliation/expensetab', reconc.expensetab);
+
+// sales_payment_wise
+router
+    .post('/reconciliation/sales_payment_wise', reconc.sales_payment_wise);
 
 // payroll API
 // absentees API

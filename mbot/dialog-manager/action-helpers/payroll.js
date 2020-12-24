@@ -16,7 +16,7 @@ module.exports.absentees = async (data, token) => {
   let textMessage = `${d}'s Absentees`;
   let cards = [];
   if (data.for === "week" || data.for === "month") {
-    d = "Last Week";
+    d = "Last "+d;
     textMessage = `${d}'s Absentees from ${data.from} - ${data.to}`;
   }
   // textMessage += `\n Total Bills - ${result.totaldata.bill_count} \n Total payroll - ${result.totaldata.totalsale}`;

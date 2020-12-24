@@ -31,7 +31,7 @@ module.exports.login = (req, res) => {
     result: {
       brand_id: user.brand_id,
       manager_id: user.manager_id,
-      email:  user.email_id
+      email_id:  user.email_id
     },
   });
 };

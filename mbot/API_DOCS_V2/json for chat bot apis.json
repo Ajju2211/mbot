@@ -91,7 +91,7 @@ Response json={
 **********************************  API NO. =>3 ***********************************************					
 ********************** outletwise Top paymemnt types wise*****************************************
 *********************************************************************************		
-ENDPOINT: BASE_URL/api/v1/sales/top_paymemnt_types
+ENDPOINT: BASE_URL/api/v1/sales/top_payment_types
 REQUEST_MODE: POST								
 
 Response json={
@@ -104,6 +104,7 @@ Response json={
         "data": [
             {
                 "outletname": "NANDHA OUTLET",
+                "total_amt":60129.23,
                 "paymemnt_type": [
                     {
                         "itemname": "online",
@@ -121,6 +122,7 @@ Response json={
             },
             {
                 "outletname": "Mohan test",
+                "total_amt":60129.23,
                 "paymemnt_type": [
                     {
                         "itemname": "card",
@@ -145,148 +147,122 @@ REQUEST_MODE: POST
 
 Response json={
     "status": "success",
-    "result": {
-        "data": [
-            {
-                "outletname": "OUTLET A",
-                "paymemnt_type": [
-                    {
+    "result": [
+        {
+            "outletname": "OUTLET A",
+            "paymemnt_type": [
+                {
                         "itemname": "card",
-                        "details":{
-							"deduction": 0,
-							"total": 5357.3,
-							"commission": 53.573,
-							"expected_deposit": 5303.727,
-							"recorded_deposit":	5303.727
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 5357.3,
+                        "commission": 53.573,
+                        "expected_deposit": 5303.727,
+                        "recorded_deposit":	5303.727
+                },
+                {
                         "itemname": "cash",
-                        "details":{
-							"deduction": 0,
-							"total": 4417,
-							"commission": 44.17,
-							"expected_deposit": 4196.15,
-							"recorded_deposit":	5303
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 4417,
+                        "commission": 44.17,
+                        "expected_deposit": 4196.15,
+                        "recorded_deposit":	5303
+                },
+                {
                         "itemname": "swiggy",
-                        "details":{
-							"deduction": 55.32,
-							"total": 226610,
-							"commission": 94.62,
-							"expected_deposit": 226610,
-							"recorded_deposit":	226610
-						},
-                    }
-                ]
-            },
-            {
-                "outletname": "OUTLET B",
-                "paymemnt_type": [
-                    {
+                        "deduction": 55.32,
+                        "total": 226610,
+                        "commission": 94.62,
+                        "expected_deposit": 226610,
+                        "recorded_deposit":	226610
+                }
+            ]
+        },
+        {
+            "outletname": "OUTLET B",
+            "paymemnt_type": [
+                {
                         "itemname": "zomato",
-                        "details":{
-							"deduction": 0,
-							"total": 5357.3,
-							"commission": 53.573,
-							"expected_deposit": 5303.727,
-							"recorded_deposit":	5303
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 5357.3,
+                        "commission": 53.573,
+                        "expected_deposit": 5303.727,
+                        "recorded_deposit":	5303
+                },
+                {
                         "itemname": "cash",
-                        "details":{
-							"deduction": 0,
-							"total": 4417,
-							"commission": 44.17,
-							"expected_deposit": 4196.15,
-							"recorded_deposit":	4196.15
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 4417,
+                        "commission": 44.17,
+                        "expected_deposit": 4196.15,
+                        "recorded_deposit":	4196.15
+                },
+                {
                         "itemname": "swiggy",
-                        "details":{
-							"deduction": 55.32,
-							"total": 226610,
-							"commission": 94.62,
-							"expected_deposit": 226610,
-							"recorded_deposit":	5303
-						},
-                    }
-                ]
-            },
-			{
-                "outletname": "OUTLET C",
-                "paymemnt_type": [
-                    {
+                        "deduction": 55.32,
+                        "total": 226610,
+                        "commission": 94.62,
+                        "expected_deposit": 226610,
+                        "recorded_deposit":	5303
+                }
+            ]
+        },
+        {
+            "outletname": "OUTLET C",
+            "paymemnt_type": [
+                {
                         "itemname": "card",
-                        "details":{
-							"deduction": 0,
-							"total": 5357.3,
-							"commission": 53.573,
-							"expected_deposit": 5303.727,
-							"recorded_deposit":	4196
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 5357.3,
+                        "commission": 53.573,
+                        "expected_deposit": 5303.727,
+                        "recorded_deposit":	4196
+                },
+                {
                         "itemname": "cash",
-                        "details":{
-							"deduction": 0,
-							"total": 4417,
-							"commission": 44.17,
-							"expected_deposit": 4196.15,
-							"recorded_deposit":	4196
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 4417,
+                        "commission": 44.17,
+                        "expected_deposit": 4196.15,
+                        "recorded_deposit":	4196
+                },
+                {
                         "itemname": "swiggy",
-                        "details":{
-							"deduction": 55.32,
-							"total": 226610,
-							"commission": 94.62,
-							"expected_deposit": 226610,
-							"recorded_deposit":	4196
-						},
-                    }
-                ]
-            },
-			{
-                "outletname": "OUTLET D",
-                "paymemnt_type": [
-                    {
+                        "deduction": 55.32,
+                        "total": 226610,
+                        "commission": 94.62,
+                        "expected_deposit": 226610,
+                        "recorded_deposit":	4196
+                }
+            ]
+        },
+        {
+            "outletname": "OUTLET D",
+            "paymemnt_type": [
+                {
                         "itemname": "card",
-                        "details":{
-							"deduction": 0,
-							"total": 5357.3,
-							"commission": 53.573,
-							"expected_deposit": 5303.727,
-							"recorded_deposit":	4196
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 5357.3,
+                        "commission": 53.573,
+                        "expected_deposit": 5303.727,
+                        "recorded_deposit":	4196
+                },
+                {
                         "itemname": "cash",
-                        "details":{
-							"deduction": 0,
-							"total": 4417,
-							"commission": 44.17,
-							"expected_deposit": 4196.15,
-							"recorded_deposit":	4196
-						},
-                    },
-                    {
+                        "deduction": 0,
+                        "total": 4417,
+                        "commission": 44.17,
+                        "expected_deposit": 4196.15,
+                        "recorded_deposit":	4196
+                },
+                {
                         "itemname": "swiggy",
-                        "details":{
-							"deduction": 55.32,
-							"total": 226610,
-							"commission": 94.62,
-							"expected_deposit": 226610,
-							"recorded_deposit":	4196
-						},
-                    }
-                ]
-            }
-        ]
-    }
+                        "deduction": 55.32,
+                        "total": 226610,
+                        "commission": 94.62,
+                        "expected_deposit": 226610,
+                        "recorded_deposit":	4196
+                }
+            ]
+        }
+    ]
 }

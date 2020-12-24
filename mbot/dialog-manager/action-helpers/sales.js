@@ -16,7 +16,7 @@ module.exports.consolidated = async (data, token) => {
   let textMessage = `${d}'s Consolidated sales`;
   let cards = [];
   if (data.for === "week" || data.for === "month") {
-    d = "Last Week";
+    d = "Last "+d;
     textMessage = `${d}'s Consolidated sales from ${data.from} - ${data.to}`;
   }
   textMessage += `\n Total Bills - ${result.totaldata.bill_count} \n Total Sales - ${result.totaldata.totalsale}`;
@@ -71,7 +71,7 @@ module.exports.topitems = async (data, token) => {
   let textMessage = `${d}'s Top Items`;
   let cardWithGraph = [];
   if (data.for === "week" || data.for === "month") {
-    d = "Last Week";
+    d = "Last "+d;
     textMessage = `${d}'s Top Items from ${data.from} - ${data.to}`;
   }
   textMessage += `\n Total Quantities - ${result.totaldata.total_qty} \n Total Amount - ${result.totaldata.total_amt}`;
@@ -134,7 +134,7 @@ module.exports.topcategories = async (data, token) => {
   let textMessage = `${d}'s Top Categories`;
   let cardWithGraph = [];
   if (data.for === "week" || data.for === "month") {
-    d = "Last Week";
+    d = "Last "+d;
     textMessage = `${d}'s Top Categories from ${data.from} - ${data.to}`;
   }
   textMessage += `\n Total Quantities - ${result.totaldata.total_qty} \n Total Amount - ${result.totaldata.total_amt}`;
@@ -184,71 +184,6 @@ module.exports.topcategories = async (data, token) => {
   );
 };
 
-// module.exports.topordertypes = async (data, token) => {
-//   const URL = BASE_URL + "/api/v1/sales/topordertypes";
-//   const resp = await axios.post(URL, data, {
-//     headers: {
-//       "Content-Type": "application/json",
-//       authorization: `Bearer ${token}`,
-//     },
-//   });
-//   let result = resp.data.result;
-//   let d = data.for;
-//   let textMessage = `${d}'s Top OrderTypes`;
-//   let cardWithGraph = [];
-//   if (data.for === "week" || data.for === "month") {
-//     d = "Last Week";
-//     textMessage = `${d}'s Top OrderTypes from ${data.from} - ${data.to}`;
-//   }
-//   console.log(result);
-//   textMessage += `\n Total Quantities - ${result.totaldata.total_qty} \n Total Amount - ${result.totaldata.total_amt}`;
-//   const CHARTTYPE = "bar";
-//   const DIPLAYLEGEND = "true";
-//   result.data.forEach((order) => {
-//     console.log(order);
-//     let labels = [];
-//     // Y-Axis
-//     let chartData = [];
-//     // Intersection of X-Y axes.
-//     let chartIntersectData = [];
-//     order.outlets.forEach((item) => {
-//       labels.push(capitalizedCamelCase(item.name));
-//       chartData.push(item.total_amt);
-//       chartIntersectData.push(item.total_qty);
-//     });
-//     cardWithGraph.push({
-//       title: order.order_type,
-//       label1: "Amount",
-//       label2: "Qty",
-//       labels: labels,
-//       chartsData: chartData,
-//       chartsIntersectData: chartIntersectData,
-//       backgroundColor: generateBackgroundColors(chartData.length),
-//       chartType: CHARTTYPE,
-//       displayLegend: DIPLAYLEGEND,
-//     });
-//   });
-//   let quickReplies1 = [
-//     {
-//       title: "Back",
-//       payload: "/main.sales.topordertypes",
-//     },
-//     {
-//       title: "Sub Menu",
-//       payload: "/main.sales",
-//     },
-//     {
-//       title: "Main Menu",
-//       payload: "/greetings.welcome",
-//     },
-//   ];
-//   return buildResponse({ text: textMessage, chartCards: cardWithGraph }).concat(
-//     buildResponse({
-//       quickReplies: quickReplies1,
-//     })
-//   );
-// };
-
 module.exports.topordertypes = async (data, token) => {
   const URL = BASE_URL + "/api/v1/sales/topordertypes";
   const resp = await axios.post(URL, data, {
@@ -261,7 +196,7 @@ module.exports.topordertypes = async (data, token) => {
   let d = data.for;
   let textMessage = `${d}'s Top OrderTypes`;
   if (data.for === "week" || data.for === "month") {
-    d = "Last Week";
+    d = "Last "+d;
     textMessage = `${d}'s Top OrderTypes from ${data.from} - ${data.to}`;
   }
   console.log(result);
@@ -314,6 +249,82 @@ module.exports.topordertypes = async (data, token) => {
     {
       title: "Back",
       payload: "/main.sales.topordertypes",
+    },
+    {
+      title: "Sub Menu",
+      payload: "/main.sales",
+    },
+    {
+      title: "Main Menu",
+      payload: "/greetings.welcome",
+    },
+  ];
+
+  return buildResponse({ scrollableChart: chart, text: textMessage }).concat(buildResponse({
+     groupedSimpleCards: {cards: cards}
+  }).concat(
+    buildResponse({
+      quickReplies: quickReplies1,
+    })
+  ));
+};
+
+module.exports.top_payment_types = async (data, token) => {
+  const URL = BASE_URL + "/api/v1/sales/top_payment_types";
+  const resp = await axios.post(URL, data, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+  let result = resp.data.result;
+  let d = data.for;
+  let textMessage = `${d}'s Top PaymentTypes`;
+  if (data.for === "week" || data.for === "month") {
+    d = "Last "+d;
+    textMessage = `${d}'s Top PaymentTypes from ${data.from} - ${data.to}`;
+  }
+  console.log(result);
+  textMessage += `\n Total Quantities - ${result.totaldata.total_qty || "-"} \n Total Amount - ${result.totaldata.total_amt || "-"}`;
+  let chart = {};
+  let labels = [];
+  let data1 = [];
+  let cards = [];
+  result.data.forEach((outlet) => {
+    let cardObj = {};
+    let minicards = [];
+    labels.push(capitalizedCamelCase(outlet.outletname));
+    // For the Chart
+    data1.push(outlet.total_amt);
+    // For the cards
+    cardObj.title = outlet.outletname;
+    // cards.push();
+    outlet.payment_type.forEach((item) => {
+      let miniCardObj = {};
+      miniCardObj.metadata = {};
+      miniCardObj.metadata.title = item.itemname;
+      miniCardObj.metadata.data = [
+        {
+          title: "TotalAmt",
+          value: item.total_amt,
+        }
+      ];
+
+      minicards.push(miniCardObj);
+    });
+    cardObj.minicards = minicards;
+    cards.push(cardObj);
+
+  });
+  chart = {
+    title1: "Amt",
+    labels: labels,
+    data1: data1
+  };
+  let quickReplies1 = [
+    {
+      title: "Back",
+      payload: "/main.sales.top_payment_types",
     },
     {
       title: "Sub Menu",

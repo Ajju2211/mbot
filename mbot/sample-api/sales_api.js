@@ -174,7 +174,47 @@ const db = [
           ]
         },
       ]
-    }
+    },
+    toppayments:{
+      "totaldata": {
+          "total_qty": 89,
+          "total_amt": 299033
+      },
+      "data": [
+          {
+              "outletname": "NANDHA OUTLET",
+              "total_amt":60129.23,
+              "payment_type": [
+                  {
+                      "itemname": "online",
+                      "total_amt": 20903.09
+                  },
+                  {
+                      "itemname": "cash",
+                      "total_amt": 20903.09
+                  },
+                  {
+                      "itemname": "swiggy",
+                      "total_amt": 20903.09
+                  }
+              ]
+          },
+          {
+              "outletname": "Mohan test",
+              "total_amt":60129.23,
+              "payment_type": [
+                  {
+                      "itemname": "card",
+                      "total_amt": 20903.09
+                  },
+                  {
+                      "itemname": "cash",
+                      "total_amt": 20903.09
+                  }
+              ]
+          }
+      ]
+  }
   },
 ];
 
@@ -286,6 +326,35 @@ module.exports.topordertypes = async (req, res) => {
     return res.status(200).json({
       status: "success",
       result: data.topordertypes,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+};
+
+module.exports.toppayments = async (req, res) => {
+  try {
+    const authorization = req.headers.authorization;
+    const token = (
+      authorization.split("token")[1] || authorization.split("Bearer")[1]
+    ).trim();
+    console.log(token);
+
+    const data = db.find((ele) => ele.token == token);
+
+    if (!token || !data) {
+      return res.status(400).json({
+        status: "failed",
+        message: "INVALID AUTHORIZATION",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      result: data.toppayments,
     });
   } catch (err) {
     res.status(500).json({

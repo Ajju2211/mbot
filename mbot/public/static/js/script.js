@@ -1955,6 +1955,10 @@ function login() {
             $(".chats").fadeOut("normal", function () {
                 $(".chats").html("");
                 $(".chats").fadeIn();
+                // make login as logout
+                const logoutINNERHTML = "<i style=\"color: red\" class=\"fa fa-power-off\" aria-hidden=\"true\"></i> Logout";
+                const loginINNERHTML = "<i style=\"color: red\" class=\"fa fa-sign-in\" aria-hidden=\"true\"></i> Login";
+                document.querySelector('#logout > span:nth-child(1) > a:nth-child(1)').innerHTML = logoutINNERHTML;
             });
             send("/greetings.welcome");
 
@@ -2005,5 +2009,9 @@ function loginForm() {
         });
     }, 1000);
 
-
+    // make logout as login 
+    const logoutINNERHTML = "<i style=\"color: red\" class=\"fa fa-power-off\" aria-hidden=\"true\"></i> Logout";
+    const loginINNERHTML = "<i style=\"color: red\" class=\"fa fa-sign-in\" aria-hidden=\"true\"></i> Login";
+    document.querySelector('#logout > span:nth-child(1) > a:nth-child(1)').innerHTML = loginINNERHTML;
+    
 }

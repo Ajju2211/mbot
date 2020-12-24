@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
   }
 
   // 2) Check if user exists && password is correct
-  const URL = BASE_URL + "/api/v1/login";
+  const URL = BASE_URL + "/api/v1/user/login";
   const reqBody = {
     email_id: email,
     password: password,
@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
     }
 
     // Signed Token
-    const token = signToken(user.result.email);
+    const token = signToken(user.result.email_id);
 
     // 3)Sending Userdata and Token , maxAge is 7 days,
     res.cookie("jwt", token, {
@@ -79,7 +79,7 @@ exports.login = async (req, res) => {
       data: user.result,
     });
   } catch (error) {
-    console.log(error.message);
+    console.log("FROM LOGIN ROUTE: "+error.message);
     return res.status(400).json({
       status: "failed",
       data: "Invalid email and password",
@@ -115,7 +115,7 @@ exports.protect = async (req, res, next) => {
 
     // 2) validate the token
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    console.log(decoded);
+    console.log("JWT Decoded email_id: "+decoded.id);
     // 3) get user details
     // const currentUser = db.find((ele) => ele.email == decoded.id);
     const url = BASE_URL + "/api/v1/user/verifyUser";
@@ -138,7 +138,7 @@ exports.protect = async (req, res, next) => {
     res.locals.user = currentUser;
     next();
   } catch (err) {
-    console.error(err);
+    console.error("FROM Protect Route: "+err.message);
     // trigger loginform if no valid jwt token(User is logged out)
     return res.send(
       buildResponse({

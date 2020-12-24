@@ -1,7 +1,8 @@
 *********************************************************************************					
 **********************  HEADERS FOR ALL API's *****************************
 *********************************************************************************				
-authtoken = md5encryption of manager id + md5encryption of brand_id
+token = md5encryption of manager id + md5encryption of brand_id
+authorization:"Bearer "+token
 
 
 

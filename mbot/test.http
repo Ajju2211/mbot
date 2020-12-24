@@ -1,0 +1,24 @@
+# POST http://mindfulautomations.com/api/v1/user/login HTTP/1.1
+
+# Content-Type: application/json
+
+# {
+#     "email_id":"pgf@pgf.com",
+#     "password":"123456"
+# }
+
+POST http://localhost:8000/api/v1/sales/top_payment_types HTTP/1.1
+
+Content-Type: application/json
+
+Authorization: Bearer eccbc87e4b5ce2fe28308fd9f2a7baf3c20ad4d76fe97759aa27a0c99bff6710
+
+{
+    "from":"",
+    "to":""
+}
+
+
+
+
+
