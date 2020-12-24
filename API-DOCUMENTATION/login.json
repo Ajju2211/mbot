@@ -1,0 +1,22 @@
+***********************************************************************************					
+**********************  Save Brand id and Manager Id ******************************
+***********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/user/login
+REQUEST_MODE: POST					
+
+Request  json={
+    "email_id": "foodie@gmail.com",
+    "password": "program@1234"
+}
+
+Response json={
+    "status": "success",
+    "result": {
+        "brand_id": "34",
+        "manager_id": "2",
+        "email_id": "foodie@gmail.com"
+    }
+}
+
+
