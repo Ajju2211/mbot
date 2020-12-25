@@ -376,7 +376,89 @@ const db = [
           }
         ]
       }
-    ]
+    ],
+    reconciliation_table: [
+      {
+          "outletname": "OUTLET A",
+          "payment_type": [
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5301.21,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "no"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              }
+          ],
+    "total_sales":2000,
+    "total_deduction":300,
+    "total_commission":300,
+    "total_expected_deposit":300,
+    "total_recorded_deposit":300,
+      },
+      {
+          "outletname": "OUTLET B",
+          "payment_type": [
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              }
+          ],
+    "total_sales":2000,
+    "total_deduction":300,
+    "total_commission":300,
+    "total_expected_deposit":300,
+    "total_recorded_deposit":300,
+      },
+  ]
   },
 ];
 
@@ -576,6 +658,36 @@ module.exports.sales_payment_wise = async (req, res) => {
     return res.status(200).json({
       status: "success",
       result: data.sales_payment_wise,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+};
+
+
+module.exports.reconciliation_table = async (req, res) => {
+  try {
+    const authorization = req.headers.authorization;
+    const token = (
+      authorization.split("token")[1] || authorization.split("Bearer")[1]
+    ).trim();
+    console.log(token);
+
+    const data = db.find((ele) => ele.token == token);
+
+    if (!token || !data) {
+      return res.status(400).json({
+        status: "failed",
+        message: "INVALID AUTHORIZATION",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      result: data.reconciliation_table,
     });
   } catch (err) {
     res.status(500).json({

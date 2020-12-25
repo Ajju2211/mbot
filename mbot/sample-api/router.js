@@ -52,6 +52,9 @@ router
 // expencetab
 router
     .post('/reconciliation/expensetab', reconc.expensetab);
+// reconciliation_table
+router
+    .post('/reconciliation/reconciliation_table', reconc.reconciliation_table);
 
 // sales_payment_wise
 router

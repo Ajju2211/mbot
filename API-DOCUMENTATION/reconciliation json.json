@@ -542,3 +542,96 @@ Response json= {
         }
     ]
 }
+
+*********************************************************************************
+********************** outletwise  Reconcile Table with paymemnt type data ****
+*********************************************************************************		
+ENDPOINT: BASE_URL/api/v1/reconciliation/reconciliation_table
+REQUEST_MODE: POST
+
+
+Response json = {
+    "status": "success",
+    "result": [
+        {
+            "outletname": "OUTLET A",
+            "payment_type": [
+                {
+                    "itemname": "card 1 Nov  - 4 Nov ",
+                    "deduction": 0,
+                    "sales": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5301.21,
+                    "recorded_deposit": 5303.727,
+					"date_range": "01 Dec 2020 - 04 Dec 2020",
+					"correct": "no"
+                },
+                {
+                    "itemname": "card 1 Nov  - 4 Nov ",
+                    "deduction": 0,
+                    "sales": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 5303.727,
+					"date_range": "01 Dec 2020 - 04 Dec 2020",
+					"correct": "yes"
+                },
+                {
+                    "itemname": "card 1 Nov  - 4 Nov ",
+                    "deduction": 0,
+                    "sales": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 5303.727,
+					"date_range": "01 Dec 2020 - 04 Dec 2020",
+					"correct": "yes"
+                }
+            ],
+			"total_sales":2000,
+			"total_deduction":300,
+			"total_commission":300,
+			"total_expected_deposit":300,
+			"total_recorded_deposit":300,
+        },
+        {
+            "outletname": "OUTLET B",
+            "payment_type": [
+                {
+                    "itemname": "card 1 Nov  - 4 Nov ",
+                    "deduction": 0,
+                    "sales": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 5303.727,
+					"date_range": "01 Dec 2020 - 04 Dec 2020",
+					"correct": "yes"
+                },
+                {
+                    "itemname": "card 1 Nov  - 4 Nov ",
+                    "deduction": 0,
+                    "sales": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 5303.727,
+					"date_range": "01 Dec 2020 - 04 Dec 2020",
+					"correct": "yes"
+                },
+                {
+                    "itemname": "card 1 Nov  - 4 Nov ",
+                    "deduction": 0,
+                    "sales": 5357.3,
+                    "commission": 53.573,
+                    "expected_deposit": 5303.727,
+                    "recorded_deposit": 5303.727,
+					"date_range": "01 Dec 2020 - 04 Dec 2020",
+					"correct": "yes"
+                }
+            ],
+			"total_sales":2000,
+			"total_deduction":300,
+			"total_commission":300,
+			"total_expected_deposit":300,
+			"total_recorded_deposit":300,
+        },
+    ]
+}

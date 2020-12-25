@@ -131,3 +131,26 @@ module.exports["main.recon.pendingpayouts.lastmonth"] = async (userObj) => {
   const data = dtUtil.getLastMonth();
   return await reconActions.pendingpayouts(data, token);
 };
+
+
+// reconciliation_table
+module.exports["main.recon.reconciliation_table.today"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getToday();
+  return await reconActions.reconciliation_table(data, token);
+};
+module.exports["main.recon.reconciliation_table.yesterday"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getYesterday();
+  return await reconActions.reconciliation_table(data, token);
+};
+module.exports["main.recon.reconciliation_table.lastweek"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getLastWeek();
+  return await reconActions.reconciliation_table(data, token);
+};
+module.exports["main.recon.reconciliation_table.lastmonth"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getLastMonth();
+  return await reconActions.reconciliation_table(data, token);
+};
