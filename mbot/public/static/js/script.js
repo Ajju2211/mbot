@@ -1642,6 +1642,9 @@ function drawScrollChart(charts_data, axis_id, chart_id) {
             scales: {
                 xAxes: [{
                     stacked: false,
+                    barThickness: 8,  // number (pixels) or 'flex'
+                    maxBarThickness: 10,   // number (pixels)
+                    // barPercentage:0.5,
                     ticks: {
                         fontSize: 12,
                         display: true
@@ -1735,7 +1738,7 @@ function createChartScroll(titles, labels, data1, data2) {
     };
     // Add to memory
     setChartData(uniqueID, { data1: data1, data2: data2 });
-    const canvasHeight = window.screen.width > 900 ? window.screen.height * 0.08 : window.screen.height * 0.4;
+    const canvasHeight = window.screen.width > 900 ? window.screen.height * 0.1 : window.screen.height * 0.25;
     console.log(canvasHeight);
 
     let html = `

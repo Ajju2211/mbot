@@ -1124,7 +1124,10 @@ text-align: center;
 
 .quickReplies {
     padding: 5px;
-    position: relative;
+    /* position: relative; */
+    /* Later Added */
+    position: sticky;
+    bottom: 0;
     /* width: 100%; */
     width: calc(100% - 25px);
     overflow-x: scroll;
