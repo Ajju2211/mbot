@@ -133,6 +133,28 @@ module.exports["main.recon.pendingpayouts.lastmonth"] = async (userObj) => {
 };
 
 
+// sales_payment_wise
+module.exports["main.recon.sales_payment_wise.today"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getToday();
+  return await reconActions.sales_payment_wise(data, token);
+};
+module.exports["main.recon.sales_payment_wise.yesterday"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getYesterday();
+  return await reconActions.sales_payment_wise(data, token);
+};
+module.exports["main.recon.sales_payment_wise.lastweek"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getLastWeek();
+  return await reconActions.sales_payment_wise(data, token);
+};
+module.exports["main.recon.sales_payment_wise.lastmonth"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getLastMonth();
+  return await reconActions.sales_payment_wise(data, token);
+};
+
 // reconciliation_table
 module.exports["main.recon.reconciliation_table.today"] = async (userObj) => {
   const token = md5(userObj.manager_id) + md5(userObj.brand_id);

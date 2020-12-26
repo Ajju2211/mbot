@@ -1642,9 +1642,11 @@ function drawScrollChart(charts_data, axis_id, chart_id) {
             scales: {
                 xAxes: [{
                     stacked: false,
-                    barThickness: 8,  // number (pixels)
-                    maxBarThickness: 10,   // number (pixels)
-                    // barPercentage:0.5,
+                    // barThickness: 8,  // number (pixels)
+                    // maxBarThickness: 10,   // number (pixels)
+                    // barPercentage:0.3,
+                    barPercentage: 0.3,
+                    categoryPercentage: 1.0,
                     ticks: {
                         fontSize: 12,
                         display: true

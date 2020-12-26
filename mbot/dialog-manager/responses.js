@@ -327,6 +327,10 @@ module.exports = {
           payload: "/main.recon.pendingpayouts",
         },
         {
+          title: "Sales Payment Wise",
+          payload: "/main.recon.sales_payment_wise",
+        },
+        {
           title: "Reconcile Table",
           payload: "/main.recon.reconciliation_table",
         },
@@ -521,6 +525,34 @@ module.exports = {
         {
           title: "Last Month",
           payload: "/main.recon.reconciliation_table.lastmonth",
+        },
+      ],
+      quickReplies: [
+        {
+          title: "Back",
+          payload: "/main.recon",
+        },
+      ],
+    }),
+    "main.recon.sales_payment_wise": () =>
+    buildResponse({
+      text: "Please select on which dates you want to see.",
+      buttons: [
+        {
+          title: "Today",
+          payload: "/main.recon.sales_payment_wise.today",
+        },
+        {
+          title: "Yesterday",
+          payload: "/main.recon.sales_payment_wise.yesterday",
+        },
+        {
+          title: "Last Week",
+          payload: "/main.recon.sales_payment_wise.lastweek",
+        },
+        {
+          title: "Last Month",
+          payload: "/main.recon.sales_payment_wise.lastmonth",
         },
       ],
       quickReplies: [

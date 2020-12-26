@@ -261,122 +261,86 @@ const db = [
     ],
     sales_payment_wise: [
       {
-        "outletname": "OUTLET A",
-        "payment_type": [
-          {
-            "itemname": "card",
-            "deduction": 0,
-            "total": 5357.3,
-            "commission": 53.573,
-            "expected_deposit": 5303.727,
-            "recorded_deposit": 5303.727
-          },
-          {
-            "itemname": "cash",
-            "deduction": 0,
-            "total": 4417,
-            "commission": 44.17,
-            "expected_deposit": 4196.15,
-            "recorded_deposit": 5303
-          },
-          {
-            "itemname": "swiggy",
-            "deduction": 55.32,
-            "total": 226610,
-            "commission": 94.62,
-            "expected_deposit": 226610,
-            "recorded_deposit": 226610
-          }
-        ]
+          "outletname": "OUTLET A",
+          "payment_type": [
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5301.21,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "no"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              }
+          ],
+    "total_sales":2000,
+    "total_deduction":300,
+    "total_commission":300,
+    "total_expected_deposit":300,
+    "total_recorded_deposit":300,
       },
       {
-        "outletname": "OUTLET B",
-        "payment_type": [
-          {
-            "itemname": "zomato",
-            "deduction": 0,
-            "total": 5357.3,
-            "commission": 53.573,
-            "expected_deposit": 5303.727,
-            "recorded_deposit": 5303
-          },
-          {
-            "itemname": "cash",
-            "deduction": 0,
-            "total": 4417,
-            "commission": 44.17,
-            "expected_deposit": 4196.15,
-            "recorded_deposit": 4196.15
-          },
-          {
-            "itemname": "swiggy",
-            "deduction": 55.32,
-            "total": 226610,
-            "commission": 94.62,
-            "expected_deposit": 226610,
-            "recorded_deposit": 5303
-          }
-        ]
+          "outletname": "OUTLET B",
+          "payment_type": [
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              },
+              {
+                  "itemname": "card 1 Nov  - 4 Nov ",
+                  "deduction": 0,
+                  "sales": 5357.3,
+                  "commission": 53.573,
+                  "expected_deposit": 5303.727,
+                  "recorded_deposit": 5303.727,
+        "date_range": "01 Dec 2020 - 04 Dec 2020",
+        "correct": "yes"
+              }
+          ],
+    "total_sales":2000,
+    "total_deduction":300,
+    "total_commission":300,
+    "total_expected_deposit":300,
+    "total_recorded_deposit":300,
       },
-      {
-        "outletname": "OUTLET C",
-        "payment_type": [
-          {
-            "itemname": "card",
-            "deduction": 0,
-            "total": 5357.3,
-            "commission": 53.573,
-            "expected_deposit": 5303.727,
-            "recorded_deposit": 4196
-          },
-          {
-            "itemname": "cash",
-            "deduction": 0,
-            "total": 4417,
-            "commission": 44.17,
-            "expected_deposit": 4196.15,
-            "recorded_deposit": 4196
-          },
-          {
-            "itemname": "swiggy",
-            "deduction": 55.32,
-            "total": 226610,
-            "commission": 94.62,
-            "expected_deposit": 226610,
-            "recorded_deposit": 4196
-          }
-        ]
-      },
-      {
-        "outletname": "OUTLET D",
-        "payment_type": [
-          {
-            "itemname": "card",
-            "deduction": 0,
-            "total": 5357.3,
-            "commission": 53.573,
-            "expected_deposit": 5303.727,
-            "recorded_deposit": 4196
-          },
-          {
-            "itemname": "cash",
-            "deduction": 0,
-            "total": 4417,
-            "commission": 44.17,
-            "expected_deposit": 4196.15,
-            "recorded_deposit": 4196
-          },
-          {
-            "itemname": "swiggy",
-            "deduction": 55.32,
-            "total": 226610,
-            "commission": 94.62,
-            "expected_deposit": 226610,
-            "recorded_deposit": 4196
-          }
-        ]
-      }
-    ],
+  ],
     reconciliation_table: [
       {
           "outletname": "OUTLET A",
