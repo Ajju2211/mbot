@@ -611,3 +611,147 @@ module.exports.sales_payment_wise = async (data, token) => {
     })
   );
 };
+
+
+
+
+module.exports.variance_aggregator_wise = async (data, token) => {
+  const URL = BASE_URL + "/api/v1/reconciliation/variance_aggregator_wise";
+  const resp = await axios.post(URL, data, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+  let result = resp.data.result;
+  let d = data.for;
+  let textMessage = `${d}'s Variance Aggregator Wise`;
+  if (data.for === "week" || data.for === "month") {
+    d = "Last "+d;
+    textMessage = `${d}'s Variance Aggregator Wise from ${data.from} - ${data.to}`;
+  }
+  console.log(result);
+  // textMessage += `\n Total Quantities - ${result.totaldata.total_qty || "-"} \n Total Amount - ${result.totaldata.total_amt || "-"}`;
+  let chart = {};
+  let labels = [];
+  let data1 = [];
+  let cards = [];
+  result.forEach((aggregator) => {
+    let cardObj = {};
+    let minicards = [];
+    labels.push(capitalizedCamelCase(aggregator.agg_type));
+    // For the Chart
+    data1.push(aggregator.total_amt);
+    // For the cards
+    cardObj.title = capitalizedCamelCase(aggregator.agg_type);
+    let i=0;
+    // cards.push();
+    aggregator.details.forEach((item) => {
+      let miniCardObj = {};
+      miniCardObj.metadata = {};
+      miniCardObj.metadata.title = item.outlet_name;
+      let tickHtml = "";
+      let tick = 0;
+      if(item.correct.toLowerCase()=="yes"){
+        tickHtml = '<i class="fa fa-check"  style = "color:orange;display:flex;font-size: 2em !important;" aria-hidden="true"></i>';
+        tick=1;
+      }
+      else{
+        tickHtml = '<i class="fa fa-times"  style = "color:red;display:flex;font-size: 2em !important;" aria-hidden="true"></i>';
+        tick = 0;
+      }
+      miniCardObj.metadata.data = [
+        {
+          title: "POS Total",
+          value: item.pos_total,
+        },
+        {
+          title: "aggregator_total",
+          value: item.aggregator_total+ ' ' +tickHtml
+        }
+      ];
+
+    //   miniCardObj.table = {};
+    //   miniCardObj.table.tableData = [];
+    //     let PaymentTypeObj = {
+    //       id:i,
+    //       name: item.itemname,
+    //       deduction: item.deduction,
+    //       sales: item.sales,
+    //       commission: item.commission,
+    //       expected_deposit: item.expected_deposit,
+    //       recorded_deposit: item.recorded_deposit,
+    //       date_range: item.date_range,
+    //       correct: tick
+    //     };
+    //     miniCardObj.table.tableData.push(PaymentTypeObj);
+    //     i++;
+    //   miniCardObj.table.columns = [{
+    //     title:"Name",
+    //     field:"name"
+    //   },
+    //   {
+    //     title:"Deduction",
+    //     field:"deduction",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"sales",
+    //     field:"sales",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"commission",
+    //     field:"commission",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"Expected Deposit",
+    //     field:"expected_deposit",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"Recorded Deposit",
+    //     field:"recorded_deposit",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"Date Range",
+    //     field:"date_range"
+    //   },
+    //   {
+    //     title:"Correct",
+    //     field:"correct",
+    //     formatter:"tickCross"
+    //   }
+    // ];
+      minicards.push(miniCardObj);
+    });
+    cardObj.minicards = minicards;
+    cards.push(cardObj);
+
+  });
+  let quickReplies1 = [
+    {
+      title: "Back",
+      payload: "/main.recon.variance_aggregator_wise",
+    },
+    {
+      title: "Sub Menu",
+      payload: "/main.recon",
+    },
+    {
+      title: "Main Menu",
+      payload: "/greetings.welcome",
+    },
+  ];
+
+  return buildResponse({
+    text: textMessage,
+     groupedSimpleCards: {cards: cards}
+  }).concat(
+    buildResponse({
+      quickReplies: quickReplies1,
+    })
+  );
+};

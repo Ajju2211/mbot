@@ -32,6 +32,10 @@ router
 // toppaymenttypes sales
 router
     .post('/sales/top_payment_types', salesApi.toppayments);
+    
+// aggregator_revenue sales
+router
+    .post('/sales/aggregator_revenue', salesApi.aggregator_revenue);
 
 // reconciliation API
 // edcreport
@@ -55,6 +59,9 @@ router
 // reconciliation_table
 router
     .post('/reconciliation/reconciliation_table', reconc.reconciliation_table);
+// variance_aggregator_wise
+router
+    .post('/reconciliation/variance_aggregator_wise', reconc.variance_aggregator_wise);
 
 // sales_payment_wise
 router

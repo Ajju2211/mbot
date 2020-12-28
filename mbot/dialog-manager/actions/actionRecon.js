@@ -176,3 +176,26 @@ module.exports["main.recon.reconciliation_table.lastmonth"] = async (userObj) =>
   const data = dtUtil.getLastMonth();
   return await reconActions.reconciliation_table(data, token);
 };
+
+
+// variance_aggregator_wise
+module.exports["main.recon.variance_aggregator_wise.today"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getToday();
+  return await reconActions.variance_aggregator_wise(data, token);
+};
+module.exports["main.recon.variance_aggregator_wise.yesterday"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getYesterday();
+  return await reconActions.variance_aggregator_wise(data, token);
+};
+module.exports["main.recon.variance_aggregator_wise.lastweek"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getLastWeek();
+  return await reconActions.variance_aggregator_wise(data, token);
+};
+module.exports["main.recon.variance_aggregator_wise.lastmonth"] = async (userObj) => {
+  const token = md5(userObj.manager_id) + md5(userObj.brand_id);
+  const data = dtUtil.getLastMonth();
+  return await reconActions.variance_aggregator_wise(data, token);
+};

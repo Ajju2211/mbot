@@ -422,7 +422,110 @@ const db = [
     "total_expected_deposit":300,
     "total_recorded_deposit":300,
       },
-  ]
+  ],
+
+  sales_payment_wise: [
+    {
+        "aggregator_type": "OUTLET A",
+        "outlets": [
+            {
+                "itemname": "card 1 Nov  - 4 Nov ",
+                "deduction": 0,
+                "sales": 5357.3,
+                "commission": 53.573,
+                "expected_deposit": 5301.21,
+                "recorded_deposit": 5303.727,
+      "date_range": "01 Dec 2020 - 04 Dec 2020",
+      "correct": "no"
+            },
+            {
+                "itemname": "card 1 Nov  - 4 Nov ",
+                "deduction": 0,
+                "sales": 5357.3,
+                "commission": 53.573,
+                "expected_deposit": 5303.727,
+                "recorded_deposit": 5303.727,
+      "date_range": "01 Dec 2020 - 04 Dec 2020",
+      "correct": "yes"
+            },
+            {
+                "itemname": "card 1 Nov  - 4 Nov ",
+                "deduction": 0,
+                "sales": 5357.3,
+                "commission": 53.573,
+                "expected_deposit": 5303.727,
+                "recorded_deposit": 5303.727,
+      "date_range": "01 Dec 2020 - 04 Dec 2020",
+      "correct": "yes"
+            }
+        ],
+  "total_sales":2000,
+  "total_deduction":300,
+  "total_commission":300,
+  "total_expected_deposit":300,
+  "total_recorded_deposit":300,
+    },
+    {
+        "outletname": "OUTLET B",
+        "payment_type": [
+            {
+                "itemname": "card 1 Nov  - 4 Nov ",
+                "deduction": 0,
+                "sales": 5357.3,
+                "commission": 53.573,
+                "expected_deposit": 5303.727,
+                "recorded_deposit": 5303.727,
+      "date_range": "01 Dec 2020 - 04 Dec 2020",
+      "correct": "yes"
+            },
+            {
+                "itemname": "card 1 Nov  - 4 Nov ",
+                "deduction": 0,
+                "sales": 5357.3,
+                "commission": 53.573,
+                "expected_deposit": 5303.727,
+                "recorded_deposit": 5303.727,
+      "date_range": "01 Dec 2020 - 04 Dec 2020",
+      "correct": "yes"
+            },
+            {
+                "itemname": "card 1 Nov  - 4 Nov ",
+                "deduction": 0,
+                "sales": 5357.3,
+                "commission": 53.573,
+                "expected_deposit": 5303.727,
+                "recorded_deposit": 5303.727,
+      "date_range": "01 Dec 2020 - 04 Dec 2020",
+      "correct": "yes"
+            }
+        ],
+  "total_sales":2000,
+  "total_deduction":300,
+  "total_commission":300,
+  "total_expected_deposit":300,
+  "total_recorded_deposit":300,
+    },
+],
+variance_aggregator_wise : [
+  {
+      "agg_type": "Swiggy",
+      "details": [
+          {
+              "outlet_name": "Outlet B",
+              "pos_total": 0,
+              "aggregator_total": 800.1,
+              "correct": "no"
+          },
+          {
+              "outlet_name": "Outlet A",
+              "pos_total": 0,
+              "aggregator_total": 1140.3,
+              "correct": "no"
+          }
+      ]
+  }
+]
+
   },
 ];
 
@@ -652,6 +755,36 @@ module.exports.reconciliation_table = async (req, res) => {
     return res.status(200).json({
       status: "success",
       result: data.reconciliation_table,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+};
+
+
+module.exports.variance_aggregator_wise = async (req, res) => {
+  try {
+    const authorization = req.headers.authorization;
+    const token = (
+      authorization.split("token")[1] || authorization.split("Bearer")[1]
+    ).trim();
+    console.log(token);
+
+    const data = db.find((ele) => ele.token == token);
+
+    if (!token || !data) {
+      return res.status(400).json({
+        status: "failed",
+        message: "INVALID AUTHORIZATION",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      result: data.variance_aggregator_wise,
     });
   } catch (err) {
     res.status(500).json({

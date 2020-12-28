@@ -50,6 +50,10 @@ module.exports = {
           title: "Top PaymentTypes",
           payload: "/main.sales.top_payment_types",
         },
+        {
+          title: "Aggregator Revenue",
+          payload: "/main.sales.aggregator_revenue",
+        },
       ],
       quickReplies: [
         {
@@ -198,6 +202,35 @@ module.exports = {
         },
       ],
     }),
+
+  "main.sales.aggregator_revenue": () =>
+    buildResponse({
+      text: "Please select on which dates you want to see.",
+      buttons: [
+        {
+          title: "Today",
+          payload: "/main.sales.aggregator_revenue.today",
+        },
+        {
+          title: "Yesterday",
+          payload: "/main.sales.aggregator_revenue.yesterday",
+        },
+        {
+          title: "LastWeek",
+          payload: "/main.sales.aggregator_revenue.lastweek",
+        },
+        {
+          title: "LastMonth",
+          payload: "/main.sales.aggregator_revenue.lastmonth",
+        },
+      ],
+      quickReplies: [
+        {
+          title: "Back",
+          payload: "/main.sales",
+        },
+      ],
+    }),
   "main.payroll": () =>
     buildResponse({
       text: "Select the Payroll type.",
@@ -333,6 +366,10 @@ module.exports = {
         {
           title: "Reconcile Table",
           payload: "/main.recon.reconciliation_table",
+        },
+        {
+          title: "Variance Aggregator Wise",
+          payload: "/main.recon.variance_aggregator_wise",
         },
       ],
       quickReplies: [
@@ -506,7 +543,7 @@ module.exports = {
         },
       ],
     }),
-    "main.recon.reconciliation_table": () =>
+  "main.recon.reconciliation_table": () =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -534,7 +571,35 @@ module.exports = {
         },
       ],
     }),
-    "main.recon.sales_payment_wise": () =>
+  "main.recon.variance_aggregator_wise": () =>
+    buildResponse({
+      text: "Please select on which dates you want to see.",
+      buttons: [
+        {
+          title: "Today",
+          payload: "/main.recon.variance_aggregator_wise.today",
+        },
+        {
+          title: "Yesterday",
+          payload: "/main.recon.variance_aggregator_wise.yesterday",
+        },
+        {
+          title: "Last Week",
+          payload: "/main.recon.variance_aggregator_wise.lastweek",
+        },
+        {
+          title: "Last Month",
+          payload: "/main.recon.variance_aggregator_wise.lastmonth",
+        },
+      ],
+      quickReplies: [
+        {
+          title: "Back",
+          payload: "/main.recon",
+        },
+      ],
+    }),
+  "main.recon.sales_payment_wise": () =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [

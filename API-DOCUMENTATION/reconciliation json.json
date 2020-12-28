@@ -635,3 +635,37 @@ Response json = {
         },
     ]
 }
+
+
+*********************************************************************************
+********************** Aggregator Wise variance in Reconciliation ****
+*********************************************************************************		
+ENDPOINT: BASE_URL/api/v1/reconciliation/variance_aggregator_wise
+REQUEST_MODE: POST
+
+
+Response json = {
+    "status": "success",
+    "message": "Successfully",
+    "result": [
+        {
+            "agg_type": "Swiggy",
+            "details": [
+                {
+                    "outlet_name": "Outlet B",
+                    "pos_total": 0,
+                    "aggregator_total": 800.1,
+                    "correct": "no"
+                },
+                {
+                    "outlet_name": "Outlet A",
+                    "pos_total": 0,
+                    "aggregator_total": 1140.3,
+                    "correct": "no"
+                }
+            ]
+        }
+    ]
+}
+
+

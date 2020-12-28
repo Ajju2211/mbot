@@ -345,3 +345,139 @@ module.exports.top_payment_types = async (data, token) => {
   ));
 };
 
+
+module.exports.aggregator_revenue = async (data, token) => {
+  const URL = BASE_URL + "/api/v1/sales/aggregator_revenue";
+  const resp = await axios.post(URL, data, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+  let result = resp.data.result;
+  let d = data.for;
+  let textMessage = `${d}'s Aggregator Revenue in Sales`;
+  if (data.for === "week" || data.for === "month") {
+    d = "Last "+d;
+    textMessage = `${d}'s Aggregator Revenue in Sales from ${data.from} - ${data.to}`;
+  }
+  console.log(result);
+  // textMessage += `\n Total Quantities - ${result.totaldata.total_qty || "-"} \n Total Amount - ${result.totaldata.total_amt || "-"}`;
+  let chart = {};
+  let labels = [];
+  let data1 = [];
+  let cards = [];
+  result.forEach((aggregator) => {
+    let cardObj = {};
+    let minicards = [];
+    labels.push(capitalizedCamelCase(aggregator.agg_type));
+    // For the Chart
+    data1.push(aggregator.total_amt);
+    // For the cards
+    cardObj.title = capitalizedCamelCase(aggregator.agg_type);
+    let i=0;
+    // cards.push();
+    aggregator.details.forEach((item) => {
+      let miniCardObj = {};
+      miniCardObj.metadata = {};
+      miniCardObj.metadata.title = item.outlet_name;
+      let pStyle = 'font-size: 1.5em;font-family: sans-serif;font-weight: 700;margin:2px';
+      let spanStyle = 'display: flex;flex-direction: column;flex-wrap: wrap;';
+      miniCardObj.metadata.data = [
+        {
+          title: '<span style="'+spanStyle+'"><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Payable</h5><p style="'+pStyle+'">'+item.customer_payable+'</p><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Sales</h5><p style="'+pStyle+'">'+item.sales+'</p></span>',
+          // value: item.customer_payable+' | '+'<span style="display:flex;">'+item.sales+'</span>'
+          value:""
+        },
+        {
+          title: '<span style="'+spanStyle+'"><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Earnings</h5><p style="'+pStyle+'">'+item.earnings+'</p><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Difference</h5><p style="'+pStyle+'">'+item.difference+'</p></span>',
+          // value: item.customer_payable+' | '+'<span style="display:flex;">'+item.sales+'</span>'
+          value:""
+        }
+      ];
+
+
+      // miniCardObj.table = {};
+      // miniCardObj.table.tableData = [];
+      //   let PaymentTypeObj = {
+      //     id:i,
+      //     name: item.itemname,
+      //     deduction: item.deduction,
+      //     sales: item.sales,
+      //     commission: item.commission,
+      //     expected_deposit: item.expected_deposit,
+      //     recorded_deposit: item.recorded_deposit,
+      //     date_range: item.date_range,
+      //     correct: tick
+      //   };
+    //     miniCardObj.table.tableData.push(PaymentTypeObj);
+    //     i++;
+    //   miniCardObj.table.columns = [{
+    //     title:"Name",
+    //     field:"name"
+    //   },
+    //   {
+    //     title:"Deduction",
+    //     field:"deduction",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"sales",
+    //     field:"sales",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"commission",
+    //     field:"commission",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"Expected Deposit",
+    //     field:"expected_deposit",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"Recorded Deposit",
+    //     field:"recorded_deposit",
+    //     bottomCalc:"sum"
+    //   },
+    //   {
+    //     title:"Date Range",
+    //     field:"date_range"
+    //   },
+    //   {
+    //     title:"Correct",
+    //     field:"correct",
+    //     formatter:"tickCross"
+    //   }
+    // ];
+      minicards.push(miniCardObj);
+    });
+    cardObj.minicards = minicards;
+    cards.push(cardObj);
+
+  });
+  let quickReplies1 = [
+    {
+      title: "Back",
+      payload: "/main.sales.aggregator_revenue",
+    },
+    {
+      title: "Sub Menu",
+      payload: "/main.sales",
+    },
+    {
+      title: "Main Menu",
+      payload: "/greetings.welcome",
+    },
+  ];
+
+  return buildResponse({
+    text: textMessage,
+     groupedSimpleCards: {cards: cards}
+  }).concat(
+    buildResponse({
+      quickReplies: quickReplies1,
+    })
+  );
+};

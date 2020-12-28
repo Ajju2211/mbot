@@ -214,7 +214,21 @@ const db = [
               ]
           }
       ]
-  }
+  },
+  aggregator_revenue: [
+    {
+        "agg_type": "Swiggy",
+        "details": [
+            {
+                "outlet_name": "Outlet A",
+                "customer_payable": 470.81,
+                "sales": 199,
+                "earnings": -359,
+                "difference": 558
+            }
+        ]
+    }
+]
   },
 ];
 
@@ -355,6 +369,36 @@ module.exports.toppayments = async (req, res) => {
     return res.status(200).json({
       status: "success",
       result: data.toppayments,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+};
+
+
+module.exports.aggregator_revenue = async (req, res) => {
+  try {
+    const authorization = req.headers.authorization;
+    const token = (
+      authorization.split("token")[1] || authorization.split("Bearer")[1]
+    ).trim();
+    console.log(token);
+
+    const data = db.find((ele) => ele.token == token);
+
+    if (!token || !data) {
+      return res.status(400).json({
+        status: "failed",
+        message: "INVALID AUTHORIZATION",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      result: data.aggregator_revenue,
     });
   } catch (err) {
     res.status(500).json({

@@ -58,8 +58,8 @@ div.chats::-webkit-scrollbar {
 
 .botAvatar {
     border-radius: 50%;
-    width: 2em;
-    height: 2em;
+    width: 3em;
+    height: 3em;
     float: left;
     margin-left: 5px;
     /* border: 2px solid  #2c53af ; */
@@ -68,7 +68,8 @@ div.chats::-webkit-scrollbar {
 .botMsg {
     float: left;
     margin-top: 5px;
-    background: rgb(203, 205, 209);
+    /* background: rgb(203, 205, 209); */
+    background:#f7ecec21;
     color: black;
     box-shadow: 2px 3px 9px 0px #9a82842e;
     margin-left: 10px;
@@ -78,6 +79,7 @@ div.chats::-webkit-scrollbar {
     min-width: 25%;
     word-wrap: break-word;
     border-radius: 0 20px 20px 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 textarea {
@@ -654,6 +656,7 @@ Elements
     color:#300111;
 }
 
+
 /*
 graphCardCarousel
 */
@@ -877,7 +880,8 @@ Elements
 
 .multi_simpleCardContents {
     margin-top: 10px;
-    background-color:#e2d08da8;
+    /* background-color:#e2d08da8; */
+    background-color: #e6fcfe;
     width: 100%;
     width: -moz-available;          /* For Mozzila */
     width: -webkit-fill-available;  /* For Chrome */
@@ -1049,6 +1053,11 @@ For Simple Cards
     background-color: rgba(44, 83, 175);
     padding-bottom:5px;
 
+}
+
+.multi_simpleCardMiniHeader > .cardTitle{
+    font-weight: 600;
+    color: #f3e5e5 !important;
 }
 
 .multi_simpleCardMiniBody {
