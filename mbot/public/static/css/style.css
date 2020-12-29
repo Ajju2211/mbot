@@ -20,7 +20,8 @@ body {
 
 .chat_header {
     height: 60px;
-    background: rgb(90, 23, 238);
+    /* background: rgb(90, 23, 238); */
+    background: rgb(44 60 146);
     padding: 5px;
     font-size: 20px;
 }
@@ -844,7 +845,7 @@ multi simple Cards
 .multi_simple_cards_scroller div.multi_simple_carousel_cards {
     
     min-height: 70%;
-    background: rgb(230, 230, 225);
+    /* background: rgb(230, 230, 225); */
     box-shadow: 2px 2px 10px rgb(163, 163, 160);
     border-radius: 0px 0px 10px 10px;
     /* Added now */
@@ -872,16 +873,22 @@ Elements
     min-height: calc(100% - 10em);
     align-content: stretch;
     align-items: stretch;
-    -webkit-box-shadow: 6px 0px 14px -1px rgb(118, 105, 118);
+    /* -webkit-box-shadow: 6px 0px 14px -1px rgb(118, 105, 118);
     -moz-box-shadow: 6px 0px 14px -1px rgb(118, 105, 118);
-    box-shadow: 6px 0px 14px -1px rgb(118, 105, 118);
+    box-shadow: 6px 0px 14px -1px rgb(118, 105, 118); */
+    -webkit-box-shadow: rgb(118, 105, 118) 6px 8px 14px -1px;
+    -moz-box-shadow: rgb(118, 105, 118) 6px 8px 14px -1px;
+    box-shadow: rgb(118, 105, 118) 6px 8px 14px -1px;
+    
+    /* Added */
+    background: rgb(230, 230, 225);
 
 }
 
 .multi_simpleCardContents {
     margin-top: 10px;
     /* background-color:#e2d08da8; */
-    background-color: #e6fcfe;
+    /* background-color: #e6fcfe; */
     width: 100%;
     width: -moz-available;          /* For Mozzila */
     width: -webkit-fill-available;  /* For Chrome */
@@ -1029,7 +1036,8 @@ For Simple Cards
     padding: 1px;
 }
 .multi_simpleCardHeader {
-    background: rgba(44, 83, 175);
+    /* background: rgba(44, 83, 175); */
+    background: rgba(247, 236, 236, 0.13) !important;;
     border-radius: 0px 0px 5px 5px;
     /* position: absolute; */
     /* z-index: 3; */
@@ -1050,14 +1058,18 @@ For Simple Cards
 
 .multi_simpleCardMiniHeader{
     color:white;
-    background-color: rgba(44, 83, 175);
+    /* background-color: rgba(44, 83, 175); */
+    /* background-color: rgba(247, 236, 236, 0.13) !important; */
+    
     padding-bottom:5px;
+    background: #f7f6f6;
 
 }
 
 .multi_simpleCardMiniHeader > .cardTitle{
     font-weight: 600;
-    color: #f3e5e5 !important;
+    /* color: #f3e5e5 !important; */
+    color: black;
 }
 
 .multi_simpleCardMiniBody {
@@ -1066,9 +1078,9 @@ For Simple Cards
     flex-wrap: nowrap;
     height: auto;
     flex-direction: column;
+    background: white;
 }
 .multi_simpleCardHeader > span.cardTitle {
-    color:red;
     overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
@@ -1081,8 +1093,9 @@ font-weight: 600;
 padding-left: 2%;
 padding-top: 3%;
 padding-right: 0px;
-color: #2c53af;
-color: #ffffff;
+/* color: #2c53af;
+color: #ffffff; */
+color: black;
 cursor: pointer;
 margin-top: 5%;
 text-align: center;
