@@ -107,8 +107,8 @@ textarea-webkit-scrollbar {
     padding: 10px;
     float: right;
     margin-right: 0.5em;
-    /* background: #5a17ee; */
-    background: rgb(44 60 146);
+    /* background: linear-gradient(45deg, rgb(44, 60, 146), rgb(245 236 236 / 60%)); */
+    background-color: rgb(44, 60, 146) !important;
     color: white;
     margin-bottom: 0.15em;
     max-width: 65%;
@@ -444,7 +444,10 @@ div.content_data::-webkit-scrollbar {
 
 .menuChips {
     display: block;
-    background: #2c53af;
+    /* Added */
+    background: linear-gradient(45deg, rgb(44, 83, 175), rgb(243 243 243 / 33%));
+    /* background: #2c53af; */
+    background-color: rgb(44, 83, 175) !important;
     color: #fff;
     text-align: center;
     padding: 5px;
@@ -903,6 +906,7 @@ Elements
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
 }
 
 .multi_simpleCardCounts {
