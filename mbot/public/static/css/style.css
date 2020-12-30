@@ -107,7 +107,8 @@ textarea-webkit-scrollbar {
     padding: 10px;
     float: right;
     margin-right: 0.5em;
-    background: #5a17ee;
+    /* background: #5a17ee; */
+    background: rgb(44 60 146);
     color: white;
     margin-bottom: 0.15em;
     max-width: 65%;
@@ -164,7 +165,8 @@ textarea-webkit-scrollbar {
 
 .imgProfile {
     box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.16), 0 0px 10px 0 #00000096;
-    border-radius: 50px;
+    /* border-radius: 50px; */
+    border-radius: 34px 8px 34px 34px;
     width: 100%;
 }
 @media(min-width: 950px){
@@ -177,7 +179,7 @@ textarea-webkit-scrollbar {
     /* display: none; */
     position: fixed;
     padding: 5px;
-    width: 10%;
+    width: 15%;
     bottom: 0;
     right: 0;
     cursor: pointer;
@@ -1037,7 +1039,7 @@ For Simple Cards
 }
 .multi_simpleCardHeader {
     /* background: rgba(44, 83, 175); */
-    background: rgba(247, 236, 236, 0.13) !important;;
+    background: rgba(247, 236, 236, 0.13) !important;
     border-radius: 0px 0px 5px 5px;
     /* position: absolute; */
     /* z-index: 3; */
@@ -1054,6 +1056,10 @@ For Simple Cards
     align-content: space-between;
     margin-bottom:5px;
     min-height: 50px;
+    /* Shadow Added */
+    -webkit-box-shadow: 0px 6px 9px 5px rgb(195 199 226 / 73%);
+    -moz-box-shadow: 0px 6px 9px 5px rgb(195 199 226 / 73%);
+    box-shadow: 0px 6px 9px 5px rgb(195 199 226 / 73%);
 }
 
 .multi_simpleCardMiniHeader{
