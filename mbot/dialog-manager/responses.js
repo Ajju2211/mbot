@@ -12,14 +12,14 @@ module.exports = {
           title: "Reconciliations",
           payload: "/main.recon",
         },
-        {
-          title: "Payroll",
-          payload: "/main.payroll",
-        },
-        {
-          title: "Inventory",
-          payload: "/main.inventory",
-        },
+        // {
+        //   title: "Payroll",
+        //   payload: "/main.payroll",
+        // },
+        // {
+        //   title: "Inventory",
+        //   payload: "/main.inventory",
+        // },
       ],
     }),
   "greetings.bye": () =>
@@ -34,14 +34,14 @@ module.exports = {
           title: "Consolidated Sales",
           payload: "/main.sales.consolidated",
         },
-        {
-          title: "Top Items",
-          payload: "/main.sales.topitems",
-        },
-        {
-          title: "Top categories",
-          payload: "/main.sales.topcategories",
-        },
+        // {
+        //   title: "Top Items",
+        //   payload: "/main.sales.topitems",
+        // },
+        // {
+        //   title: "Top categories",
+        //   payload: "/main.sales.topcategories",
+        // },
         {
           title: "Top OrderTypes",
           payload: "/main.sales.topordertypes",
@@ -335,30 +335,30 @@ module.exports = {
     buildResponse({
       text: "Select the Reconciliation type.",
       buttons: [
-        {
-          title: "Variance",
-          payload: "/main.recon.variance",
-        },
-        {
-          title: "Cancellations",
-          payload: "/main.recon.cancellations",
-        },
-        {
-          title: "Cash Deposit Report",
-          payload: "/main.recon.cdreport",
-        },
-        {
-          title: "EDC Report",
-          payload: "/main.recon.edcreport",
-        },
-        {
-          title: "Expense Tab",
-          payload: "/main.recon.expensetab",
-        },
-        {
-          title: "Pending Payouts",
-          payload: "/main.recon.pendingpayouts",
-        },
+        // {
+        //   title: "Variance",
+        //   payload: "/main.recon.variance",
+        // },
+        // {
+        //   title: "Cancellations",
+        //   payload: "/main.recon.cancellations",
+        // },
+        // {
+        //   title: "Cash Deposit Report",
+        //   payload: "/main.recon.cdreport",
+        // },
+        // {
+        //   title: "EDC Report",
+        //   payload: "/main.recon.edcreport",
+        // },
+        // {
+        //   title: "Expense Tab",
+        //   payload: "/main.recon.expensetab",
+        // },
+        // {
+        //   title: "Pending Payouts",
+        //   payload: "/main.recon.pendingpayouts",
+        // },
         {
           title: "Sales Payment Wise",
           payload: "/main.recon.sales_payment_wise",
