@@ -178,6 +178,17 @@ function send(message) {
 
             // now set the response
             setBotResponse(botResponse);
+            // If no response from chatbot
+            if (botResponse.length < 1) {
+                let goBackReply = [{
+                    "custom": {
+                        "payload": "quickReplies",
+                        "data": [{ "title": "Back to Menu", "payload": action_name },]
+                    }
+                }
+                ];
+                setBotResponse(goBackReply);
+            }
 
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -192,6 +203,14 @@ function send(message) {
 
             // if there is no response from Chatbot server
             setBotResponse("");
+            let goBackReply = [{
+                "custom": {
+                    "payload": "quickReplies",
+                    "data": [{ "title": "Back to Menu", "payload": action_name },]
+                }
+            }
+            ];
+            setBotResponse(goBackReply);
             console.log("Error from bot end: ", textStatus);
         }
     });
@@ -2018,5 +2037,5 @@ function loginForm() {
     const logoutINNERHTML = "<i style=\"color: red\" class=\"fa fa-power-off\" aria-hidden=\"true\"></i> Logout";
     const loginINNERHTML = "<i style=\"color: red\" class=\"fa fa-sign-in\" aria-hidden=\"true\"></i> Login";
     document.querySelector('#logout > span:nth-child(1) > a:nth-child(1)').innerHTML = loginINNERHTML;
-    
+
 }
