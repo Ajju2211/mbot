@@ -51,6 +51,7 @@ module.exports.consolidated = async (data, token) => {
       payload: "/greetings.welcome",
     },
   ];
+  // multiSimpleCards
   return buildResponse({ text: textMessage, multiSimpleCards: { cards: cards, minicardlimit: 5 } }).concat(
     buildResponse({
       quickReplies: quickReplies1,
@@ -261,7 +262,7 @@ module.exports.topordertypes = async (data, token) => {
   ];
 
   return buildResponse({ scrollableChart: chart, text: textMessage }).concat(buildResponse({
-     groupedSimpleCards: {cards: cards}
+     groupedSimpleCards2: {cards: cards}
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
@@ -337,7 +338,7 @@ module.exports.top_payment_types = async (data, token) => {
   ];
 
   return buildResponse({ scrollableChart: chart, text: textMessage }).concat(buildResponse({
-     groupedSimpleCards: {cards: cards}
+     groupedSimpleCards2: {cards: cards, minicardrowlimit: 1}
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
@@ -381,18 +382,22 @@ module.exports.aggregator_revenue = async (data, token) => {
       let miniCardObj = {};
       miniCardObj.metadata = {};
       miniCardObj.metadata.title = item.outlet_name;
-      let pStyle = 'font-size: 1.5em;font-family: sans-serif;font-weight: 700;margin:2px';
-      let spanStyle = 'display: flex;flex-direction: column;flex-wrap: wrap;';
       miniCardObj.metadata.data = [
         {
-          title: '<span style="'+spanStyle+'"><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Payable</h5><p style="'+pStyle+'">'+item.customer_payable+'</p><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Sales</h5><p style="'+pStyle+'">'+item.sales+'</p></span>',
-          // value: item.customer_payable+' | '+'<span style="display:flex;">'+item.sales+'</span>'
-          value:""
+          title: "Payable",
+          value:item.customer_payable
         },
         {
-          title: '<span style="'+spanStyle+'"><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Earnings</h5><p style="'+pStyle+'">'+item.earnings+'</p><h5 style="border-bottom:solid 1px #170d0d;margin:2px">Difference</h5><p style="'+pStyle+'">'+item.difference+'</p></span>',
-          // value: item.customer_payable+' | '+'<span style="display:flex;">'+item.sales+'</span>'
-          value:""
+          title: "Sales",
+          value:item.sales
+        },
+        {
+          title: "Earnings",
+          value: item.earnings
+        },
+        {
+          title: "Difference",
+          value: item.difference
         }
       ];
 
@@ -474,7 +479,7 @@ module.exports.aggregator_revenue = async (data, token) => {
 
   return buildResponse({
     text: textMessage,
-     groupedSimpleCards: {cards: cards}
+     groupedSimpleCards2: {cards: cards, minicardrowlimit:4}
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,

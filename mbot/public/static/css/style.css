@@ -936,6 +936,191 @@ multi simple Cards
 
 
 
+/*
+multi simple Cards2
+*/
+
+.multi_simple_carousel_wrapper2 {
+    display: block;
+    /* background: #20005a; */
+    background: rgb(44 60 146);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 25px;
+}
+
+.multi_simple_cards_scroller2 {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    /* height: 420px; */
+    height:80%;
+    width: 100%;
+    transition: width 0.5s ease;
+    flex-direction: column;
+    align-items: stretch;
+    
+    /* Enable Safari touch scrolling physics which is needed for scroll snap */
+    -webkit-overflow-scrolling: touch;
+}
+
+.multi_simple_cards_scroller2 img {
+    border-radius: 10px;
+}
+
+.multi_simple_cards2 div.note {
+    position: absolute;
+    /* vertically align center */
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    position: absolute;
+    font-size: 4em;
+    color: white;
+}
+
+.multi_simple_cards2 .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 30px;
+    border-radius: 2px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.multi_simple_cards2 .arrow.next {
+    display: none;
+    font-size: 2em;
+    color: #ffffff;
+    right: 10px;
+}
+
+.multi_simple_cards2 .arrow.prev {
+    display: none;
+    font-size: 2em;
+    color: #ffffff;
+    left: 10px;
+}
+
+.multi_simple_cards_scroller2::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.multi_simple_cards_scroller2>div.multi_simple_carousel_cards2 {
+    margin: 5px;
+    scroll-snap-align: center;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+.multi_simple_cards_scroller2 div.multi_simple_carousel_cards2 {
+    
+    /* min-height: 70%; */
+    /* background: rgb(230, 230, 225); */
+    /* Added now */
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; */
+    /* Removed shadow */
+    /* box-shadow: 2px 2px 10px rgb(163, 163, 160);
+    border-radius: 0px 0px 10px 10px; */
+}
+
+
+
+
+/*
+Inside simple Card2
+Elements
+*/
+
+.multi_simpleCardMainBody2 {
+    display: flex;
+    padding: 5px;
+    flex-wrap: nowrap;
+    height: calc(100% - 4em);
+    flex-direction: row;
+    /* border: solid 1px #e3dbdbde; */
+    overflow-x: scroll;
+    overflow-y: hidden;
+    min-height: calc(100% - 10em);
+    align-content: stretch;
+    align-items: stretch;
+    /* -webkit-box-shadow: 6px 0px 14px -1px rgb(118, 105, 118);
+    -moz-box-shadow: 6px 0px 14px -1px rgb(118, 105, 118);
+    box-shadow: 6px 0px 14px -1px rgb(118, 105, 118); */
+    /* Removed */
+    /* -webkit-box-shadow: rgb(118, 105, 118) 6px 8px 14px -1px;
+    -moz-box-shadow: rgb(118, 105, 118) 6px 8px 14px -1px;
+    box-shadow: rgb(118, 105, 118) 6px 8px 14px -1px; */
+    
+    /* Added */
+    /* background: rgb(230, 230, 225); */
+    /* background: rgb(40, 4, 104); */
+    background: rgb(44 60 146);
+}
+
+.multi_simpleCardMiniHeader2 > span > i.fa-external-link {
+    color:black;
+    margin-top: 10px !important;
+    margin-right: 8px !important;
+}
+
+.multi_simpleCardContents2 {
+    margin-top: 10px;
+    /* background-color:#e2d08da8; */
+    /* background-color: #e6fcfe; */
+    width: 100%;
+    width: -moz-available;          /* For Mozzila */
+    width: -webkit-fill-available;  /* For Chrome */
+    width: stretch;                 /* Unprefixed */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex: 1 1 auto;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    margin-right: 8px;
+    border-radius: 10%;
+}
+
+.multi_simpleCardCounts2 {
+    color:black;
+    /* top: 40%; */
+    /* margin-left:4%;
+    position: absolute; */
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.multi_simpleCardAmount2 {
+    color:black;
+    margin-left:4%;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+/* 
+End Of
+multi simple Cards2
+*/
+
+
 @-webkit-keyframes fadeInLeft {
     from {
         opacity: 0;
@@ -1116,6 +1301,91 @@ text-align: center;
     color: white;
     line-height: 15px;
 }
+
+
+
+/*
+multi content2 Inside*/
+
+.multi_simpleCardHeader2 {
+    /* background: rgba(44, 83, 175); */
+    /* background: rgba(247, 236, 236, 0.13) !important; */
+    border-radius: 0px 0px 5px 5px;
+    /* position: absolute; */
+    /* z-index: 3; */
+    color: white;
+    /* top: 0; */
+    width: 100%;
+    /* height: 14%; */
+    height:7%;
+    word-wrap: break-word;
+    padding: 1px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    margin-bottom:5px;
+    min-height: 50px;
+    /* Shadow Added */
+    /* -webkit-box-shadow: 0px 6px 9px 5px rgb(195 199 226 / 73%);
+    -moz-box-shadow: 0px 6px 9px 5px rgb(195 199 226 / 73%);
+    box-shadow: 0px 6px 9px 5px rgb(195 199 226 / 73%); */
+}
+
+.multi_simpleCardMiniHeader2{
+    color:white;
+    /* background-color: rgba(44, 83, 175); */
+    /* background-color: rgba(247, 236, 236, 0.13) !important; */
+    
+    padding-bottom:5px;
+    background: #f7f6f6;
+    border-radius: 20px 20px 0% 0%;
+
+}
+
+.multi_simpleCardMiniHeader2 > .cardTitle{
+    font-weight: 600;
+    /* color: #f3e5e5 !important; */
+    color:black !important;
+}
+
+.multi_simpleCardMiniBody2 {
+    display:flex;
+    padding:5px;
+    flex-wrap: nowrap;
+    height: auto;
+    flex-direction: column;
+    background: white;
+    border-radius: 0% 0% 10% 10%;
+}
+.multi_simpleCardHeader2 > span.cardTitle {
+    overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+width: 78%;
+height: 60%;
+display: inline-block;
+margin-bottom: 3%;
+font-size: 1.15rem;
+font-weight: 600;
+padding-left: 2%;
+padding-top: 3%;
+padding-right: 0px;
+/* color: #2c53af;
+color: #ffffff; */
+color: white;
+cursor: pointer;
+margin-top: 0px;
+text-align: center;
+height:100%;
+}
+
+
+
+/*End Of multi content 2*/
+
+
+
 
 .graphCardHeader {
     background: rgba(44, 83, 175);

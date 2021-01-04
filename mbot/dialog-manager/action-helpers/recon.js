@@ -462,7 +462,7 @@ module.exports.reconciliation_table = async (data, token) => {
 
   return buildResponse({
     text: textMessage,
-     groupedSimpleCards: {cards: cards}
+     groupedSimpleCards2: {cards: cards}
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
@@ -604,7 +604,7 @@ module.exports.sales_payment_wise = async (data, token) => {
 
   return buildResponse({
     text: textMessage,
-     groupedSimpleCards: {cards: cards}
+     groupedSimpleCards2: {cards: cards}
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
@@ -748,7 +748,7 @@ module.exports.variance_aggregator_wise = async (data, token) => {
 
   return buildResponse({
     text: textMessage,
-     groupedSimpleCards: {cards: cards}
+     groupedSimpleCards2: {cards: cards}
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
