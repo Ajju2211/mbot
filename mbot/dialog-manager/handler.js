@@ -1,6 +1,7 @@
 const responses = require("../dialog-manager/responses");
 // requireAll actions from a dir
 const modules = require('require-dir-all')("../dialog-manager/actions");
+const {sendAlertMail} = require("../utils/mail");
 const actions = {};
 let keys = Object.keys(modules);
 for(let i=0;i<keys.length;i++){
@@ -20,6 +21,7 @@ module.exports.handleIntents = async (userObj, intent) => {
     catch(err){
         console.error('ERROR DURING RESPONDING TO INTENT');
         console.error(err);
+        sendAlertMail(err.stack);
         return [];
     }
 
