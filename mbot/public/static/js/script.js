@@ -1036,7 +1036,7 @@ function setBotResponse(response) {
 
                 //check if the response contains "text"
                 if (response[i].hasOwnProperty("text")) {
-                    var BotResponse = '<img class="botAvatar" src="./static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text + '</p><div class="clearfix"></div>';
+                    var BotResponse = '<img class="botAvatar" src="./static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text.replace(/undefined/g,'-') + '</p><div class="clearfix"></div>';
                     $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
                 }
 
@@ -3007,7 +3007,7 @@ function loginForm() {
         <div class="container mainform">
         <div class="row">
             <div class="col m12 center-align m2">
-                <p  style="font-size:1.3em;font-family:Georgia,serif">Hi 👋! Please fill out the login form below to start chatting with the MBOT.</p>
+                <p  style="font-size:1.3em;font-family:Georgia,serif">Hi <span class="wave">👋</span>! Please fill out the login form below to start chatting with the MBOT.</p>
             </div>
         </div>
         <div class="row ">

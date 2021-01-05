@@ -1779,7 +1779,10 @@ form control login
     margin-left: 10%;
     margin-right: 10%;
     border-radius: 30px;
-    background-color: rgb(90, 23, 238);
+    /* Updated colors */
+    background: linear-gradient(45deg, rgb(44 60 146), #828bb16e);
+    background-color: rgb(44 60 146);
+    /* background-color: rgb(90, 23, 238); */
     color: white;
     height: 45px;
     font-size: 1.5em;
@@ -1791,10 +1794,29 @@ form control login
 
 .login-btn{
     width: 100%;
-
-
-
 }
+
+/* wave animation */
+.wave {
+    animation-name: wave-animation;  
+    animation-duration: 2.5s;        
+    animation-iteration-count: infinite;  
+    transform-origin: 70% 70%;       
+    display: inline-block;
+  }
+  
+  @keyframes wave-animation {
+      0% { transform: rotate( 0.0deg) }
+     10% { transform: rotate(14.0deg) }  
+     20% { transform: rotate(-8.0deg) }
+     30% { transform: rotate(14.0deg) }
+     40% { transform: rotate(-4.0deg) }
+     50% { transform: rotate(10.0deg) }
+     60% { transform: rotate( 0.0deg) }  
+    100% { transform: rotate( 0.0deg) }
+  }
+/* Ends of animation */
+
 .sform{
     width: 80%;
     margin-left:10%;
