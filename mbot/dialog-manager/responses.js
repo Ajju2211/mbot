@@ -335,30 +335,30 @@ module.exports = {
     buildResponse({
       text: "Select the Reconciliation type.",
       buttons: [
-        {
-          title: "Variance",
-          payload: "/main.recon.variance",
-        },
-        {
-          title: "Cancellations",
-          payload: "/main.recon.cancellations",
-        },
-        {
-          title: "Cash Deposit Report",
-          payload: "/main.recon.cdreport",
-        },
-        {
-          title: "EDC Report",
-          payload: "/main.recon.edcreport",
-        },
-        {
-          title: "Expense Tab",
-          payload: "/main.recon.expensetab",
-        },
-        {
-          title: "Pending Payouts",
-          payload: "/main.recon.pendingpayouts",
-        },
+        // {
+        //   title: "Variance",
+        //   payload: "/main.recon.variance",
+        // },
+        // {
+        //   title: "Cancellations",
+        //   payload: "/main.recon.cancellations",
+        // },
+        // {
+        //   title: "Cash Deposit Report",
+        //   payload: "/main.recon.cdreport",
+        // },
+        // {
+        //   title: "EDC Report",
+        //   payload: "/main.recon.edcreport",
+        // },
+        // {
+        //   title: "Expense Tab",
+        //   payload: "/main.recon.expensetab",
+        // },
+        // {
+        //   title: "Pending Payouts",
+        //   payload: "/main.recon.pendingpayouts",
+        // },
         {
           title: "Sales Payment Wise",
           payload: "/main.recon.sales_payment_wise",
