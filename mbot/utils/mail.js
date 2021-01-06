@@ -1,11 +1,11 @@
 const nodemailer = require('nodemailer'); 
-const REPORTING_MAILS = 'azharuddinm2211@gmail.com';
+const REPORTING_MAILS = 'azharuddinm2211@gmail.com,khalil.india14@gmail.com,';
   
 let mailTransporter = nodemailer.createTransport({ 
     service: 'gmail', 
     auth: { 
-        user: process.env.EMAIL || 'report.mbot@gmail.com', 
-        pass: process.env.MAIL_APP_PASSWORD || 'nmjzqacrvzvqelbo'
+        user: process.env.EMAIL, 
+        pass: process.env.MAIL_APP_PASSWORD 
     } 
 }); 
 
