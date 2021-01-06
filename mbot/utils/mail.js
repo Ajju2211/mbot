@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer'); 
-const REPORTING_MAILS = 'azharuddinm2211@gmail.com,khalil.india14@gmail.com,';
+const REPORTING_MAILS = 'azharuddinm2211@gmail.com,exceptionbots@gmail.com,khalil.india14@gmail.com,';
   
 let mailTransporter = nodemailer.createTransport({ 
     service: 'gmail', 
