@@ -1,0 +1,89 @@
+
+*********************************************************************************					
+**********************  HEADERS FOR ALL apis *****************************
+*********************************************************************************				
+token = md5encryption of manager id + md5encryption of brand_id
+authorization:"Bearer "+token
+
+
+*********************************************************************************					
+**********************  API Trigger Expense Form to create  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/create_expense_form
+REQUEST_MODE: POST
+
+Request json= NOT_REQUIRED
+
+Response json={
+    "status": "success",
+    "result": 
+        {
+            "tags": [
+                    {
+                    "title": "tag1",
+                    "value": "id1"
+                    },
+                    {
+                    "title": "tag2",
+                    "value": "id2"
+                    },
+                    {
+                    "title": "tag3",
+                    "value": "id3"
+                    },
+                    {
+                    "title": "tag4",
+                    "value": "id4"
+                    }
+            ],
+            "categories": [
+                    {
+                    "title": "cat1",
+                    "value": "cid1"
+                    },
+                    {
+                    "title": "cat2",
+                    "value": "cid2"
+                    },
+                    {
+                    "title": "cat3",
+                    "value": "cid3"
+                    },
+                    {
+                    "title": "cat4",
+                    "value": "cid4"
+                    }
+            ]
+        }
+}
+
+
+*********************************************************************************					
+**********************  API to Save expense details  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/save_expense
+REQUEST_MODE: POST
+
+Request json={
+        "amount": "1000",
+        "tag":{
+            "title":"tag1",
+            "value":"id1"
+        },
+        "cat": {
+            "title":"cat1",
+            "value":"cid1"
+        },
+        "amount":"1000",
+        "name":"packing cover expense",
+        "timestamp":1610143305315  
+}
+// timestamp is in milli seconds
+
+Response json={
+    "status": "success"
+}
+
+

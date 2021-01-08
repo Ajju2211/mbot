@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 const salesApi = require("../sample-api/sales_api");
 const reconc = require("../sample-api/reconciliation_api");
+const expense = require("../sample-api/expense_api");
 const payroll = require("../sample-api/payroll_api");
 const inventory = require("../sample-api/inventory_api");
 const authController = require("../sample-api/auth");
@@ -66,6 +67,15 @@ router
 // sales_payment_wise
 router
     .post('/reconciliation/sales_payment_wise', reconc.sales_payment_wise);
+
+// expense API
+// create_expense API
+router
+    .post('/expense/create_expense_form',expense.create_expense);
+
+// save_expense API
+router
+.post('/expense/save_expense',expense.save_expense);
 
 // payroll API
 // absentees API

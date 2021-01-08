@@ -1444,6 +1444,7 @@ height:100%;
     grid-template-columns: 50%;
     /* Adjusting left gap */
     left: 25px;
+    z-index:2;
 }
 
 .quickReplies::-webkit-scrollbar {
@@ -1816,6 +1817,75 @@ form control login
     100% { transform: rotate( 0.0deg) }
   }
 /* Ends of animation */
+
+
+/* expense form */
+.expense-input-field {
+    border: solid 1px #cababad1;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    margin-top:0px;
+
+    font: 1.4em/1.6em monospace;
+    color: #095484;
+}
+/* end of expense form */
+
+.expense-text-area {
+    border: solid 2px #cababad1;
+    margin: 0px;
+    margin-bottom: 2px;
+    margin-top:0px;
+    border-radius:20px;
+}
+
+.expense-text-area > textarea{
+    height: 100px;
+    padding: 10px;
+    border-left: 6px solid #095484;
+    border-bottom: 6px solid #095484;
+    border-radius: 20px 0px 20px 20px;
+    margin-bottom:0px;
+    /* background-color: #d0e2bc; */
+    font: 1.4em/1.6em monospace;
+    color: #095484;
+}
+
+.expense-text-area:hover {
+    background: #E8E8E8;
+}
+
+.expense-input-field:hover {
+    background: #E8E8E8;
+}
+
+.expense-input-field > .active
+{   
+display: none;
+}
+/* autocomplete dropdown */
+.autocomplete-content{
+    height:150px !important;
+    overflow-y:scroll !important;
+  }
+  .dropdown-content{
+    z-index: 1000 !important;
+  }
+
+#saveExpense {
+    margin-top:5px;
+    width: 50%;
+    margin-left: 25%;
+    background: grey;
+    border: solid 1px #a9a9a98c;
+    height: 2.5em;border-radius:20px;
+}
+/* #saveExpense:hover {
+    background: white;
+    scale: 1.2;
+    font-size:1.2em;
+    color: black;
+} */
 
 .sform{
     width: 80%;

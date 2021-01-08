@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     instancesTap.open();
     setTimeout(function () { instancesTap.close(); }, 4000);
 
+
 });
 
 // In memory chart data
@@ -20,6 +21,7 @@ var charts_data = [];
 var card_chart_data = [];
 //initialization
 $(document).ready(function () {
+
 
     //Bot pop-up intro
     $("div").removeClass("tap-target-origin")
@@ -41,10 +43,40 @@ $(document).ready(function () {
     // currently not neccesary, if require better use cookie
     user_id = "userid_unique";
 
-    $("#userInput").prop('disabled', true);
+    // $("#userInput").prop('disabled', true);
 
     // Bot will display welcome message
     action_trigger();
+
+    // createExpenseForm
+    // setBotResponse([{
+    //     text:"Hello",
+    //     custom:{
+    //         payload:"createExpenseForm",
+    //         data:{
+    //             tags:[{
+    //                 value:"1",
+    //                 title:"Toilet Paper"
+    //             },
+    //             {
+    //                 value:"2",
+    //                 title:"Sweeper"
+    //             },
+    //             {
+    //                 value:"3",
+    //                 title:"Filter water"
+    //             }],
+    //             categories:[{
+    //                 title:"Cat1",
+    //                 value:"1"
+    //             },
+    //             {
+    //                 title:"cat2",
+    //                 value:"2"
+    //             }]
+    //         }
+    //     }
+    // }]);
 
 })
 
@@ -143,7 +175,7 @@ function scrollToBottomOfResults() {
 }
 
 //============== send the user message to Chatbot server =============================================
-function send(message) {
+function send(message, data) {
     // Destroy modal and charts and cards if opened
     // Destroy others
     $(".chart-container").remove();
@@ -152,7 +184,10 @@ function send(message) {
     if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
     $("#paginated_cards").remove();
     $(".quickReplies").remove();
-
+    let msgObj = {
+        text: message,
+        data: data
+    };
     $.ajax({
         url: "/user/bot/webhook",
         type: "POST",
@@ -161,7 +196,7 @@ function send(message) {
             "accept": "application/json",
             "Access-Control-Allow-Origin": "*"
         },
-        data: JSON.stringify({ message: message, sender: user_id }),
+        data: JSON.stringify({ message: msgObj, sender: user_id }),
         success: function (botResponse, status) {
             console.log("Response from Chatbot: ", botResponse, "\nStatus: ", status);
 
@@ -411,6 +446,14 @@ function setBotResponse(response) {
                             createChartScroll({ title1: title1, title2: title2 }, labels, data1, data2);
                         }, 1000);
                         continue;
+                        // return;
+                    }
+
+                    //check if the custom payload type is "createExpenseForm"
+                    if (response[i].custom.payload == "createExpenseForm") {
+                        let resData = (response[i].custom.data)
+                        showCreateExpenseForm(resData);
+                        // continue;
                         // return;
                     }
 
@@ -2153,6 +2196,157 @@ function createChartinModal(chartName, titles, labels, backgroundColor, chartsDa
 
 }
 
+// ========================================createForm==============================================
+function showCreateExpenseForm(formData){
+    let tags = {};
+    let cats = {};
+    expenseFormMemory = formData;
+    formData.tags.forEach((tag)=>{
+        tags[tag.title] = null;
+    });
+    formData.categories.forEach((cat)=>{
+        cats[cat.title] = null;
+    });
+// background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
+// style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
+    const eles = `
+    <div class="input-field col s12 expense-input-field">
+    <input type="text" name="tag" id="auto-complete-tags1" class="autocomplete validate" required="" maxlength="25">
+        <label for="auto-complete-tags1">Search Tags</label>
+    </div>
+    <div class="input-field col s12 expense-input-field">
+        <input type="text" name="cat" id="auto-complete-cats1" class="autocomplete validate" required="" maxlength="25">
+        <label for="auto-complete-cats1">Search Cats</label>
+    </div>
+    <div class="input-field col s12 expense-input-field">
+        <input type="text" name="name" placeholder="Expense Name" class="validate" required maxlength="25">
+    </div>
+    <div class="input-field col s12 expense-input-field">
+        <input type="number" name="amount" placeholder="Amount"  class="validate" required onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" max="10000000">
+    </div>
+    <div class="input-field col s12 expense-text-area">
+        <textarea class="materialize-textarea" name="comment" placeholder="Write any Comments..." class="validate" maxlength="50" required></textarea>
+    </div>`;
+    const miniCard =   `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
+                                ${eles}
+                        </div>`;
+    const card = `<div class="multi_simple_carousel_cards2 in-left">
+                        <div class="multi_simpleCardMainBody2" style="overflow: hidden !important;height:auto !important;">
+                        ${miniCard}
+                        </div>
+                    </div>`;
+
+
+    const formHtml = `
+                <div id="paginated_cards">
+                        <div class="multi_simple_carousel_wrapper2 cards" style="display:flex;flex-direction:column">
+                        <form method="POST" action="">
+                        ${card}
+                        <button id="saveExpense" class="waves-effect waves-light btn-small" type="submit">Save Expense</button>
+                        </form>
+                        </div>
+                </div>`;
+    $(formHtml).appendTo(".chats").show();
+
+    // $('#auto-complete-tags1').autocomplete({
+    //     data: tags,
+    //   });
+    //   $('#auto-complete-cats1').autocomplete({
+    //     data: cats,
+    //   });
+
+      const autoCompleteTagElems = document.querySelectorAll('#auto-complete-tags1');
+      const autoCompleteCatElems = document.querySelectorAll('#auto-complete-cats1');
+      const options = {};
+
+      const autoCompleteTaginstances = M.Autocomplete.init(autoCompleteTagElems, {
+        data: tags,
+        minLength: 0, 
+      });
+      const autoCompleteCatinstances = M.Autocomplete.init(autoCompleteCatElems, {
+        data: cats,
+        minLength: 0, 
+      });
+      $('#auto-complete-tags1').on('keyup',function(){
+        setTimeout(()=>{
+            // console.log(autoCompleteTaginstances);
+            if ( autoCompleteTaginstances[0].count === 0 ) {
+              console.log('no matches');
+              $('#auto-complete-tags1').val('');
+            }
+        },300);
+      })
+      $('#auto-complete-cats1').on('keyup',function(){
+        // console.log('keyup');
+        setTimeout(()=>{
+            if ( autoCompleteCatinstances[0].count === 0 ) {
+                console.log('no matches');
+                $('#auto-complete-cats1').val('');
+              }
+        },300);
+      })
+    $('form').on('submit', (e)=>{
+        e.preventDefault();
+        // Disabling the multi clicks
+        $('#saveExpense').prop('disabled', true);
+        const serialisedData = $('form').serializeArray();
+        formExpenseSubmit(serialisedData);
+        $('#saveExpense').prop('disabled', false);
+        
+    });
+
+    scrollToBottomOfResults();
+}
+
+function formExpenseSubmit(serialiseddata){
+    console.log(serialiseddata);
+    let expenseData = {};
+    for(let i=0;i<serialiseddata.length;i++){
+        let ele = serialiseddata[i];
+        if(typeof ele.value ==="undefined"){
+            M.toast({html: 'Please fill out the details properly'});
+            return;
+        }
+        let singleSpacedText = ele.value.replace(/ +/g, " ").trim();
+        if(singleSpacedText.length<1){
+            M.toast({html: 'Please fill out the details properly'});
+            return;
+        }
+
+        expenseData[ele.name] = singleSpacedText;
+    }
+    let tag_found;
+    let cat_found;
+    for(i=0,j=0;i<expenseFormMemory.tags.length || j<expenseFormMemory.categories.length;i++, j++){
+        let tag = expenseFormMemory.tags[i];
+        let cat = expenseFormMemory.categories[i];
+        if(tag){
+            if(tag.title.toLowerCase().trim() === expenseData.tag.toLowerCase()){
+                tag_found = tag;
+            }
+        }
+        if(cat){
+            if(cat.title.toLowerCase().trim() === expenseData.cat.toLowerCase()){
+                cat_found = cat;
+            }
+        }
+    }
+    if(typeof tag_found==="undefined" || typeof cat_found=== "undefined") {
+        M.toast({html: 'Please select valid option'});
+        return;
+    }
+    expenseData.tag = tag_found;
+    expenseData.cat = cat_found;
+    // timestamp in ms
+    expenseData.timestamp = new Date().getTime();
+    console.log(expenseData);
+    const CREATE_EXPENSE_INTENT = "/main.expense.create_expense.save";
+    send(CREATE_EXPENSE_INTENT, expenseData);
+    console.log("Submitted");
+    // 2.sendData
+    // 3. response of the success
+    // 4. Respond for the error
+}
 
 
 // ========================================loginForm===============================================

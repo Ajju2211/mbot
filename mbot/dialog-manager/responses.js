@@ -12,6 +12,10 @@ module.exports = {
           title: "Reconciliations",
           payload: "/main.recon",
         },
+        {
+          title: "Expenses",
+          payload: "/main.expense",
+        },
         // {
         //   title: "Payroll",
         //   payload: "/main.payroll",
@@ -959,4 +963,26 @@ module.exports = {
         },
       ],
     }),
+  "main.expense": () =>
+    buildResponse({
+      text: "Select the expense types.",
+      buttons: [
+        {
+          title: "Create Expense",
+          payload: "/main.expense.create_expense",
+        },
+        {
+          title: "Approve Expense",
+          payload: "/main.expense.approve_expense",
+        },
+      ],
+      quickReplies: [
+        {
+          title: "Back",
+          payload: "/greetings.welcome",
+        },
+      ],
+    }),
 };
+
+

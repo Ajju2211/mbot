@@ -8,20 +8,23 @@ for(let i=0;i<keys.length;i++){
     Object.assign(actions, modules[keys[i]]);
 }
 
-module.exports.handleIntents = async (userObj, intent) => {
+module.exports.handleIntents = async (userObj, intent, reqdata) => {
     try{
         if(actions[intent]){
-            return await actions[intent](userObj);
+            return await actions[intent](userObj, reqdata);
         }
         if(responses[intent]){
-            return await responses[intent](userObj);
+            return await responses[intent](userObj, reqdata);
         }
         return [];
     }
     catch(err){
         console.error('ERROR DURING RESPONDING TO INTENT');
         console.error(err);
-        sendAlertMail(err.stack);
+        // Only Send Alerts in Production
+        if(process.env.NODE_ENV !="dev"){
+            sendAlertMail(err.stack);
+        }
         return [];
     }
 
