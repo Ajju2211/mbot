@@ -1821,17 +1821,35 @@ form control login
 
 /* expense form */
 .expense-input-field {
-    border: solid 1px #cababad1;
-    border-radius: 20px;
+    /* border: solid 1px #cababad1; */
+    /* removed border */
+    /* border: solid 2px #cababad1; */
+    /* border-radius: 20px; */
+    border-radius: 0px;
     margin-bottom: 5px;
     margin-top:0px;
 
-    font: 1.4em/1.6em monospace;
+    font: 0.8em/1.6em monospace;
     color: #095484;
+
+        /* box-shadow: -2px 2px 86px 12px rgba(206,197,197,0.3);
+    -webkit-box-shadow: -2px 2px 86px 12px rgba(206,197,197,0.3);
+    -moz-box-shadow: -2px 2px 86px 12px rgba(206,197,197,0.3); */
+        box-shadow: rgba(206, 197, 197, 0.3) 0px 2px 30px 0px;
+    -webkit-box-shadow: rgba(206, 197, 197, 0.3) 0px 2px 30px 0px;
+    -moz-box-shadow: rgba(206, 197, 197, 0.3) 0px 2px 30px 0px;
+}
+
+.expense-input-field >  input {
+    color: black !important;
+}
+.expense-text-area >  textarea {
+    color: black !important;
 }
 /* end of expense form */
 
 .expense-text-area {
+    /* border: solid 1px #cababad1; */
     border: solid 2px #cababad1;
     margin: 0px;
     margin-bottom: 2px;
@@ -1847,7 +1865,8 @@ form control login
     border-radius: 20px 0px 20px 20px;
     margin-bottom:0px;
     /* background-color: #d0e2bc; */
-    font: 1.4em/1.6em monospace;
+    /* font: 1.4em/1.6em monospace; */
+    font: 1.1em/1.2em monospace;
     color: #095484;
 }
 
@@ -1863,6 +1882,18 @@ form control login
 {   
 display: none;
 }
+
+
+.expense-input-field > span{
+    display: inline;
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    font-size: small;
+    font-style: italic;
+    color: red;    
+}
+
 /* autocomplete dropdown */
 .autocomplete-content{
     height:150px !important;
@@ -1870,13 +1901,22 @@ display: none;
   }
   .dropdown-content{
     z-index: 1000 !important;
+    top:50px !important;
   }
 
 #saveExpense {
     margin-top:5px;
     width: 50%;
     margin-left: 25%;
-    background: grey;
+    background: #D3D3D3;
+    color:black;
+    border: solid 1px #a9a9a98c;
+    height: 2.5em;border-radius:20px;
+}
+
+.formSubmitBtns {
+    background: #D3D3D3;
+    color:black;
     border: solid 1px #a9a9a98c;
     height: 2.5em;border-radius:20px;
 }

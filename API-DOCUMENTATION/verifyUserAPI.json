@@ -27,7 +27,10 @@ RESPONSE=
         "brand_id": "23",
         "manager_id": "2",
         "email_id": "test@mail.com",
+        "approve_count":2
       },
 }
+
+// approve_count is to be sent only in the expense tabs
 
 

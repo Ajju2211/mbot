@@ -1,0 +1,58 @@
+{
+    "GREETINGS_WELCOME":"greetings.welcome",
+
+    "MAIN_SALES":"main.sales",
+
+    "MAIN_SALES_CONSOLIDATED":"main.sales.consolidated",
+    "MAIN_SALES_CONSOLIDATED_TODAY":"main.sales.consolidated.today",
+    "MAIN_SALES_CONSOLIDATED_YESTERDAY":"main.sales.consolidated.yesterday",
+    "MAIN_SALES_CONSOLIDATED_LASTMONTH":"main.sales.consolidated.lastmonth",
+    "MAIN_SALES_CONSOLIDATED_LASTWEEK":"main.sales.consolidated.lastweek",
+
+    "MAIN_SALES_TOPORDERTYPES":"main.sales.topordertypes",
+    "MAIN_SALES_TOPORDERTYPES_TODAY":"main.sales.topordertypes.today",
+    "MAIN_SALES_TOPORDERTYPES_YESTERDAY":"main.sales.topordertypes.yesterday",
+    "MAIN_SALES_TOPORDERTYPES_LASTMONTH":"main.sales.topordertypes.lastmonth",
+    "MAIN_SALES_TOPORDERTYPES_LASTWEEK":"main.sales.topordertypes.lastweek",
+
+    "MAIN_SALES_TOPPAYMENTTYPES":"main.sales.top_payment_types",
+    "MAIN_SALES_TOPPAYMENTTYPES_TODAY":"main.sales.top_payment_types.today",
+    "MAIN_SALES_TOPPAYMENTTYPES_YESTERDAY":"main.sales.top_payment_types.yesterday",
+    "MAIN_SALES_TOPPAYMENTTYPES_LASTMONTH":"main.sales.top_payment_types.lastmonth",
+    "MAIN_SALES_TOPPAYMENTTYPES_LASTWEEK":"main.sales.top_payment_types.lastweek",
+
+    "MAIN_SALES_AGGREGATORREVENUE":"main.sales.aggregator_revenue",
+    "MAIN_SALES_AGGREGATORREVENUE_TODAY":"main.sales.aggregator_revenue.today",
+    "MAIN_SALES_AGGREGATORREVENUE_YESTERDAY":"main.sales.aggregator_revenue.yesterday",
+    "MAIN_SALES_AGGREGATORREVENUE_LASTMONTH":"main.sales.aggregator_revenue.lastmonth",
+    "MAIN_SALES_AGGREGATORREVENUE_LASTWEEK":"main.sales.aggregator_revenue.lastweek",
+
+
+    "MAIN_RECON":"main.recon",
+
+    "MAIN_RECON_SALESPAYMENTWISE":"main.recon.sales_payment_wise",
+    "MAIN_RECON_SALESPAYMENTWISE_TODAY":"main.recon.sales_payment_wise.today",
+    "MAIN_RECON_SALESPAYMENTWISE_YESTERDAY":"main.recon.sales_payment_wise.yesterday",
+    "MAIN_RECON_SALESPAYMENTWISE_LASTMONTH":"main.recon.sales_payment_wise.lastmonth",
+    "MAIN_RECON_SALESPAYMENTWISE_LASTWEEK":"main.recon.sales_payment_wise.lastweek",
+
+    "MAIN_RECON_RECONCILIATIONTABLE":"main.recon.reconciliation_table",
+    "MAIN_RECON_RECONCILIATIONTABLE_TODAY":"main.recon.reconciliation_table.today",
+    "MAIN_RECON_RECONCILIATIONTABLE_YESTERDAY":"main.recon.reconciliation_table.yesterday",
+    "MAIN_RECON_RECONCILIATIONTABLE_LASTMONTH":"main.recon.reconciliation_table.lastmonth",
+    "MAIN_RECON_RECONCILIATIONTABLE_LASTWEEK":"main.recon.reconciliation_table.lastweek",
+
+    "MAIN_RECON_VARIANCEAGGREGATORWISE":"main.recon.variance_aggregator_wise",
+    "MAIN_RECON_VARIANCEAGGREGATORWISE_TODAY":"main.recon.variance_aggregator_wise.today",
+    "MAIN_RECON_VARIANCEAGGREGATORWISE_YESTERDAY":"main.recon.variance_aggregator_wise.yesterday",
+    "MAIN_RECON_VARIANCEAGGREGATORWISE_LASTMONTH":"main.recon.variance_aggregator_wise.lastmonth",
+    "MAIN_RECON_VARIANCEAGGREGATORWISE_LASTWEEK":"main.recon.variance_aggregator_wise.lastweek",
+
+
+    "MAIN_EXPENSE":"main.expense",
+
+    "MAIN_EXPENSE_CREATEEXPENSE":"main.expense.create_expense",
+    "MAIN_EXPENSE_CREATEEXPENSE_SAVE":"main.expense.create_expense.save",
+    "MAIN_EXPENSE_APPROVEEXPENSE":"main.expense.approve_expense",
+    "MAIN_EXPENSE_APPROVEEXPENSE_SAVE":"main.expense.approve_expense.save"
+}

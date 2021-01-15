@@ -7,8 +7,10 @@ router.post("/login", authMiddleware.login);
 // user logout
 router.get("/logout", authMiddleware.logout);
 
-// protect every route on /user/*
+// protect every route on /user/* 
 router.use(authMiddleware.protect);
+
+
 
 // chatbot endpoints
 router.post("/bot/webhook", botController.BotReply);

@@ -3,7 +3,7 @@ const BASE_URL = process.env.API_BASE_URL;
 const { buildResponse } = require("../../utils/make-response");
 const { renameKeys, generateBackgroundColors, capitalizedCamelCase } = require("../../utils");
 
-module.exports.consolidated = async (data, token) => {
+module.exports.consolidated = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/sales/consolidated";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -55,11 +55,11 @@ module.exports.consolidated = async (data, token) => {
   return buildResponse({ text: textMessage, multiSimpleCards: { cards: cards, minicardlimit: 5 } }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
-module.exports.topitems = async (data, token) => {
+module.exports.topitems = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/sales/topitems";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -118,11 +118,11 @@ module.exports.topitems = async (data, token) => {
   return buildResponse({ text: textMessage, chartCards: cardWithGraph }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
-module.exports.topcategories = async (data, token) => {
+module.exports.topcategories = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/sales/topcategories";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -181,11 +181,11 @@ module.exports.topcategories = async (data, token) => {
   return buildResponse({ text: textMessage, chartCards: cardWithGraph }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
-module.exports.topordertypes = async (data, token) => {
+module.exports.topordertypes = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/sales/topordertypes";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -266,11 +266,11 @@ module.exports.topordertypes = async (data, token) => {
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   ));
 };
 
-module.exports.top_payment_types = async (data, token) => {
+module.exports.top_payment_types = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/sales/top_payment_types";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -342,12 +342,12 @@ module.exports.top_payment_types = async (data, token) => {
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   ));
 };
 
 
-module.exports.aggregator_revenue = async (data, token) => {
+module.exports.aggregator_revenue = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/sales/aggregator_revenue";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -483,6 +483,6 @@ module.exports.aggregator_revenue = async (data, token) => {
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };

@@ -10,7 +10,7 @@ module.exports.buildResponse = ({
   groupedSimpleCards2,
   scrollableChart,
   custom,
-}) => {
+}, userObj) => {
   /**
    * @param {string} [text] - text message
    * @param {URL} [image] - url of the image
@@ -27,9 +27,20 @@ module.exports.buildResponse = ({
     response.image = image;
   }
   if (buttons) {
+    for(let i=0; i<buttons.length;i++){
+      if(!this.isPrivilageGranted(userObj.privilages, buttons[i].payload.toLowerCase().trim().split('/')[1])){
+        buttons.splice(i, i+1);
+
+      }
+    }
     response.buttons = buttons;
   }
   if (quickReplies) {
+    for(let i=0; i<quickReplies.length;i++){
+      if(!this.isPrivilageGranted(userObj.privilages, quickReplies[i].payload.toLowerCase().trim().split('/')[1])){
+        quickReplies.splice(i, i+1);
+      }
+    }
     response.custom = {
       payload: "quickReplies",
       data: quickReplies,
@@ -86,4 +97,16 @@ module.exports.buildResponse = ({
     return [];
   }
   return [response];
+};
+
+
+
+module.exports.isPrivilageGranted = (privilages, intent) => {
+  let ind = privilages.indexOf(intent);
+  if(ind === -1){
+    return false;
+  }
+  else {
+    return true;
+  }
 };

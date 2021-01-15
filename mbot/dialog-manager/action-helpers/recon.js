@@ -3,7 +3,7 @@ const BASE_URL = process.env.API_BASE_URL;
 const { buildResponse } = require("../../utils/make-response");
 const { renameKeys, generateBackgroundColors, capitalizedCamelCase } = require("../../utils");
 
-module.exports.variance = async (data, token) => {
+module.exports.variance = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/variance";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -49,11 +49,11 @@ module.exports.variance = async (data, token) => {
   return buildResponse({ cards: cards }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    },userObj)
   );
 };
 
-module.exports.cancellations = async (data, token) => {
+module.exports.cancellations = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/cancellations";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -100,11 +100,11 @@ module.exports.cancellations = async (data, token) => {
   return buildResponse({ chartCards: cardWithGraph }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
-module.exports.cdreport = async (data, token) => {
+module.exports.cdreport = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/bankdepositreport";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -156,11 +156,11 @@ module.exports.cdreport = async (data, token) => {
   return buildResponse({ chartCards: cardWithGraph }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    },userObj)
   );
 };
 
-module.exports.edcreport = async (data, token) => {
+module.exports.edcreport = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/edcreport";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -212,11 +212,11 @@ module.exports.edcreport = async (data, token) => {
   return buildResponse({ chartCards: cardWithGraph }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    },userObj)
   );
 };
 
-module.exports.expensetab = async (data, token) => {
+module.exports.expensetab = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/expensetab";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -268,11 +268,11 @@ module.exports.expensetab = async (data, token) => {
   return buildResponse({ chartCards: cardWithGraph }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
-module.exports.pendingpayouts = async (data, token) => {
+module.exports.pendingpayouts = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/pendingpayouts";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -324,12 +324,12 @@ module.exports.pendingpayouts = async (data, token) => {
   return buildResponse({ chartCards: cardWithGraph }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
 
-module.exports.reconciliation_table = async (data, token) => {
+module.exports.reconciliation_table = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/reconciliation_table";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -466,12 +466,12 @@ module.exports.reconciliation_table = async (data, token) => {
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
 
-module.exports.sales_payment_wise = async (data, token) => {
+module.exports.sales_payment_wise = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/sales_payment_wise";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -608,14 +608,14 @@ module.exports.sales_payment_wise = async (data, token) => {
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };
 
 
 
 
-module.exports.variance_aggregator_wise = async (data, token) => {
+module.exports.variance_aggregator_wise = async (data, token, userObj) => {
   const URL = BASE_URL + "/api/v1/reconciliation/variance_aggregator_wise";
   const resp = await axios.post(URL, data, {
     headers: {
@@ -752,6 +752,6 @@ module.exports.variance_aggregator_wise = async (data, token) => {
   }).concat(
     buildResponse({
       quickReplies: quickReplies1,
-    })
+    }, userObj)
   );
 };

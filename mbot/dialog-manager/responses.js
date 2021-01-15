@@ -1,6 +1,6 @@
 const { buildResponse } = require("../utils/make-response");
 module.exports = {
-  "greetings.welcome": () =>
+  "greetings.welcome": (userObj, reqData) =>
     buildResponse({
       text: "Welcome to the Bot",
       buttons: [
@@ -25,12 +25,12 @@ module.exports = {
         //   payload: "/main.inventory",
         // },
       ],
-    }),
-  "greetings.bye": () =>
+    }, userObj),
+  "greetings.bye": (userObj, reqData) =>
     buildResponse({
       text: "Thanks for visiting us",
-    }),
-  "main.sales": () =>
+    }, userObj),
+  "main.sales": (userObj, reqData) =>
     buildResponse({
       text: "Select the sales types.",
       buttons: [
@@ -65,8 +65,8 @@ module.exports = {
           payload: "/greetings.welcome",
         },
       ],
-    }),
-  "main.sales.consolidated": () =>
+    }, userObj),
+  "main.sales.consolidated": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -93,8 +93,8 @@ module.exports = {
           payload: "/main.sales",
         },
       ],
-    }),
-  "main.sales.topitems": () =>
+    }, userObj),
+  "main.sales.topitems": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -121,8 +121,8 @@ module.exports = {
           payload: "/main.sales",
         },
       ],
-    }),
-  "main.sales.topcategories": () =>
+    }, userObj),
+  "main.sales.topcategories": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -149,8 +149,8 @@ module.exports = {
           payload: "/main.sales",
         },
       ],
-    }),
-  "main.sales.topordertypes": () =>
+    }, userObj),
+  "main.sales.topordertypes": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -177,8 +177,8 @@ module.exports = {
           payload: "/main.sales",
         },
       ],
-    }),
-  "main.sales.top_payment_types": () =>
+    }, userObj),
+  "main.sales.top_payment_types": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -205,9 +205,9 @@ module.exports = {
           payload: "/main.sales",
         },
       ],
-    }),
+    }, userObj),
 
-  "main.sales.aggregator_revenue": () =>
+  "main.sales.aggregator_revenue": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -234,8 +234,8 @@ module.exports = {
           payload: "/main.sales",
         },
       ],
-    }),
-  "main.payroll": () =>
+    }, userObj),
+  "main.payroll": (userObj, reqData) =>
     buildResponse({
       text: "Select the Payroll type.",
       buttons: [
@@ -258,8 +258,8 @@ module.exports = {
           payload: "/greetings.welcome",
         },
       ],
-    }),
-  "main.payroll.absentees": () =>
+    }, userObj),
+  "main.payroll.absentees": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -286,8 +286,8 @@ module.exports = {
           payload: "/main.payroll",
         },
       ],
-    }),
-  "main.payroll.avg_working_hrs": () =>
+    }, userObj),
+  "main.payroll.avg_working_hrs": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -314,8 +314,8 @@ module.exports = {
           payload: "/main.payroll",
         },
       ],
-    }),
-  "main.payroll.avg_costing": () =>
+    }, userObj),
+  "main.payroll.avg_costing": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -334,8 +334,8 @@ module.exports = {
           payload: "/main.payroll",
         },
       ],
-    }),
-  "main.recon": () =>
+    }, userObj),
+  "main.recon": (userObj, reqData) =>
     buildResponse({
       text: "Select the Reconciliation type.",
       buttons: [
@@ -382,8 +382,8 @@ module.exports = {
           payload: "/greetings.welcome",
         },
       ],
-    }),
-  "main.recon.variance": () =>
+    }, userObj),
+  "main.recon.variance": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -406,8 +406,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.cancellations": () =>
+    }, userObj),
+  "main.recon.cancellations": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -434,8 +434,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.cdreport": () =>
+    }, userObj),
+  "main.recon.cdreport": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -462,8 +462,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.edcreport": () =>
+    }, userObj),
+  "main.recon.edcreport": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -490,8 +490,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.expensetab": () =>
+    }, userObj),
+  "main.recon.expensetab": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -518,8 +518,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.pendingpayouts": () =>
+    }, userObj),
+  "main.recon.pendingpayouts": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -546,8 +546,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.reconciliation_table": () =>
+    }, userObj),
+  "main.recon.reconciliation_table": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -574,8 +574,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.variance_aggregator_wise": () =>
+    }, userObj),
+  "main.recon.variance_aggregator_wise": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -602,8 +602,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.recon.sales_payment_wise": () =>
+    }, userObj),
+  "main.recon.sales_payment_wise": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -630,8 +630,8 @@ module.exports = {
           payload: "/main.recon",
         },
       ],
-    }),
-  "main.inventory": () =>
+    }, userObj),
+  "main.inventory": (userObj, reqData) =>
     buildResponse({
       text: "Select the Inventory type.",
       buttons: [
@@ -682,8 +682,8 @@ module.exports = {
           payload: "/greetings.welcome",
         },
       ],
-    }),
-  "main.inventory.pendingpurchases": () =>
+    }, userObj),
+  "main.inventory.pendingpurchases": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -710,8 +710,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.pendingvendorpayments": () =>
+    }, userObj),
+  "main.inventory.pendingvendorpayments": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -738,8 +738,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.pendingindents": () =>
+    }, userObj),
+  "main.inventory.pendingindents": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -766,8 +766,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.pendingphysicalchecks": () =>
+    }, userObj),
+  "main.inventory.pendingphysicalchecks": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -794,8 +794,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.pendingproductions": () =>
+    }, userObj),
+  "main.inventory.pendingproductions": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -822,8 +822,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.wastages": () =>
+    }, userObj),
+  "main.inventory.wastages": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -850,8 +850,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.costgoods": () =>
+    }, userObj),
+  "main.inventory.costgoods": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -878,8 +878,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.foodcost": () =>
+    }, userObj),
+  "main.inventory.foodcost": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -906,8 +906,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.marginitems": () =>
+    }, userObj),
+  "main.inventory.marginitems": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -934,8 +934,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.inventory.lossitems": () =>
+    }, userObj),
+  "main.inventory.lossitems": (userObj, reqData) =>
     buildResponse({
       text: "Please select on which dates you want to see.",
       buttons: [
@@ -962,8 +962,8 @@ module.exports = {
           payload: "/main.inventory",
         },
       ],
-    }),
-  "main.expense": () =>
+    }, userObj),
+  "main.expense": (userObj, reqData) =>
     buildResponse({
       text: "Select the expense types.",
       buttons: [
@@ -972,7 +972,7 @@ module.exports = {
           payload: "/main.expense.create_expense",
         },
         {
-          title: "Approve Expense",
+          title: "Approve Expense("+userObj.approve_count+")",
           payload: "/main.expense.approve_expense",
         },
       ],
@@ -982,7 +982,7 @@ module.exports = {
           payload: "/greetings.welcome",
         },
       ],
-    }),
+    }, userObj),
 };
 
 

@@ -1,3 +1,6 @@
+const privilages = require("./privilages.json");
+let privilages2 = Object.values(privilages);
+privilages2.pop();
 const db = [
   {
     email_id: "test@mail.com",
@@ -5,6 +8,15 @@ const db = [
     brand_id: "12",
     manager_id: "3",
     token: "eccbc87e4b5ce2fe28308fd9f2a7baf3c20ad4d76fe97759aa27a0c99bff6710",
+    privilages: Object.values(privilages),
+  },
+  {
+    email_id: "test2@mail.com",
+    password: "mbot@2020",
+    brand_id: "12",
+    manager_id: "3",
+    token: "eccbc87e4b5ce2fe28308fd9f2a7baf3c20ad4d76fe97759aa27a0c99bff6710",
+    privilages: privilages2,
   },
 ];
 
@@ -31,7 +43,7 @@ module.exports.login = (req, res) => {
     result: {
       brand_id: user.brand_id,
       manager_id: user.manager_id,
-      email_id:  user.email_id
+      email_id: user.email_id
     },
   });
 };
@@ -48,6 +60,8 @@ exports.getUserData = async (req, res) => {
         brand_id: currentUser.brand_id,
         manager_id: currentUser.manager_id,
         email_id: currentUser.email_id,
+        privilages: currentUser.privilages,
+        approve_count: 2
       },
     });
   } catch (err) {

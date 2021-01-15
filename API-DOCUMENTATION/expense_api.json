@@ -59,6 +59,8 @@ Response json={
 }
 
 
+
+
 *********************************************************************************					
 **********************  API to Save expense details  *****************************
 *********************************************************************************					
@@ -78,6 +80,7 @@ Request json={
         },
         "amount":"1000",
         "name":"packing cover expense",
+        "comment": "We need them urgently",
         "timestamp":1610143305315  
 }
 // timestamp is in milli seconds
@@ -85,5 +88,95 @@ Request json={
 Response json={
     "status": "success"
 }
+
+*********************************************************************************					
+**********************  API Trigger get_approval_expense  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/get_approval_expense
+REQUEST_MODE: POST
+
+Request json= NOT_REQUIRED
+
+Response json={
+    "status": "success",
+    "result": 
+        {
+            "expenses":[
+                {
+                    "id":"1",
+                    "tag":"Tag1",
+                    "category":"Cat1",
+                    "expense_name":"Printer powder",
+                    "amount":"1500",
+                    "comments":[
+                        {
+                            "created_on":"10/01/21",
+                            "comment":"Sir Urgent xerox poweder required.",
+                            "created_by":"Azhar",
+                            "position":"1"
+                        },
+                        {
+                            "created_on":"11/01/21",
+                            "comment":"Yes I've checked it , its urgent",
+                            "created_by":"Kamal",
+                            "position":"2"
+                        },
+                        {
+                            "created_on":"10/01/21",
+                            "comment":"No, we don't providing extra things 🔥, I'm cancelling it out.",
+                            "created_by":"Mansoor",
+                            "position":"3"
+                        }
+                    ]
+                },
+                {
+                    "id":"2",
+                    "tag":"Tag2",
+                    "category":"Cat2",
+                    "expense_name":"Kitchen ware",
+                    "amount":"2000",
+                    "comments":[
+                        {
+                            "created_on":"10/01/21",
+                            "comment":"Glass cups broken, we need one dozen of them.",
+                            "created_by":"Azhar",
+                            "position":"1"
+                        },
+                        {
+                            "created_on":"11/01/21",
+                            "comment":"Okay, we will provide half dozen adjust this month.",
+                            "created_by":"Kamal",
+                            "position":"2"
+                        }
+                    ]
+                }
+            ]
+        }
+}
+
+
+*********************************************************************************					
+**********************  API to Save approval expenses   *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/save_approve_expense
+REQUEST_MODE: POST
+
+Request json={
+    "approval": "reject",
+    "comment": "kk",
+    "id": "2",
+    "timestamp": 1610368968601
+}
+// timestamp is in milli seconds
+
+Response json={
+    "status": "success"
+}
+
+
+
+
 
 

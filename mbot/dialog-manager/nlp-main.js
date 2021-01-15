@@ -1,5 +1,5 @@
 
-const { buildResponse } = require("../utils/make-response");
+const { buildResponse, isPrivilageGranted } = require("../utils/make-response");
 const { handleIntent, handleIntents } = require("../dialog-manager/handler");
 
 module.exports.sendText = async (userObj, messageBody)=>{
@@ -12,7 +12,22 @@ module.exports.sendText = async (userObj, messageBody)=>{
     // handle only intent,eg: /greetings.welcome
     if(text.startsWith('/')){
         let intent = text.toLowerCase().trim().split('/')[1];
-        return await handleIntents(userObj, intent, reqdata);
+        console.log(userObj);
+        try {
+            if(!isPrivilageGranted(userObj.privilages, intent)){
+                console.log(intent+"INTENT UNAUTHORISED ACCESS "+JSON.stringify(userObj));
+                throw new Error(intent+"INTENT UNAUTHORISED ACCESS ");
+            }
+            return await handleIntents(userObj, intent, reqdata);
+        } catch (error) {
+            console.error(error.message);
+            // Only Send Alerts in Production
+            if(process.env.NODE_ENV !="dev"){
+                sendAlertMail(err.stack);
+            }
+            return [];
+        }
+
     }
 
     return [];

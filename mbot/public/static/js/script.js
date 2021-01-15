@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     // createExpenseForm
     // setBotResponse([{
-    //     text:"Hello",
+    //     text:"create Expense below",
     //     custom:{
     //         payload:"createExpenseForm",
     //         data:{
@@ -75,6 +75,64 @@ $(document).ready(function () {
     //                 value:"2"
     //             }]
     //         }
+    //     }
+    // }]);
+ 
+    // approve Expense
+    // setBotResponse([{
+    //     text:"Approve expense Below",
+    //     custom:{
+    //         payload:"approveExpense",
+    //         expenses:[
+    //             {
+    //                 id:"1",
+    //                 tag:"Tag1",
+    //                 category:"Cat1",
+    //                 expense_name:"Printer powder",
+    //                 amount:"1500",
+    //                 comments:[
+    //                     {
+    //                         createdOn:"10/01/21",
+    //                         comment:"Sir Urgent xerox poweder required.",
+    //                         createdBy:"Azhar",
+    //                         position:"1"
+    //                     },
+    //                     {
+    //                         createdOn:"11/01/21",
+    //                         comment:"Yes I've checked it , its urgent",
+    //                         createdBy:"Kamal",
+    //                         position:"2"
+    //                     },
+    //                     {
+    //                         createdOn:"10/01/21",
+    //                         comment:"No, we don't providing extra things 🔥, I'm cancelling it out.",
+    //                         createdBy:"Mansoor",
+    //                         position:"3"
+    //                     }
+    //                 ]
+    //             },
+    //             {
+    //                 id:"2",
+    //                 tag:"Tag2",
+    //                 category:"Cat2",
+    //                 expense_name:"Kitchen ware",
+    //                 amount:"2000",
+    //                 comments:[
+    //                     {
+    //                         createdOn:"10/01/21",
+    //                         comment:"Glass cups broken, we need one dozen of them.",
+    //                         createdBy:"Azhar",
+    //                         position:"1"
+    //                     },
+    //                     {
+    //                         createdOn:"11/01/21",
+    //                         comment:"Okay, we will provide half dozen adjust this month.",
+    //                         createdBy:"Kamal",
+    //                         position:"2"
+    //                     }
+    //                 ]
+    //             }
+    //         ]
     //     }
     // }]);
 
@@ -175,15 +233,18 @@ function scrollToBottomOfResults() {
 }
 
 //============== send the user message to Chatbot server =============================================
-function send(message, data) {
+function send(message, data, silent=false) {
     // Destroy modal and charts and cards if opened
     // Destroy others
-    $(".chart-container").remove();
-    $(".chart-container1").remove();
-    $(".chartWrapper").remove();
-    if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
-    $("#paginated_cards").remove();
-    $(".quickReplies").remove();
+    if(silent === false){
+        $(".chart-container").remove();
+        $(".chart-container1").remove();
+        $(".chartWrapper").remove();
+        if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
+        $("#paginated_cards").remove();
+        $(".quickReplies").remove();
+    }
+
     let msgObj = {
         text: message,
         data: data
@@ -210,7 +271,9 @@ function send(message, data) {
             }
 
             // now set the response
-            setBotResponse(botResponse);
+            if(silent == false){
+                setBotResponse(botResponse);
+            }
             // If no response from chatbot
             if (botResponse.length < 1) {
                 let goBackReply = [{
@@ -220,6 +283,9 @@ function send(message, data) {
                     }
                 }
                 ];
+                if(silent == false){
+
+                }
                 setBotResponse(goBackReply);
             }
 
@@ -318,6 +384,15 @@ function setBotResponse(response) {
                         // showQuickReplies(quickRepliesData);
                         return;
                     }
+
+                    // //check if the custom payload type is "countNotifications"
+                    // if (response[i].custom.payload == "countNotifications") {
+                    //     countsData = response[i].custom.data;
+                    //     // setTimeout(showCountsNotifications(countsData), 2000);
+                    //     showCountsNotifications(countsData);
+                    //     // continue;
+                    //     // return;
+                    // }
 
                     //check if the custom payload type is "pdf_attachment"
                     if (response[i].custom.payload == "pdf_attachment") {
@@ -451,12 +526,18 @@ function setBotResponse(response) {
 
                     //check if the custom payload type is "createExpenseForm"
                     if (response[i].custom.payload == "createExpenseForm") {
-                        let resData = (response[i].custom.data)
+                        let resData = (response[i].custom.data);
                         showCreateExpenseForm(resData);
                         // continue;
                         // return;
                     }
-
+                    //check if the custom payload type is "approveExpense"
+                    if (response[i].custom.payload == "approveExpense") {
+                        let resData = (response[i].custom.expenses);
+                        showApproveExpense(resData);
+                        // continue;
+                        // return;
+                    }
                     //check of the custom payload type is "collapsible"
                     if (response[i].custom.payload == "collapsible") {
                         data = (response[i].custom.data);
@@ -1596,6 +1677,20 @@ $(document).on("click", ".quickReplies .chip", function () {
 
 });
 
+
+// ===================================== showCountsNotifications =======================================
+function showCountsNotifications(countsData) {
+        
+
+        const countNotifications = `<div class="countNotifications"><span>Approved</span><span>100</span></div>`;
+        $(countNotifications).appendTo(".chats").fadeIn(1000);
+        scrollToBottomOfResults();
+}
+
+
+
+
+
 //====================================== Get User Location ==================================================
 function getLocation() {
     if (navigator.geolocation) {
@@ -2210,22 +2305,24 @@ function showCreateExpenseForm(formData){
 // background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
 // style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
     const eles = `
-    <div class="input-field col s12 expense-input-field">
-    <input type="text" name="tag" id="auto-complete-tags1" class="autocomplete validate" required="" maxlength="25">
-        <label for="auto-complete-tags1">Search Tags</label>
+    <div class="input-field col s12 expense-input-field" style="margin-top:9px">
+    <input type="text" name="tag" id="auto-complete-tags1" autocomplete="off" class="autocomplete validate" required="" maxlength="25" placeholder="Search Tags">
+    <span style="display:none" id="warning-tag"> <span class="material-icons" style="font-size: small;margin-right: 3px;top: 3px;position: relative;" style="font-size: small;margin-right: 3px;top: 3px;position: relative;">warning</span>No such tag</>
+        <!-- <label for="auto-complete-tags1" style="font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;">Search Tags</label> -->
     </div>
     <div class="input-field col s12 expense-input-field">
-        <input type="text" name="cat" id="auto-complete-cats1" class="autocomplete validate" required="" maxlength="25">
-        <label for="auto-complete-cats1">Search Cats</label>
+        <input type="text" name="cat" autocomplete="off" id="auto-complete-cats1" class="autocomplete validate" required="" maxlength="25" placeholder="Search Categories">
+        <span style="display:none" id="warning-cat"> <span class="material-icons" style="font-size: small;margin-right: 3px;top: 3px;position: relative;">warning</span>No such Category</>
+        <!-- <label for="auto-complete-cats1"  style="font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;">Search Cats</label> -->
     </div>
     <div class="input-field col s12 expense-input-field">
-        <input type="text" name="name" placeholder="Expense Name" class="validate" required maxlength="25">
+        <input type="text" name="name" autocomplete="nope" placeholder="Expense Name" class="validate" required maxlength="25">
     </div>
     <div class="input-field col s12 expense-input-field">
-        <input type="number" name="amount" placeholder="Amount"  class="validate" required onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" min="0" max="10000000">
+        <input type="number" autocomplete="off" name="amount" placeholder="Amount"  class="validate" required onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57) || event.keyCode==46 " min="0" >
     </div>
     <div class="input-field col s12 expense-text-area">
-        <textarea class="materialize-textarea" name="comment" placeholder="Write any Comments..." class="validate" maxlength="50" required></textarea>
+        <textarea class="materialize-textarea" name="comment" placeholder="Write any Comments..." class="validate" maxlength="50" required autocomplete="off"></textarea>
     </div>`;
     const miniCard =   `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
                                 ${eles}
@@ -2267,23 +2364,44 @@ function showCreateExpenseForm(formData){
         data: cats,
         minLength: 0, 
       });
+      
+      $('#auto-complete-tags1').on('focusin',function(){
+        $('.quickReplies').toggle();
+      })
+      $('#auto-complete-tags1').on('focusout',function(){
+        $('.quickReplies').toggle();   
+      })
+      $('#auto-complete-cats1').on('focusin',function(){
+        $('.quickReplies').toggle();
+      })
+      $('#auto-complete-cats1').on('focusout',function(){
+        $('.quickReplies').toggle();   
+      })
       $('#auto-complete-tags1').on('keyup',function(){
-        setTimeout(()=>{
             // console.log(autoCompleteTaginstances);
             if ( autoCompleteTaginstances[0].count === 0 ) {
               console.log('no matches');
               $('#auto-complete-tags1').val('');
+              $('#warning-tag').show();
+              $(this).trigger("click");
             }
-        },300);
+            else{
+                $('#warning-tag').hide();
+            }
+            return;
       })
       $('#auto-complete-cats1').on('keyup',function(){
         // console.log('keyup');
-        setTimeout(()=>{
             if ( autoCompleteCatinstances[0].count === 0 ) {
                 console.log('no matches');
                 $('#auto-complete-cats1').val('');
+                $('#warning-cat').show();
+                $(this).trigger("click");
               }
-        },300);
+              else{
+                $('#warning-cat').hide();
+            }
+            return;
       })
     $('form').on('submit', (e)=>{
         e.preventDefault();
@@ -2343,11 +2461,195 @@ function formExpenseSubmit(serialiseddata){
     const CREATE_EXPENSE_INTENT = "/main.expense.create_expense.save";
     send(CREATE_EXPENSE_INTENT, expenseData);
     console.log("Submitted");
+}
+
+
+// ========================================saveExpense==============================================
+function showApproveExpense(formData){
+    let tags = {};
+    let cats = {};
+    approveExpenseFormMemory = formData;
+    let forms = '';
+    for(let i=0;i< approveExpenseFormMemory.length;i++){
+        let expense = approveExpenseFormMemory[i];
+        let comments = '';
+        let totalComments = expense.comments.length;
+        for(let j=0;j< totalComments;j++){
+            let comment = expense.comments[j];
+            let commentHtml = `
+            <fieldset class="input-field col s12 expense-text-area" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border:none !important;">
+            <legend><label for="previousComments${j}" style="color:grey">${comment['created_on']} ${j+1}/${totalComments}</label></legend>
+            <textarea class="materialize-textarea" name="previousComments${j}" placeholder="Write any Comments..." class="validate"  maxlength="50" required disabled style="border-bottom:6px solid rgb(9, 84, 132) !important;overflow-y:scroll;width:50vh">${comment.comment}</textarea>
+            </fieldset>
+            `;
+            comments = comments + commentHtml;
+        }
+        let fields = `
+        <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
+        <legend><label for="tag" style="color:grey">Tag</label></legend>
+        <input type="text" name="tag" id="auto-complete-tags${i}" class="validate" required="" disabled value="${expense.tag}" maxlength="25" style="height: auto;">
+        </fieldset>
+    
+        <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
+        <legend><label for="cat" style="color:grey">Category</label></legend>
+        <input type="text" name="cat" id="auto-complete-cats1${i}" class="validate" required="" disabled value="${expense.category}" maxlength="25" style="height: auto;">
+        </fieldset>
+    
+        <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
+        <legend><label for="name" style="color:grey">Expense Name</label></legend>
+        <input type="text" name="name"  class="validate" required="" disabled value="${expense.expense_name}" maxlength="25" style="height: auto;">
+        </fieldset>
+    
+        <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
+        <legend><label for="amount" style="color:grey">Amount</label></legend>
+        <input type="text" name="amount"  class="validate" required="" disabled value="${expense.amount}" maxlength="25" style="height: auto;">
+        </fieldset>
+    
+        <div style="overflow-x:scroll;display:flex;flex-direction:row">
+        ${comments}
+        </div>
+    
+        <fieldset class="input-field col s12 expense-text-area" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important">
+        <legend><label for="comment" style="color:grey">Enter Comments</label></legend>
+        <textarea class="materialize-textarea" autocomplete="off" name="comment" placeholder="Write any Comments..." class="validate"  maxlength="50" required  style="border-bottom:6px solid rgb(9, 84, 132) !important;overflow-y:scroll;height:15vh;"></textarea>
+        </fieldset>
+        `;
+        let miniCard =   `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
+                                    ${fields}
+                            </div>`;
+        let card = `<div class="multi_simple_carousel_cards2 in-left">
+                            <div class="multi_simpleCardMainBody2" style="overflow: hidden !important;height:auto !important;">
+                            ${miniCard}
+                            </div>
+                        </div>`;
+        let form = `
+        <form method="POST"  name="approve_form" value="${expense.id}" id="approval${expense.id}" action="" style="width:100%">
+        ${card}
+        <div style="display:flex;flex-direction:row;justify-content: space-evenly;">
+        <button id="approve${expense.id}" name="approve" class="formSubmitBtns waves-effect waves-light btn-small" style="border-radius: 20px" value="approve" type="submit">Approve</button>
+        <button id="reject${expense.id}" name="reject" class="formSubmitBtns waves-effect waves-light btn-small" style="border-radius: 20px" value="reject" type="submit">Reject</button>
+        <button id="cancel${expense.id}" name="cancel" class="formSubmitBtns waves-effect waves-light btn-small" style="border-radius: 20px" value="cancel" type="submit">Cancel</button>
+        </div>
+        </form>`;
+        forms = forms + form;
+    }
+// background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
+// style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
+
+
+
+    const approveForm = `
+                <div id="paginated_cards">
+                        <div style="top: 30px;background: linear-gradient(45deg, #344392, #dedbdb00);background-color: #2c3c92;color:white;border-radius: 20px;padding-top: 5px;padding-left: 10px;padding-right: 10px;text-align: right;z-index: 2;position: relative;margin-left: 59%;margin-right:10px">Approvals <span id="approvalCounts">${approveExpenseFormMemory.length}</span></div>
+                        <div class="multi_simple_carousel_wrapper2 cards" style="display:flex;flex-direction:row;overflow-x:scroll">
+                        ${forms}
+                        </div>
+                </div>`;
+    $(approveForm).appendTo(".chats").show();
+
+    $('form').on('submit', (e)=>{
+        e.preventDefault();
+        // Disabling the multi clicks
+        // $('#saveExpense').prop('disabled', true);
+        const btnId = e.originalEvent.submitter.id;
+        const button_name = e.originalEvent.submitter.innerText.toLowerCase();
+        console.log(button_name);
+        const id = btnId.split(button_name)[1];
+        console.log('id: '+id);
+        const FORM_SELECTOR = `form#approval${id}`;
+        const serialisedData = $(FORM_SELECTOR).serializeArray();
+        formApproveSubmit(serialisedData, id, button_name);
+
+        
+   
+        // $('#saveExpense').prop('disabled', false);
+        
+    });
+
+    scrollToBottomOfResults();
+}
+
+function formApproveSubmit(serialiseddata, id, selOption){
+    // console.log(serialiseddata);
+    const FORM_SELECTOR = `form#approval${id}`;
+    let approveExpenseData = {};
+    for(let i=0;i<serialiseddata.length;i++){
+        let ele = serialiseddata[i];
+        if(typeof ele.value ==="undefined"){
+            M.toast({html: 'Please fill out the details properly'});
+            return;
+        }
+        let singleSpacedText = ele.value.replace(/ +/g, " ").trim();
+        if(singleSpacedText.length<1){
+            M.toast({html: 'Please fill out the details properly'});
+            return;
+        }
+
+        approveExpenseData[ele.name] = singleSpacedText;
+    }
+    
+    approveExpenseData.id = id;
+    // approval status: approve , reject, cancel
+    approveExpenseData.approval = selOption.toLowerCase().trim();
+    // timestamp in ms
+    approveExpenseData.timestamp = new Date().getTime();
+    console.log(approveExpenseData);
+    const CREATE_EXPENSE_INTENT = "/main.expense.approve_expense.approval";
+    // send(CREATE_EXPENSE_INTENT, approveExpenseData);
+    send('/main.expense.approve_expense.save', approveExpenseData, silent=true);
+    console.log("Counts "+$('#approvalCounts').html());
+    let counts = parseInt($('#approvalCounts').html())-1;
+    console.log(counts);
+    $('#approvalCounts').html(counts+"");
+    // $('#approvalCounts').show();
+    console.log("Submitted");
+
+    // if(selOption === "approve"){
+    //     let style = `font-size: 6em;
+    // position: relative;
+    // pointer-events: auto;
+    // background: #51A351;
+    // overflow: hidden;
+    // margin: 0 0 6px;
+    // padding: 15px 15px 15px 50px;
+    // color: #FFF;
+    // opacity: .8;
+    //     `;
+    //     let toastContent = `
+    //     <span class="material-icons" style="${style}">
+    //     check_circle_outline
+    //     <span><button class="btn-flat toast-action"><i class="material-icons">visibility_off</i></button></span>
+    //     </span>`;
+    //     M.toast({
+    //         html:toastContent
+    //     },3600);
+    // }
+    // else if(selOption === "reject"){
+
+    //     toastContent = `<h1>Rejected</h1><span><button class="btn-flat toast-action"><i class="material-icons">visibility_off</i></button></span>`;
+    //     M.toast({
+    //         html:toastContent
+    //     },1300);
+    // }
+    // else{
+    //     toastContent = `<h1>Cancelled</h1><span><button class="btn-flat toast-action"><i class="material-icons">visibility_off</i></button></span>`;
+    //     M.toast({
+    //         html:toastContent
+    //     },1300);
+    // }
+
+    // Remove the card now
+    $(FORM_SELECTOR).fadeOut(300, function(){ 
+        $(this).remove();
+        let len = $(".multi_simple_carousel_wrapper2").children().length;
+        if(len === 0){
+            $(".multi_simple_carousel_wrapper2").remove();
+        }
+    });
     // 2.sendData
     // 3. response of the success
     // 4. Respond for the error
 }
-
 
 // ========================================loginForm===============================================
 

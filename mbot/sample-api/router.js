@@ -77,6 +77,14 @@ router
 router
 .post('/expense/save_expense',expense.save_expense);
 
+// get_approval_expense API
+router
+    .post('/expense/get_approval_expense',expense.get_approve_expense);
+
+// save_approve_expense API
+router
+.post('/expense/save_approve_expense',expense.save_approve_expense);
+
 // payroll API
 // absentees API
 router
