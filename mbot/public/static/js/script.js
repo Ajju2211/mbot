@@ -271,7 +271,7 @@ function send(message, data, silent=false) {
             }
 
             // now set the response
-            if(silent == false){
+            if(silent === false){
                 setBotResponse(botResponse);
             }
             // If no response from chatbot
@@ -283,10 +283,16 @@ function send(message, data, silent=false) {
                     }
                 }
                 ];
-                if(silent == false){
-
+                if(silent === false){
+                    setBotResponse(goBackReply);
                 }
-                setBotResponse(goBackReply);
+                else{
+                    return {
+                        status:"failed",
+                        message: "No Repponse"
+                    };
+                }
+                
             }
 
         },
@@ -301,6 +307,8 @@ function send(message, data, silent=false) {
             }
 
             // if there is no response from Chatbot server
+            if(silent ==  false){
+                console.log("...");
             setBotResponse("");
             let goBackReply = [{
                 "custom": {
@@ -310,6 +318,13 @@ function send(message, data, silent=false) {
             }
             ];
             setBotResponse(goBackReply);
+            }
+            else{
+                return {
+                    status:"failed",
+                    message: textStatus
+                };
+            }
             console.log("Error from bot end: ", textStatus);
         }
     });
@@ -2470,6 +2485,12 @@ function showApproveExpense(formData){
     let cats = {};
     approveExpenseFormMemory = formData;
     let forms = '';
+    if(approveExpenseFormMemory.length < 1){
+        setBotResponse([{
+            text: "No More to Approve."
+        }]);
+        return;
+    }
     for(let i=0;i< approveExpenseFormMemory.length;i++){
         let expense = approveExpenseFormMemory[i];
         let comments = '';
