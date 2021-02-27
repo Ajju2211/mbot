@@ -1,8 +1,8 @@
-// overriding console.log in production
-// Debugging allowed only in localhost
-if (window.location.hostname != "localhost") {
-    console.log = function () { };
-}
+// // overriding console.log in production
+// // Debugging allowed only in localhost
+// if (window.location.hostname != "localhost") {
+//     console.log = function () { };
+// }
 
 //Bot pop-up intro
 document.addEventListener('DOMContentLoaded', function () {
@@ -2582,9 +2582,14 @@ function showApproveExpense(formData){
         e.preventDefault();
         // Disabling the multi clicks
         // $('#saveExpense').prop('disabled', true);
-        const btnId = e.originalEvent.submitter.id;
-        const button_name = e.originalEvent.submitter.innerText.toLowerCase();
-        console.log(button_name);
+        console.log(e);
+        // const btnId = e.originalEvent.submitter.id;
+        const clickedBtn = $('button[type=submit]:focus');
+        const btnId = clickedBtn.attr('id');
+        console.log($('button[type=submit]:focus'));
+        // const button_name = e.originalEvent.submitter.innerText.toLowerCase();
+        const button_name = clickedBtn.attr('value').toLowerCase();
+        console.log("BUTTONNAME: "+button_name);
         const id = btnId.split(button_name)[1];
         console.log('id: '+id);
         const FORM_SELECTOR = `form#approval${id}`;
@@ -2698,6 +2703,10 @@ function login() {
         url: "/user/login",
         type: "POST",
         contentType: "application/json",
+        "headers": {
+            "accept": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
         data: JSON.stringify({ email: email, password: password }),
         success: function (response, status) {
             console.log("Response from server: ", response, "\nStatus: ", status);
@@ -2722,6 +2731,7 @@ function login() {
             console.log("Error from bot end: ", textStatus);
         }
     });
+
 
 }
 
