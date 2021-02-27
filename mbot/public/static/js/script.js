@@ -2336,6 +2336,16 @@ function showCreateExpenseForm(formData){
     <div class="input-field col s12 expense-input-field">
         <input type="number" autocomplete="off" name="amount" placeholder="Amount"  class="validate" required onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57) || event.keyCode==46 " min="0" >
     </div>
+    <!--<div class="input-field col s12 expense-input-field">
+        <input type="file" accept="image/*"  name="image" placeholder="Upload Image"  class="validate" required>
+    </div>-->
+    <div class="file-field input-field">
+        
+    <input type="file" accept="image/*"  name="image" required>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload an Image">
+      </div>
+    </div>
     <div class="input-field col s12 expense-text-area">
         <textarea class="materialize-textarea" name="comment" placeholder="Write any Comments..." class="validate" maxlength="50" required autocomplete="off"></textarea>
     </div>`;
