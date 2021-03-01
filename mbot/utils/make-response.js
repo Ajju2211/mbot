@@ -27,23 +27,21 @@ module.exports.buildResponse = ({
     response.image = image;
   }
   if (buttons) {
-    
+    let updatedButtons = [];
     for(let i=0; i<buttons.length;i++){
       let granted = this.isPrivilageGranted(userObj.privilages, buttons[i].payload.toLowerCase().trim().split('/')[1]);
-      if(!granted){
-        // buttons.splice(i, i+1);
-        let removed = buttons.splice(i, 1);
-        console.log(JSON.stringify(removed));
-
+      if(granted){
+        updatedButtons.push(buttons[i]);
       }
     }
-    response.buttons = buttons;
+    response.buttons = updatedButtons;
   }
   if (quickReplies) {
     for(let i=0; i<quickReplies.length;i++){
+      let updatedQuickReplies =[];
       let granted1 = this.isPrivilageGranted(userObj.privilages, quickReplies[i].payload.toLowerCase().trim().split('/')[1]);
-      if(!granted1){
-        quickReplies.splice(i, 1);
+      if(granted1){
+        updatedQuickReplies.push(quickReplies[i]);
       }
     }
     response.custom = {
