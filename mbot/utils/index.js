@@ -70,3 +70,15 @@ module.exports.capitalizedCamelCase = (str) => {
 
   return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
 };
+
+
+
+module.exports.isPrivilageGranted = (privilages, intent) => {
+  let ind = privilages.indexOf(intent);
+  if(ind === -1){
+    return false;
+  }
+  else {
+    return true;
+  }
+};

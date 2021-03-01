@@ -2340,7 +2340,6 @@ function showCreateExpenseForm(formData){
         <input type="file" accept="image/*"  name="image" placeholder="Upload Image"  class="validate" required>
     </div>-->
     <div class="file-field input-field">
-        
     <input type="file" accept="image/*"  name="image" required>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text" placeholder="Upload an Image">

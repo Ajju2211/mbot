@@ -27,9 +27,13 @@ module.exports.buildResponse = ({
     response.image = image;
   }
   if (buttons) {
+    
     for(let i=0; i<buttons.length;i++){
-      if(!this.isPrivilageGranted(userObj.privilages, buttons[i].payload.toLowerCase().trim().split('/')[1])){
-        buttons.splice(i, i+1);
+      let granted = this.isPrivilageGranted(userObj.privilages, buttons[i].payload.toLowerCase().trim().split('/')[1]);
+      if(!granted){
+        // buttons.splice(i, i+1);
+        let removed = buttons.splice(i, 1);
+        console.log(JSON.stringify(removed));
 
       }
     }
@@ -37,8 +41,9 @@ module.exports.buildResponse = ({
   }
   if (quickReplies) {
     for(let i=0; i<quickReplies.length;i++){
-      if(!this.isPrivilageGranted(userObj.privilages, quickReplies[i].payload.toLowerCase().trim().split('/')[1])){
-        quickReplies.splice(i, i+1);
+      let granted1 = this.isPrivilageGranted(userObj.privilages, quickReplies[i].payload.toLowerCase().trim().split('/')[1]);
+      if(!granted1){
+        quickReplies.splice(i, 1);
       }
     }
     response.custom = {
@@ -102,6 +107,7 @@ module.exports.buildResponse = ({
 
 
 module.exports.isPrivilageGranted = (privilages, intent) => {
+
   let ind = privilages.indexOf(intent);
   if(ind === -1){
     return false;
