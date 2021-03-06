@@ -2594,6 +2594,9 @@ function formExpenseSubmit(serialiseddata){
     expenseData.cat = cat_found;
     // timestamp in ms
     expenseData.timestamp = new Date().getTime();
+    if(uploadedAttachmentStore.filled){
+        expenseData.file_path = uploadedAttachmentStore.url;
+    }
     console.log(expenseData);
     const CREATE_EXPENSE_INTENT = "/main.expense.create_expense.save";
     send(CREATE_EXPENSE_INTENT, expenseData);
@@ -2613,10 +2616,14 @@ function showApproveExpense(formData){
         }]);
         return;
     }
+    let noPreviewUrl = 'data:image/png;base64,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';
     for(let i=0;i< approveExpenseFormMemory.length;i++){
         let expense = approveExpenseFormMemory[i];
         let comments = '';
         let totalComments = expense.comments.length;
+        let attachmentUrl = expense.document_path;
+        let attachmentDisplay = attachmentUrl.length > 0 ? 'inline-block' : 'none';
+        let imgUrl = attachmentUrl.length>0 ? attachmentUrl: noPreviewUrl;
         for(let j=0;j< totalComments;j++){
             let comment = expense.comments[j];
             let commentHtml = `
@@ -2642,12 +2649,17 @@ function showApproveExpense(formData){
         <legend><label for="name" style="color:grey">Expense Name</label></legend>
         <input type="text" name="name"  class="validate" required="" disabled value="${expense.expense_name}" maxlength="25" style="height: auto;">
         </fieldset>
-    
+
         <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
         <legend><label for="amount" style="color:grey">Amount</label></legend>
         <input type="text" name="amount"  class="validate" required="" disabled value="${expense.amount}" maxlength="25" style="height: auto;">
         </fieldset>
     
+        <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
+        <legend><label for="attachment" style="color:grey">Attachment</label></legend>
+        <img  title="${expense.expense_name}" href="${imgUrl}" class="${attachmentUrl.length>0 ? 'gallery1':''}" src="${imgUrl}"  style="height:25px; width:auto;margin-left:30%">
+        </fieldset>
+
         <div style="overflow-x:scroll;display:flex;flex-direction:row">
         ${comments}
         </div>
@@ -2690,6 +2702,10 @@ function showApproveExpense(formData){
                 </div>`;
 
     $(approveForm).appendTo(".chats").show();
+
+    // adding preview for the img tags
+    $('.gallery1').EZView();
+
     // on click of approve button remove required comment box
     $('button[name=approve]').on('click',(e)=>{
         $('textarea[name=comment]').removeAttr('required');
@@ -2756,6 +2772,7 @@ function formApproveSubmit(serialiseddata, id, selOption){
     approveExpenseData.approval = selOption.toLowerCase().trim();
     // timestamp in ms
     approveExpenseData.timestamp = new Date().getTime();
+
     console.log(approveExpenseData);
     const CREATE_EXPENSE_INTENT = "/main.expense.approve_expense.approval";
     // send(CREATE_EXPENSE_INTENT, approveExpenseData);

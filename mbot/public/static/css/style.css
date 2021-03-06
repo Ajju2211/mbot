@@ -1582,6 +1582,19 @@ Added these classes
 /*
 upto here added
 */
+
+.gallery2 {
+    cursor: pointer;
+    width: 25px;
+    position: absolute;
+    right: 0px;
+    top: -15px;
+    rotate(340deg);
+}
+.gallery2:hover {
+    scale: 1.3;
+}
+
 .addFiles#attachment-icon {
     color: #6b665f;
 }
