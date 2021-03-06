@@ -1,6 +1,7 @@
 
 const { buildResponse, isPrivilageGranted } = require("../utils/make-response");
 const { handleIntent, handleIntents } = require("../dialog-manager/handler");
+const { sendAlertMail } = require("../utils/mail");
 
 module.exports.sendText = async (userObj, messageBody)=>{
 
@@ -16,14 +17,14 @@ module.exports.sendText = async (userObj, messageBody)=>{
         try {
             if(!isPrivilageGranted(userObj.privilages, intent)){
                 console.log(intent+"INTENT UNAUTHORISED ACCESS "+JSON.stringify(userObj));
-                throw new Error(intent+"INTENT UNAUTHORISED ACCESS ");
+                throw new Error(intent+" INTENT UNAUTHORISED ACCESS BY "+userObj.email_id+" FROM "+userObj.ip);
             }
             return await handleIntents(userObj, intent, reqdata);
         } catch (error) {
             console.error(error.message);
             // Only Send Alerts in Production
             if(process.env.NODE_ENV !="dev"){
-                sendAlertMail(err.stack);
+                sendAlertMail(error.stack);
             }
             return [];
         }

@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "blueimp-file-upload": "^10.31.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -24,6 +25,7 @@
     "md5": "^2.3.0",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "require-dir-all": "^0.4.15",
     "smtp-server": "^3.8.0"
   },

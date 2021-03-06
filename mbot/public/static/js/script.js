@@ -3,7 +3,12 @@
 // if (window.location.hostname != "localhost") {
 //     console.log = function () { };
 // }
-
+// window.addEventListener('resize', () => {
+//     console.log('height changed')
+//     const fullpage = window.fullpage_api;
+//     console.log(fullpage);
+//     if (fullpage) fullpage.reBuild()
+// }, true)
 //Bot pop-up intro
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -21,7 +26,6 @@ var charts_data = [];
 var card_chart_data = [];
 //initialization
 $(document).ready(function () {
-
 
     //Bot pop-up intro
     $("div").removeClass("tap-target-origin")
@@ -2307,6 +2311,88 @@ function createChartinModal(chartName, titles, labels, backgroundColor, chartsDa
 }
 
 // ========================================createForm==============================================
+var uploadedAttachmentStore = {
+    filled:false
+};
+function previewAttachments(){
+    if(!uploadedAttachmentStore.filled){
+        M.toast({html:"No files are uploaded!..."});
+        return;
+    }
+    M.toast({html:"Displaying preview...!"});
+}
+function fillAttachment(file){
+    console.log(file);
+    uploadedAttachmentStore = {
+        preview:file.preview,
+        url:file.uploadURL,
+        name:file.name,
+        type:file.type,
+        filled:true
+    };
+    let icon = $('#attachment-icon');
+    icon.addClass('filledFiles');
+    icon.removeClass('addFiles');
+    $('#oneRed').toggle();
+    // icon.text('edit');
+    // 1. add another id for the icon
+    // 2. style the filled icon
+    // 3. on trigger of the new icon run another function
+    // $('#attachment-icon')
+}
+function triggerUploadFile(token, cb){
+    var uppy = Uppy.Core({restrictions:{maxNumberOfFiles:1}})
+    .use(Uppy.Dashboard,  { target: '#drag-drop-area'})
+    .use(Uppy.ImageEditor, {
+     target:Uppy.Dashboard,
+     quality: 0.8,
+     cropperOptions: {
+          viewMode: 1,
+          background: false,
+          autoCropArea: 1,
+          responsive: true
+     },
+     actions: {
+          revert: true,
+          rotate: true,
+         flip: true,
+          zoomIn: true,
+          zoomOut: true,
+           cropSquare: true,
+           cropWidescreen: true,
+           cropWidescreenVertical: true
+     }
+})
+    .use(Uppy.Webcam, { target: Uppy.Dashboard })
+    .use(Uppy.XHRUpload, {
+    endpoint: 'https://mindfulautomations.com/chat_bot_test/api/v1/expense/insert_expense_document',
+    method:"post",
+    fieldName: 'files',
+    responseUrlFieldName: 'data',
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+    })
+    //   .use(Uppy.Tus, {endpoint: 'http://mindfulautomations.com/chat_bot_test/api/v1/expense/insert_expense_document',
+    //  fieldName: 'files'                 
+    // })
+
+    uppy.on('complete', (result) => {
+        console.log(result);
+      console.log('Upload complete! We’ve uploaded these files:', result.successful);
+      cb(result);
+
+    })
+
+
+    uppy.getPlugin('Dashboard').openModal()
+
+// setTimeout(() => {
+//   uppy.getPlugin('Dashboard').closeModal()
+// }, 5000)
+// 
+}
+
 function showCreateExpenseForm(formData){
     let tags = {};
     let cats = {};
@@ -2339,13 +2425,17 @@ function showCreateExpenseForm(formData){
     <!--<div class="input-field col s12 expense-input-field">
         <input type="file" accept="image/*"  name="image" placeholder="Upload Image"  class="validate" required>
     </div>-->
-    <div class="file-field input-field">
+    <!-- <div class="file-field input-field">
     <input type="file" accept="image/*"  name="image" required>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text" placeholder="Upload an Image">
       </div>
-    </div>
+    </div> -->
     <div class="input-field col s12 expense-text-area">
+    <span id="attachment-area">
+    <span style="display:none" id="oneRed"><p>1</p></span>
+    <i id="attachment-icon" class="small addFiles material-icons">attachment</i> 
+    </span>
         <textarea class="materialize-textarea" name="comment" placeholder="Write any Comments..." class="validate" maxlength="50" required autocomplete="off"></textarea>
     </div>`;
     const miniCard =   `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
@@ -2427,6 +2517,29 @@ function showCreateExpenseForm(formData){
             }
             return;
       })
+
+    $('#attachment-area').on('click', (e)=> {
+        if(uploadedAttachmentStore.filled){
+            alert("Filled");
+            return;
+        }
+        const token = formData.token;
+        triggerUploadFile(token , (result)=>{
+        const {successful, failed} = result;
+            console.log(failed)
+        if(failed.length>0){
+            M.toast({html: `Failed due to:  ${failed[0].error}`});
+        }
+        else{
+            const url = `https://mindfulautomations.com/${successful[0].response.uploadURL}`;
+            M.toast({html:`successfully uploaded at ${url}`});
+            fillAttachment(successful[0]);
+        }
+        });
+        
+        
+    });
+
     $('form').on('submit', (e)=>{
         e.preventDefault();
         // Disabling the multi clicks
@@ -2553,7 +2666,7 @@ function showApproveExpense(formData){
                             </div>
                         </div>`;
         let form = `
-        <form method="POST"  name="approve_form" value="${expense.id}" id="approval${expense.id}" action="" style="width:100%">
+        <form method="POST" autocomplete="off"  name="approve_form" value="${expense.id}" id="approval${expense.id}" action="" style="width:100%">
         ${card}
         <div style="display:flex;flex-direction:row;justify-content: space-evenly;">
         <button id="approve${expense.id}" name="approve" class="formSubmitBtns waves-effect waves-light btn-small" style="border-radius: 20px" value="approve" type="submit">Approve</button>
@@ -2575,9 +2688,20 @@ function showApproveExpense(formData){
                         ${forms}
                         </div>
                 </div>`;
-    $(approveForm).appendTo(".chats").show();
 
+    $(approveForm).appendTo(".chats").show();
+    // on click of approve button remove required comment box
+    $('button[name=approve]').on('click',(e)=>{
+        $('textarea[name=comment]').removeAttr('required');
+    });
+    $('button[name=cancel]').on('click',(e)=>{
+        $('textarea[name=comment]').attr('required','false');
+    });
+    $('button[name=reject]').on('click',(e)=>{
+        $('textarea[name=comment]').attr('required','false');
+    });
     $('form').on('submit', (e)=>{
+        console.log("Submitted");
         e.preventDefault();
         // Disabling the multi clicks
         // $('#saveExpense').prop('disabled', true);
@@ -2610,12 +2734,16 @@ function formApproveSubmit(serialiseddata, id, selOption){
     let approveExpenseData = {};
     for(let i=0;i<serialiseddata.length;i++){
         let ele = serialiseddata[i];
+        console.log(ele);
         if(typeof ele.value ==="undefined"){
             M.toast({html: 'Please fill out the details properly'});
             return;
         }
         let singleSpacedText = ele.value.replace(/ +/g, " ").trim();
         if(singleSpacedText.length<1){
+            if(ele.name=='comment'){
+                continue;
+            }
             M.toast({html: 'Please fill out the details properly'});
             return;
         }

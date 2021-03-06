@@ -14,8 +14,6 @@ body {
     bottom: 5%;
     position: fixed;
     background: #f7f7f7;
-    
-    
 }
 
 .chat_header {
@@ -204,7 +202,16 @@ textarea-webkit-scrollbar {
 
 .dropdown-content li>a,
 .dropdown-content li>span {
-    color: #5a17ee;
+    /* color: #5a17ee; */
+    display: flex;
+    font-size: 16px;
+    color: #212121  !important;
+    flex: auto;
+    align-items: center;
+    word-break: break-word;
+    padding-right: 8px;
+    font-family:arial,sans-serif  !important;
+    line-height: 18px;
 }
 
 @keyframes animateElement {
@@ -1575,6 +1582,54 @@ Added these classes
 /*
 upto here added
 */
+.addFiles#attachment-icon {
+    color: #6b665f;
+}
+.filledFiles#attachment-icon {
+    color:red;
+}
+#oneRed {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: -25px;
+    right: 3px;
+    background: red;
+    width: 15px;
+    height: 15px;
+    z-index: 2;
+    border-radius: 50%;
+}
+#oneRed > p {
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    color: white;
+    font-size: 1.1em;
+    position: absolute;
+    left: 4px;
+}
+#attachment-icon {
+    /*color: #6b665f;*/
+    position: absolute;
+    top: -20px;
+    background: #fff;
+    right: -8px;
+    border-radius: 50%;
+    transform: rotate(325deg);
+}
+
+
+a.uppy-Dashboard-poweredBy {
+    display: none !important;
+}
+
+/*
+upload files 
+*/
+
+/*End of upload files*/
+
 
 /*
 SCROLL CHART TEST
@@ -1894,15 +1949,44 @@ display: none;
     color: red;    
 }
 
+/* 
+
+*/
+
+
 /* autocomplete dropdown */
-.autocomplete-content{
+.expense-input-field > .autocomplete-content{
     height:150px !important;
     overflow-y:scroll !important;
+    box-shadow: 0 4px 6px rgb(32 33 36 / 28%);
+    /*box-shadow: 0 1px 6px rgb(32 33 36 / 28%);*/
+    border-radius: 24px;
   }
-  .dropdown-content{
+  div:nth-child(1) .expense-input-field > .dropdown-content{
     z-index: 1000 !important;
-    top:50px !important;
+    /* top:50px !important; */
+        /* Added */
+        top: -30% !important;
+        position: fixed;
   }
+  div:nth-child(2).expense-input-field > .dropdown-content{
+    z-index: 1000 !important;
+    /* top:50px !important; */
+        /* Added */
+        top: -20% !important;
+        position: fixed;
+  }
+
+ .highlight {
+    background: url(https://www.google.com/images/searchbox/desktop_searchbox_sprites302_hr.webp) no-repeat 0 -21px;
+    background-size: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    margin: 0px 13px 0px 13px;
+    height: 20px;
+    width: 20px;
+}
+
 
 #saveExpense {
     margin-top:5px;

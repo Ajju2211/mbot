@@ -35,8 +35,15 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// server statuc file
+
+// server static file
 app.use("/", express.static(path.join(__dirname, "public")));
+
+// Linking the some node_modules as UI dependencies
+// const nm_dependencies = ['blueimp-file-upload','blueimp-canvas-to-blob','blueimp-load-image','blueimp-tmpl']; // keep adding required node_modules to this array.
+// nm_dependencies.forEach(dep => {
+//   app.use(`/${dep}`, express.static(path.join(__dirname, `node_modules/${dep}`)));
+// });
 
 // sample-api for testing replaced with original
 app.use("/api/v1", sampleAPIRouter);

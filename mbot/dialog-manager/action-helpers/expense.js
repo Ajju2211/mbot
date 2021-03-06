@@ -12,6 +12,8 @@ module.exports.create_expense = async (data, token, userObj) => {
       },
     });
     let result = resp.data.result;
+    // sending token for the upload API at client side
+    result.token = token;
     let textMessage = `Please fill the details of expense to add!`;
 
 
