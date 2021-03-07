@@ -290,7 +290,13 @@ $.fn.EZView =  function(collectionName) {
     self.buildHtmlContent = function() {
         var imgIndex = self.index[collectionName],
             src      = self.arContent[collectionName][imgIndex].href,
-            isPdf    = src.match('.pdf');
+            type     = src.split('/').pop().split('.')[1],
+            isPdf    = src.match('.pdf'),
+            isMusic  = self.audio.indexOf(type || '.zzzzzz'),
+            isVideo  = self.video.indexOf(type || '.zzzzzz');
+        console.log(isMusic);
+
+        let enUrl = encodeURI(src);
         
         // Content to show 
         var htmlContent = '<img index-content="' + collectionName + imgIndex + '" src="' + src + '" class="EZ-content" />';
@@ -299,12 +305,31 @@ $.fn.EZView =  function(collectionName) {
         if (isPdf) {
             htmlContent = '<iframe class="EZ-content" frameborder="0" index-content="' + collectionName + imgIndex +
                 '" height="' + $(window).height() * 0.95 + '" width="' + $(window).width() * 0.9 +
-                '" src="' + src + '" type="application/pdf"><p>Your browser does not support iframes.</p>'+
+                '" src="' + enUrl + '" type="application/pdf"><p>Your browser does not support iframes.</p>'+
                 '<script type="text/javascript">alert("Your browser does not support iframes.")</script><iframe/>';
 
             self.arContent[collectionName][imgIndex].isImg = false;
         }
+        if(isMusic!=-1){
+            htmlContent = `
+            <audio controls autoplay muted>
+            <source src=${enUrl} type="audio/${type}">
+            Your browser does not support the audio.
+            </audio>
+            `;
 
+            self.arContent[collectionName][imgIndex].isImg = false;
+        }
+        if(isVideo!=-1){
+            htmlContent = `
+            <video  controls autoplay muted style="border-radius:10px;">
+            <source src=${enUrl} type="video/${type}">
+            Your browser does not support the video.
+            </video>
+            `;
+
+            self.arContent[collectionName][imgIndex].isImg = false;
+        }
         return htmlContent;
     };
 
