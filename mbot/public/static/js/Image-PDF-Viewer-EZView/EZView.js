@@ -293,11 +293,13 @@ $.fn.EZView =  function(collectionName) {
             type     = src.split('/').pop().split('.')[1],
             isPdf    = src.match('.pdf'),
             isMusic  = self.audio.indexOf(type || '.zzzzzz'),
-            isVideo  = self.video.indexOf(type || '.zzzzzz');
+            isVideo  = self.video.indexOf(type || '.zzzzzz'),
+            isDoc    = self.doc.indexOf(type || '.zzzzzz'),
+            isXl     = self.xl.indexOf(type || '.zzzzzz');
         console.log(isMusic);
 
         let enUrl = encodeURI(src);
-        
+        console.log(isDoc);
         // Content to show 
         var htmlContent = '<img index-content="' + collectionName + imgIndex + '" src="' + src + '" class="EZ-content" />';
 
@@ -312,8 +314,8 @@ $.fn.EZView =  function(collectionName) {
         }
         if(isMusic!=-1){
             htmlContent = `
-            <audio controls autoplay muted>
-            <source src=${enUrl} type="audio/${type}">
+            <audio class="EZ-content" controls autoplay muted>
+            <source src=${src} type="audio/${type}">
             Your browser does not support the audio.
             </audio>
             `;
@@ -322,10 +324,18 @@ $.fn.EZView =  function(collectionName) {
         }
         if(isVideo!=-1){
             htmlContent = `
-            <video  controls autoplay muted style="border-radius:10px;">
-            <source src=${enUrl} type="video/${type}">
+            <video class="EZ-content" controls autoplay muted style="border-radius:10px;">
+            <source src=${src} type="video/${type}">
             Your browser does not support the video.
             </video>
+            `;
+
+            self.arContent[collectionName][imgIndex].isImg = false;
+        }
+        if(isDoc!=-1){
+            htmlContent = `
+            <iframe  class="EZ-content docs" src="https://docs.google.com/gview?url=${src}&embedded=true">
+            </iframe>
             `;
 
             self.arContent[collectionName][imgIndex].isImg = false;
@@ -356,7 +366,7 @@ $.fn.EZView =  function(collectionName) {
         $('[index-content=' + collectionName + newIndex + ']').on( "error",function() {
             var style = 'padding: 10px; border-radius: 10px; background-color: rgba(255,255,255,0.6);font-size:2em';
 
-            $(this).replaceWith('<h1 class = "EZ-content" index-content="' + collectionName + self.index[collectionName] + '" style="' + style + '">Unsupported preview</h1>');
+            $(this).replaceWith('<h1 class = "EZ-content" index-content="' + collectionName + self.index[collectionName] + '" style="' + style + '">Unsupported preview, View after downloading.</h1>');
 
             self.arContent[collectionName][self.index[collectionName]].isImg = false;
         });
@@ -732,6 +742,8 @@ $.fn.EZView =  function(collectionName) {
             if (self.arContent[collectionName][newIndex].isRender) {
 
                 $('[index-content=' + collectionName + self.index[collectionName]+']').slideUp();
+                // addd
+                self.setContentOnViewer(self.buildHtmlContent());
 
                 $('[index-content=' + collectionName + newIndex + ']').slideDown();
 

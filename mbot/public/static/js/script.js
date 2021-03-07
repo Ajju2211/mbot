@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
 // [{id:0,data:{}]
 var charts_data = [];
 var card_chart_data = [];
+// uploadedAttachment link stored
+var uploadedAttachmentStore = {
+    filled:false
+};
 //initialization
 $(document).ready(function () {
 
@@ -554,6 +558,9 @@ function setBotResponse(response) {
                     if (response[i].custom.payload == "approveExpense") {
                         let resData = (response[i].custom.expenses);
                         showApproveExpense(resData);
+                        uploadedAttachmentStore = {
+                                        filled:false
+                                };
                         // continue;
                         // return;
                     }
@@ -2311,9 +2318,7 @@ function createChartinModal(chartName, titles, labels, backgroundColor, chartsDa
 }
 
 // ========================================createForm==============================================
-var uploadedAttachmentStore = {
-    filled:false
-};
+
 function previewAttachments(){
     if(!uploadedAttachmentStore.filled){
         M.toast({html:"No files are uploaded!..."});
@@ -2341,7 +2346,14 @@ function fillAttachment(file){
     // $('#attachment-icon')
 }
 function triggerUploadFile(token, cb){
-    var uppy = Uppy.Core({restrictions:{maxNumberOfFiles:1}})
+    var uppy = Uppy.Core({restrictions:{maxNumberOfFiles:1},
+    onBeforeFileAdded: (currentFile, files) => {
+      const modifiedFile = {
+        ...currentFile,
+        name:  currentFile.name.replace(/ +/g, "-").trim()
+      }
+      return modifiedFile
+    }})
     .use(Uppy.Dashboard,  { target: '#drag-drop-area'})
     .use(Uppy.ImageEditor, {
      target:Uppy.Dashboard,
