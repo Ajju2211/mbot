@@ -2622,6 +2622,9 @@ function showApproveExpense(formData){
         let comments = '';
         let totalComments = expense.comments.length;
         let attachmentUrl = expense.document_path;
+        if(attachmentUrl.split('://')[0] == 'http'){
+            attachmentUrl = 'https://'+attachmentUrl.split('://')[1];
+        }
         let attachmentDisplay = attachmentUrl.length > 0 ? 'inline-block' : 'none';
         let imgUrl = attachmentUrl.length>0 ? attachmentUrl: noPreviewUrl;
         for(let j=0;j< totalComments;j++){
