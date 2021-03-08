@@ -271,6 +271,7 @@ $.fn.EZView =  function(collectionName) {
         }
 
         $('.download').attr('href', href);
+        $('.download2').attr('href', href);
 
         $('.name>b').html(name);
 
@@ -287,8 +288,9 @@ $.fn.EZView =  function(collectionName) {
         }
     };
 
-    self.buildHtmlContent = function() {
+    self.buildHtmlContent = function(onlyDocs=false) {
         var imgIndex = self.index[collectionName],
+
             src      = self.arContent[collectionName][imgIndex].href,
             type     = src.split('/').pop().split('.')[1],
             isPdf    = src.match('.pdf'),
@@ -301,10 +303,14 @@ $.fn.EZView =  function(collectionName) {
         let enUrl = encodeURI(src);
         console.log(isDoc);
         // Content to show 
-        var htmlContent = '<img index-content="' + collectionName + imgIndex + '" src="' + src + '" class="EZ-content" />';
+        let htmlContent = "";
+        if(onlyDocs==false){
+            htmlContent = '<img index-content="' + collectionName + imgIndex + '" src="' + src + '" class="EZ-content" />';
+        }
+        // var htmlContent = '<img index-content="' + collectionName + imgIndex + '" src="' + src + '" class="EZ-content" />';
 
         // To show pdf files
-        if (isPdf) {
+        if (isPdf && onlyDocs==false) {
             htmlContent = '<iframe class="EZ-content" frameborder="0" index-content="' + collectionName + imgIndex +
                 '" height="' + $(window).height() * 0.95 + '" width="' + $(window).width() * 0.9 +
                 '" src="' + enUrl + '" type="application/pdf"><p>Your browser does not support iframes.</p>'+
@@ -314,31 +320,37 @@ $.fn.EZView =  function(collectionName) {
         }
         if(isMusic!=-1){
             htmlContent = `
-            <audio class="EZ-content" controls autoplay muted>
+            <audio class="EZ-content" controls>
             <source src=${src} type="audio/${type}">
             Your browser does not support the audio.
             </audio>
             `;
+            if(onlyDocs==false){
+                self.arContent[collectionName][imgIndex].isImg = false;
+            }
 
-            self.arContent[collectionName][imgIndex].isImg = false;
+            
         }
         if(isVideo!=-1){
             htmlContent = `
-            <video class="EZ-content" controls autoplay muted style="border-radius:10px;">
+            <video class="EZ-content" controls style="border-radius:10px;">
             <source src=${src} type="video/${type}">
             Your browser does not support the video.
             </video>
             `;
 
-            self.arContent[collectionName][imgIndex].isImg = false;
+            if(onlyDocs==false){
+                self.arContent[collectionName][imgIndex].isImg = false;
+            }
         }
         if(isDoc!=-1){
             htmlContent = `
             <iframe  class="EZ-content docs" src="https://docs.google.com/gview?url=${src}&embedded=true">
             </iframe>
             `;
-
-            self.arContent[collectionName][imgIndex].isImg = false;
+            if(onlyDocs==false){
+                    self.arContent[collectionName][imgIndex].isImg = false;
+            }
         }
         return htmlContent;
     };
@@ -360,13 +372,16 @@ $.fn.EZView =  function(collectionName) {
             .find('.download, img').click(function(e) {
                 // Avoid trigger remove action
                 e.stopPropagation();
+            })
+            .find('.download2, img').click(function(e) {
+                // Avoid trigger remove action
+                e.stopPropagation();
             });
-
         // Check If href isn't exists and show unsuported msg
         $('[index-content=' + collectionName + newIndex + ']').on( "error",function() {
             var style = 'padding: 10px; border-radius: 10px; background-color: rgba(255,255,255,0.6);font-size:2em';
-
-            $(this).replaceWith('<h1 class = "EZ-content" index-content="' + collectionName + self.index[collectionName] + '" style="' + style + '">Unsupported preview, View after downloading.</h1>');
+            
+            $(this).replaceWith(`<h1 class = "EZ-content" index-content="${collectionName + self.index[collectionName]}" style="${style}">Unsupported preview, <br> View after downloading. <br> <a  class="download2" download="FileName" onclick="$.fn.dwLink('${self.arContent[collectionName][self.index[collectionName]].href}')" target="_blank" href="${self.arContent[collectionName][self.index[collectionName]].href}"><img src="${self.icons.download}" title="Download" /></a></h1>`);
 
             self.arContent[collectionName][self.index[collectionName]].isImg = false;
         });
@@ -582,7 +597,7 @@ $.fn.EZView =  function(collectionName) {
                 e.stopPropagation();
                 e.preventDefault();
 
-                self.close();
+                // self.close();
             })
 
             // Add close Event
@@ -603,6 +618,12 @@ $.fn.EZView =  function(collectionName) {
                 self.downloadUrl($(this).attr('href'));
             }).end()
 
+            .find('.download2, EZ-content').click(function(e) {
+                // Avoid trigger remove action
+                e.stopPropagation();
+                e.preventDefault();
+                self.downloadUrl($(this).attr('href'));
+            }).end()
             // Add back event
             .find('.back>img').click(function(e) {
                 e.stopPropagation();
@@ -743,7 +764,7 @@ $.fn.EZView =  function(collectionName) {
 
                 $('[index-content=' + collectionName + self.index[collectionName]+']').slideUp();
                 // addd
-                self.setContentOnViewer(self.buildHtmlContent());
+                self.setContentOnViewer(self.buildHtmlContent(true));
 
                 $('[index-content=' + collectionName + newIndex + ']').slideDown();
 
@@ -788,3 +809,33 @@ $.fn.EZView =  function(collectionName) {
     // Return constructor execution
     return self.constructor();
 };
+
+
+$.fn.dwLink = function(url, fileName){
+        if(!window.streamSaver){
+            console.error("Require streamSaver.js dependency");
+            return;
+        }
+        let getFileNameFromUrl = url.split('/').pop();
+        const fileStream = streamSaver.createWriteStream(getFileNameFromUrl || fileName);
+
+        fetch(url).then(res => {
+          const readableStream = res.body
+
+          // more optimized
+          if (window.WritableStream && readableStream.pipeTo) {
+            return readableStream.pipeTo(fileStream)
+              .then(() => console.log('done writing'))
+          }
+
+          window.writer = fileStream.getWriter()
+
+          const reader = res.body.getReader()
+          const pump = () => reader.read()
+            .then(res => res.done
+              ? writer.close()
+              : writer.write(res.value).then(pump))
+
+          pump()
+        })
+}
