@@ -550,6 +550,9 @@ function setBotResponse(response) {
                     //check if the custom payload type is "createExpenseForm"
                     if (response[i].custom.payload == "createExpenseForm") {
                         let resData = (response[i].custom.data);
+                        uploadedAttachmentStore = {
+                                    filled:false
+                                };
                         showCreateExpenseForm(resData);
                         // continue;
                         // return;
@@ -558,9 +561,7 @@ function setBotResponse(response) {
                     if (response[i].custom.payload == "approveExpense") {
                         let resData = (response[i].custom.expenses);
                         showApproveExpense(resData);
-                        uploadedAttachmentStore = {
-                                        filled:false
-                                };
+
                         // continue;
                         // return;
                     }
@@ -2347,6 +2348,7 @@ function fillAttachment(file){
 }
 function triggerUploadFile(token, cb){
     var uppy = Uppy.Core({restrictions:{maxNumberOfFiles:1},
+    browserBackButtonClose: true,
     onBeforeFileAdded: (currentFile, files) => {
       const modifiedFile = {
         ...currentFile,
@@ -2375,7 +2377,17 @@ function triggerUploadFile(token, cb){
            cropWidescreenVertical: true
      }
 })
-    .use(Uppy.Webcam, { target: Uppy.Dashboard })
+    .use(Uppy.Webcam, { target: Uppy.Dashboard,
+        countdown: false,
+        mirror: false,
+        showVideoSourceDropdown: true,
+        videoConstraints: {
+            facingMode: { exact: "environment" },
+            width: { min: 720, ideal: 1280, max: 1920 },
+            height: { min: 480, ideal: 800, max: 1080 },
+          },
+           showRecordingLength: true,
+     })
     .use(Uppy.XHRUpload, {
     endpoint: 'https://mindfulautomations.com/chat_bot_test/api/v1/expense/insert_expense_document',
     method:"post",

@@ -381,7 +381,7 @@ $.fn.EZView =  function(collectionName) {
         $('[index-content=' + collectionName + newIndex + ']').on( "error",function() {
             var style = 'padding: 10px; border-radius: 10px; background-color: rgba(255,255,255,0.6);font-size:2em';
             
-            $(this).replaceWith(`<h1 class = "EZ-content" index-content="${collectionName + self.index[collectionName]}" style="${style}">Unsupported preview, <br> View after downloading. <br> <a  class="download2" styles="margin-left:45%" download="FileName" onclick="$.fn.dwLink('${self.arContent[collectionName][self.index[collectionName]].href}')" target="_blank" href="${self.arContent[collectionName][self.index[collectionName]].href}"><img src="${self.icons.download}" title="Download" /></a></h1>`);
+            $(this).replaceWith(`<h1 class = "EZ-content" index-content="${collectionName + self.index[collectionName]}" style="${style}">Unsupported preview, <br> View after downloading. <br> <a  class="download2" style="margin-left:45%" download="FileName" onclick="$.fn.dwLink('${self.arContent[collectionName][self.index[collectionName]].href}')" target="_blank" href="${self.arContent[collectionName][self.index[collectionName]].href}"><img src="${self.icons.download}" title="Download" /></a></h1>`);
 
             self.arContent[collectionName][self.index[collectionName]].isImg = false;
         });
