@@ -310,14 +310,14 @@ $.fn.EZView =  function(collectionName) {
         // var htmlContent = '<img index-content="' + collectionName + imgIndex + '" src="' + src + '" class="EZ-content" />';
 
         // To show pdf files
-        if (isPdf && onlyDocs==false) {
-            htmlContent = '<iframe class="EZ-content" frameborder="0" index-content="' + collectionName + imgIndex +
-                '" height="' + $(window).height() * 0.95 + '" width="' + $(window).width() * 0.9 +
-                '" src="' + enUrl + '" type="application/pdf"><p>Your browser does not support iframes.</p>'+
-                '<script type="text/javascript">alert("Your browser does not support iframes.")</script><iframe/>';
+        // if (isPdf && onlyDocs==false) {
+        //     htmlContent = '<iframe class="EZ-content" frameborder="0" index-content="' + collectionName + imgIndex +
+        //         '" height="' + $(window).height() * 0.95 + '" width="' + $(window).width() * 0.9 +
+        //         '" src="' + enUrl + '" type="application/pdf"><p>Your browser does not support iframes.</p>'+
+        //         '<script type="text/javascript">alert("Your browser does not support iframes.")</script><iframe/>';
 
-            self.arContent[collectionName][imgIndex].isImg = false;
-        }
+        //     self.arContent[collectionName][imgIndex].isImg = false;
+        // }
         if(isMusic!=-1){
             htmlContent = `
             <audio class="EZ-content" controls>
@@ -343,7 +343,7 @@ $.fn.EZView =  function(collectionName) {
                 self.arContent[collectionName][imgIndex].isImg = false;
             }
         }
-        if(isDoc!=-1){
+        if(isDoc!=-1 || isPdf){
             htmlContent = `
             <iframe  class="EZ-content docs" src="https://docs.google.com/gview?url=${src}&embedded=true">
             </iframe>
