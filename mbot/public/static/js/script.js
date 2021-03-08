@@ -2643,7 +2643,7 @@ function showApproveExpense(formData){
             let comment = expense.comments[j];
             let commentHtml = `
             <fieldset class="input-field col s12 expense-text-area" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border:none !important;">
-            <legend><label for="previousComments${j}" style="color:grey">${comment['created_on']} ${j+1}/${totalComments}</label></legend>
+            <legend><label for="previousComments${j}" style="color:grey">${comment['created_date']} ${j+1}/${totalComments}</label></legend>
             <textarea class="materialize-textarea" name="previousComments${j}" placeholder="Write any Comments..." class="validate"  maxlength="50" required disabled style="border-bottom:6px solid rgb(9, 84, 132) !important;overflow-y:scroll;width:50vh">${comment.comment}</textarea>
             </fieldset>
             `;
