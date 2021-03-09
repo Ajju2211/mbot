@@ -659,15 +659,27 @@ $.fn.EZView =  function(collectionName) {
             });
     };
 
-    self.downloadUrl = function(url, fileName){
+    self.downloadUrl = function(url , filename){
+        let downloadableUrl = `/user/download?url=${url}`;
+        window.open(downloadableUrl, 'Download');
+        // if(!window.FileSaver){
+        //     console.error("Require FileSaver.js dependency");
+        //     return;
+        // }        
+        // let getFileNameFromUrl = url.split('/').pop();
+        // let downloadableUrl = `/user/download?url=${url}`;
+        // saveAs(downloadableUrl, getFileNameFromUrl);
+    }
+
+    self.downloadUrl1 = function(url, fileName){
         if(!window.streamSaver){
             console.error("Require streamSaver.js dependency");
             return;
         }
         let getFileNameFromUrl = url.split('/').pop();
         const fileStream = streamSaver.createWriteStream(getFileNameFromUrl || fileName);
-
-        fetch(url).then(res => {
+        let downloadableUrl = `/user/download?url=${url}`;
+        fetch(downloadableUrl).then(res => {
           const readableStream = res.body
 
           // more optimized
@@ -812,30 +824,32 @@ $.fn.EZView =  function(collectionName) {
 
 
 $.fn.dwLink = function(url, fileName){
-        if(!window.streamSaver){
-            console.error("Require streamSaver.js dependency");
-            return;
-        }
-        let getFileNameFromUrl = url.split('/').pop();
-        const fileStream = streamSaver.createWriteStream(getFileNameFromUrl || fileName);
+        let downloadableUrl = `/user/download?url=${url}`;
+        window.open(downloadableUrl, 'Download');
+        // if(!window.streamSaver){
+        //     console.error("Require streamSaver.js dependency");
+        //     return;
+        // }
+        // let getFileNameFromUrl = url.split('/').pop();
+        // const fileStream = streamSaver.createWriteStream(getFileNameFromUrl || fileName);
 
-        fetch(url).then(res => {
-          const readableStream = res.body
+        // fetch(url).then(res => {
+        //   const readableStream = res.body
 
-          // more optimized
-          if (window.WritableStream && readableStream.pipeTo) {
-            return readableStream.pipeTo(fileStream)
-              .then(() => console.log('done writing'))
-          }
+        //   // more optimized
+        //   if (window.WritableStream && readableStream.pipeTo) {
+        //     return readableStream.pipeTo(fileStream)
+        //       .then(() => console.log('done writing'))
+        //   }
 
-          window.writer = fileStream.getWriter()
+        //   window.writer = fileStream.getWriter()
 
-          const reader = res.body.getReader()
-          const pump = () => reader.read()
-            .then(res => res.done
-              ? writer.close()
-              : writer.write(res.value).then(pump))
+        //   const reader = res.body.getReader()
+        //   const pump = () => reader.read()
+        //     .then(res => res.done
+        //       ? writer.close()
+        //       : writer.write(res.value).then(pump))
 
-          pump()
-        })
+        //   pump()
+        // })
 }

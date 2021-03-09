@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/auth");
 const botController = require("../controllers/userBotController");
+const downloadController = require("../controllers/downloadController");
+// download octet stream link
+// query param: url=<url>
+router.get("/download", downloadController.octetStream);
 // user login
 router.post("/login", authMiddleware.login);
 
