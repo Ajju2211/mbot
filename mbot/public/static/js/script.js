@@ -28,6 +28,48 @@ var card_chart_data = [];
 var uploadedAttachmentStore = {
     filled:false
 };
+window.timerId = null;
+var callReoladIframe = true;
+$.fn.reloadIFrame = function(id){
+const iframe = document.getElementById(id);
+console.log(id);
+if(!iframe){
+    console.log("No iframe detected...");
+    return;
+}
+console.log(iframe);
+try{
+  console.log(iframe.contentDocument);//work control
+  if(iframe.contentDocument){
+      if(iframe.contentDocument.URL == "about:blank"){
+        iframe.src =  iframe.src;
+      }    
+  else{
+    console.log("clearing interval...");
+    callReoladIframe = false;
+    clearInterval(timerId);
+    window.timerId = null;
+  }
+  }
+  else{
+    callReoladIframe = false;
+    console.log("clearing interval");
+    clearInterval(window.timerId);
+    window.timerId = null;
+  }
+
+
+}
+catch(er){
+    console.log(er);
+    // callReoladIframe = false;
+    // console.log("clearing interval due to "+er.message);
+    // clearInterval(window.timerId);
+    // window.timerId = null;
+}
+
+}
+
 //initialization
 $(document).ready(function () {
 
@@ -40,7 +82,23 @@ $(document).ready(function () {
     //initiate the modal for displaying the charts, if you dont have charts, then you comment the below line
     $('.modal').modal();
 
+    // google docs iframe reloading if it is blank
+    // if($('#gdocsViewer')){ 
+    //     console.log($('#gdocsViewer'));
+    // console.log("opening godocs");       
+    // timerId = setInterval("reloadIFrame();", 2000);
 
+    //     $('#gdocsViewer').on('load', function() {
+    //         if(timerId){
+    //         clearInterval(timerId);
+    //         console.log("Finally Loaded"); //work control
+    //         }
+    //         else{
+    //             timerId = setInterval("reloadIFrame();", 2000);                
+    //         }
+    //     });
+    // }
+    // ends of google docs funs
 
     //enable this if u have configured the bot to start the conversation. 
     showBotTyping();

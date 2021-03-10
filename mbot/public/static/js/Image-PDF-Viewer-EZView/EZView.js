@@ -345,12 +345,16 @@ $.fn.EZView =  function(collectionName) {
         }
         if(isDoc!=-1 || isPdf){
             htmlContent = `
-            <iframe  class="EZ-content docs" src="https://docs.google.com/gview?url=${src}&embedded=true">
+            <div class="docsLoader" ></div>
+            <iframe  id="gdocsViewer" class="EZ-content docs" src="https://docs.google.com/gview?url=${src}&embedded=true">
             </iframe>
             `;
+            console.log("Creating iframe ...");
+            window.timerId = setInterval(`$.fn.reloadIFrame('gdocsViewer');`, 2000);
             if(onlyDocs==false){
                     self.arContent[collectionName][imgIndex].isImg = false;
             }
+
         }
         return htmlContent;
     };
@@ -527,6 +531,7 @@ $.fn.EZView =  function(collectionName) {
      */
     self.close = function () {
         // Hide EZView elements
+        self.removeIframes();
         self.$EZView.hide(200)
         
         self.returnImageToOriginalMeasures(self.index[collectionName]);
@@ -534,6 +539,14 @@ $.fn.EZView =  function(collectionName) {
         // Remove keyup events
         $(window).off('keyup', null, self.keyupEvents);
     };
+    // removing iframes
+    self.removeIframes = function(){
+        console.log("Removing Iframe all occurances");
+        $('.docs').nextAll().remove();
+    }
+
+    // 
+
 
     /**
      * zoom in or out on current img
@@ -656,6 +669,19 @@ $.fn.EZView =  function(collectionName) {
                 e.stopPropagation();
                 e.preventDefault();
                 self.zoom();
+            }).end()
+
+            // Add iframe refresh event
+            .find('#gdocsViewer').on('load', function(e){
+            if(window.timerId){
+            clearInterval(window.timerId);
+            window.timerId = null;
+            console.log("Finally Loaded"); //work control
+            }
+            else{
+                window.timerId = setInterval(`$.fn.reloadIFrame('gdocsViewer');`, 2000);                
+                console.log("resetting Interval...");
+            }
             });
     };
 
@@ -726,7 +752,9 @@ $.fn.EZView =  function(collectionName) {
             return self.next();
         }
 
+       self.removeIframes();
        self.goTo(newIndex);
+
     };
 
     /**
@@ -753,7 +781,7 @@ $.fn.EZView =  function(collectionName) {
 
             return self.back();
         }
-
+        self.removeIframes();
         self.goTo(newIndex);
     };
 
