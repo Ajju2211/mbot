@@ -2435,17 +2435,17 @@ function triggerUploadFile(token, cb){
            cropWidescreenVertical: true
      }
 })
-    .use(Uppy.Webcam, { target: Uppy.Dashboard,
-        countdown: false,
-        mirror: false,
-        showVideoSourceDropdown: true,
-        videoConstraints: {
-            facingMode: { exact: "environment" },
-            width: { min: 720, ideal: 1280, max: 1920 },
-            height: { min: 480, ideal: 800, max: 1080 },
-          },
-           showRecordingLength: true,
-     })
+    // .use(Uppy.Webcam, { target: Uppy.Dashboard,
+    //     countdown: false,
+    //     mirror: false,
+    //     showVideoSourceDropdown: true,
+    //     videoConstraints: {
+    //         facingMode: { exact: "environment" },
+    //         width: { min: 720, ideal: 1280, max: 1920 },
+    //         height: { min: 480, ideal: 800, max: 1080 },
+    //       },
+    //        showRecordingLength: true,
+    //  })
     .use(Uppy.XHRUpload, {
     endpoint: 'https://mindfulautomations.com/chat_bot_test/api/v1/expense/insert_expense_document',
     method:"post",
