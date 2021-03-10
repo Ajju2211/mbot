@@ -542,7 +542,11 @@ $.fn.EZView =  function(collectionName) {
     // removing iframes
     self.removeIframes = function(){
         console.log("Removing Iframe all occurances");
+        // removing css loader animation
+        $('.docsLoader').nextAll().remove();
+        $('.docsLoader').remove();
         $('.docs').nextAll().remove();
+        $('.docs').remove();
     }
 
     // 
