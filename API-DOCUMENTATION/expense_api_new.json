@@ -1,0 +1,166 @@
+##############creat expense form API modified############################################
+
+*********************************************************************************					
+**********************  HEADERS FOR ALL apis *****************************
+*********************************************************************************				
+token = md5encryption of manager id + md5encryption of brand_id
+authorization:"Bearer "+token
+
+
+*********************************************************************************					
+**********************  API Trigger Expense Form to create  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/create_expense_form
+REQUEST_MODE: POST
+
+Request json= NOT_REQUIRED
+
+Response json={
+    "status": "success",
+    "message": "Successfully",
+    "result": 
+        {
+            "tags": [
+                    {
+					"title": "tag1 (25000)",
+					"value": 2,
+					"amount_limit": 25000,
+					"outlet_id": 6
+                    },
+                    {
+					"title": "tag2 (250000)",
+					"value": 3,
+					"amount_limit": 250000,
+					"outlet_id": 6
+                    },
+                    {
+					"title": "tag1 (25000)",
+					"value": 2,
+					"amount_limit": 25000,
+					"outlet_id": 7
+                    },
+                    {
+					"title": "tag2 (250000)",
+					"value": 3,
+					"amount_limit": 250000,
+					"outlet_id": 7
+                    }
+            ],
+            "outlets":[
+            		{
+						"title": "Eat Fish ECT (200000)",
+						"outlet_id": 6,
+						"amount_limit": 1000000,
+						"remaining_amount":200000,
+						"spent_amount":800000
+            		},
+            		{
+						"title": "Eat Fish MDP (200000)",
+						"outlet_id": 7,
+						"amount_limit": 1000000,						
+						"remaining_amount":200000,
+						"spent_amount":800000
+            		}
+            ],
+            "categories": [
+                    {
+					"title": "Salaries (10000)",
+					"value": 2,
+					"amount_limit": 10000,
+					"outlet_id": 6
+                    },
+                    {
+					"title": "Rent (10000)",
+					"value": 3,
+					"amount_limit": 10000,
+					"outlet_id": 6
+                    },
+                    {
+					"title": "Salaries (10000)",
+					"value": 2,
+					"amount_limit": 10000,
+					"outlet_id": 7
+                    },
+                    {
+					"title": "Rent (10000)",
+					"value": 3,
+					"amount_limit": 10000,
+					"outlet_id": 7
+                    }
+            ]
+        },
+	"token":"c74d97b01eae257e44aa9d5bade97baf45c48cce2e2d7fbdea1afc51c7c6ad2"
+}
+
+#########################################################################################
+
+*********************************************************************************					
+**********************  API to Send OTP  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/send_otp
+REQUEST_MODE: POST
+
+Request json= NOT_REQUIRED
+
+Response json={
+    "status": "success",
+    "message": "OTP Sent Successfully",
+    "token": "c74d97b01eae257e44aa9d5bade97baf45c48cce2e2d7fbdea1afc51c7c6ad26"
+}
+
+
+#########################################################################################
+
+*********************************************************************************					
+**********************  API to Veriy OTP  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/verify_otp
+REQUEST_MODE: POST
+
+
+Request json={
+        "otp": 2556
+}
+
+Response json={
+    "status": "success",
+	"is_valid_otp":"yes",
+    "message": "OTP verified Successfully",
+    "token": "c74d97b01eae257e44aa9d5bade97baf45c48cce2e2d7fbdea1afc51c7c6ad26"
+}
+
+
+#########################################################################################
+
+*********************************************************************************					
+**********************  API to Save expense details  *****************************
+*********************************************************************************					
+
+ENDPOINT: BASE_URL/api/v1/expense/save_expense
+REQUEST_MODE: POST
+
+Request json={
+		"outlet_id":6,
+        "amount": 1000,
+        "tag":{
+            "title":"KRM",
+            "value":2
+        },
+        "cat": {
+            "title":"Rent",
+            "value":3
+        },
+        "is_verified":"no",
+        "name":"packing cover expense",
+        "comment": "We need them urgently",
+        "timestamp":1610143305315  
+}
+// timestamp is in milli seconds
+
+Response json={
+    "status": "failed",
+	"message": "Expense exceeds the left budget limit and not verified"
+}

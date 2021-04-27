@@ -10,6 +10,7 @@ module.exports.buildResponse = ({
   groupedSimpleCards2,
   scrollableChart,
   custom,
+  toast
 }, userObj) => {
   /**
    * @param {string} [text] - text message
@@ -20,6 +21,9 @@ module.exports.buildResponse = ({
    * returns [response]
    */
   const response = {};
+  if (toast) {
+    response.toast = toast;
+  }
   if (text) {
     response.text = text;
   }

@@ -28,7 +28,8 @@
     "multer": "^1.4.2",
     "request": "^2.88.2",
     "require-dir-all": "^0.4.15",
-    "smtp-server": "^3.8.0"
+    "smtp-server": "^3.8.0",
+    "sweetalert2": "^10.16.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

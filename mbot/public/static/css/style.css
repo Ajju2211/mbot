@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Raleway', sans-serif;
     background: url('') no-repeat center center fixed;
@@ -1589,7 +1590,7 @@ upto here added
     position: absolute;
     right: 0px;
     top: -15px;
-    rotate(340deg);
+    transform: rotate(340deg);
 }
 .gallery2:hover {
     scale: 1.3;
@@ -2031,8 +2032,21 @@ display: none;
         top: -20% !important;
         position: fixed;
   }
-
- .highlight {
+  div:nth-child(3).expense-input-field > .dropdown-content{
+    z-index: 1000 !important;
+    /* top:50px !important; */
+        /* Added */
+        top: -10% !important;
+        position: fixed;
+  }
+li > img.circle {
+    height: 15px;
+    width: 15px;
+    padding: 0px;
+    margin: 15px -10px 0px 5px;
+    float: left !important;
+}
+ /* .highlight {
     background: url(https://www.google.com/images/searchbox/desktop_searchbox_sprites302_hr.webp) no-repeat 0 -21px;
     background-size: 20px;
     min-height: 20px;
@@ -2040,7 +2054,7 @@ display: none;
     margin: 0px 13px 0px 13px;
     height: 20px;
     width: 20px;
-}
+} */
 
 
 #saveExpense {

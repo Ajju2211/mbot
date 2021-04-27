@@ -1,4 +1,66 @@
 
+// *********************************************************************************					
+// **********************  HEADERS FOR ALL apis *****************************
+// *********************************************************************************				
+// token = md5encryption of manager id + md5encryption of brand_id
+// authorization:"Bearer "+token
+
+
+// *********************************************************************************					
+// **********************  API Trigger Expense Form to create  *****************************
+// *********************************************************************************					
+
+// ENDPOINT: BASE_URL/api/v1/expense/create_expense_form
+// REQUEST_MODE: POST
+
+// Request json= NOT_REQUIRED
+
+// Response json={
+//     "status": "success",
+//     "result": 
+//         {
+//             "tags": [
+//                     {
+//                     "title": "tag1",
+//                     "value": "id1"
+//                     },
+//                     {
+//                     "title": "tag2",
+//                     "value": "id2"
+//                     },
+//                     {
+//                     "title": "tag3",
+//                     "value": "id3"
+//                     },
+//                     {
+//                     "title": "tag4",
+//                     "value": "id4"
+//                     }
+//             ],
+//             "categories": [
+//                     {
+//                     "title": "cat1",
+//                     "value": "cid1"
+//                     },
+//                     {
+//                     "title": "cat2",
+//                     "value": "cid2"
+//                     },
+//                     {
+//                     "title": "cat3",
+//                     "value": "cid3"
+//                     },
+//                     {
+//                     "title": "cat4",
+//                     "value": "cid4"
+//                     }
+//             ]
+//         }
+// }
+
+
+##############creat expense form API modified############################################
+
 *********************************************************************************					
 **********************  HEADERS FOR ALL apis *****************************
 *********************************************************************************				
@@ -37,22 +99,38 @@ Response json={
                     "value": "id4"
                     }
             ],
+            "outlets":[
+            		{
+            			"title": "Parivar",
+            			"amount_limit":200000,
+            			"outlet_id": "parivar321"
+            		},
+            		{
+            			"title": "Bawarchi",
+            			"amount_limit":300000,
+            			"outlet_id": "bawarchi090"
+            		}
+            ],
             "categories": [
                     {
                     "title": "cat1",
-                    "value": "cid1"
+                    "value": "cid1",
+                    "outlet_id":"mayura21"
                     },
                     {
                     "title": "cat2",
-                    "value": "cid2"
+                    "value": "cid2",
+                    "outlet_id":"parivar321"
                     },
                     {
                     "title": "cat3",
-                    "value": "cid3"
+                    "value": "cid3",
+                    "outlet_id":"bawarchi090"
                     },
                     {
                     "title": "cat4",
-                    "value": "cid4"
+                    "value": "cid4",
+                    "outlet_id":"mehfil007"
                     }
             ]
         }
@@ -60,6 +138,10 @@ Response json={
 
 
 
+
+
+
+#########################################################################################
 
 *********************************************************************************					
 **********************  API to Save expense details  *****************************

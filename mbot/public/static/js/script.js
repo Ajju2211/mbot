@@ -9,6 +9,10 @@
 //     console.log(fullpage);
 //     if (fullpage) fullpage.reBuild()
 // }, true)
+
+
+
+
 //Bot pop-up intro
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -26,47 +30,47 @@ var charts_data = [];
 var card_chart_data = [];
 // uploadedAttachment link stored
 var uploadedAttachmentStore = {
-    filled:false
+    filled: false
 };
 window.timerId = null;
 var callReoladIframe = true;
-$.fn.reloadIFrame = function(id){
-const iframe = document.getElementById(id);
-console.log(id);
-if(!iframe){
-    console.log("No iframe detected...");
-    return;
-}
-console.log(iframe);
-try{
-  console.log(iframe.contentDocument);//work control
-  if(iframe.contentDocument){
-      if(iframe.contentDocument.URL == "about:blank"){
-        iframe.src =  iframe.src;
-      }    
-  else{
-    console.log("clearing interval...");
-    callReoladIframe = false;
-    clearInterval(timerId);
-    window.timerId = null;
-  }
-  }
-  else{
-    callReoladIframe = false;
-    console.log("clearing interval");
-    clearInterval(window.timerId);
-    window.timerId = null;
-  }
+$.fn.reloadIFrame = function (id) {
+    const iframe = document.getElementById(id);
+    console.log(id);
+    if (!iframe) {
+        console.log("No iframe detected...");
+        return;
+    }
+    console.log(iframe);
+    try {
+        console.log(iframe.contentDocument);//work control
+        if (iframe.contentDocument) {
+            if (iframe.contentDocument.URL == "about:blank") {
+                iframe.src = iframe.src;
+            }
+            else {
+                console.log("clearing interval...");
+                callReoladIframe = false;
+                clearInterval(timerId);
+                window.timerId = null;
+            }
+        }
+        else {
+            callReoladIframe = false;
+            console.log("clearing interval");
+            clearInterval(window.timerId);
+            window.timerId = null;
+        }
 
 
-}
-catch(er){
-    console.log(er);
-    // callReoladIframe = false;
-    // console.log("clearing interval due to "+er.message);
-    // clearInterval(window.timerId);
-    // window.timerId = null;
-}
+    }
+    catch (er) {
+        console.log(er);
+        // callReoladIframe = false;
+        // console.log("clearing interval due to "+er.message);
+        // clearInterval(window.timerId);
+        // window.timerId = null;
+    }
 
 }
 
@@ -105,7 +109,8 @@ $(document).ready(function () {
     // $("#userInput").prop('disabled', true);
 
     //global variables
-    action_name = "/greetings.welcome";
+    // action_name = "/greetings.welcome";
+    action_name = "/main.expense.create_expense";
     // currently not neccesary, if require better use cookie
     user_id = "userid_unique";
 
@@ -143,7 +148,7 @@ $(document).ready(function () {
     //         }
     //     }
     // }]);
- 
+
     // approve Expense
     // setBotResponse([{
     //     text:"Approve expense Below",
@@ -299,17 +304,17 @@ function scrollToBottomOfResults() {
 }
 
 //============== send the user message to Chatbot server =============================================
-function send(message, data, silent=false) {
+function send(message, data, silent = false) {
     // Destroy modal and charts and cards if opened
     // Destroy others
-    if(silent === false){
-        $(".chart-container").remove();
-        $(".chart-container1").remove();
-        $(".chartWrapper").remove();
-        if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
-        $("#paginated_cards").remove();
-        $(".quickReplies").remove();
-    }
+    // if (silent === false) {
+    //     $(".chart-container").remove();
+    //     $(".chart-container1").remove();
+    //     $(".chartWrapper").remove();
+    //     if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
+    //     $("#paginated_cards").remove();
+    //     $(".quickReplies").remove();
+    // }
 
     let msgObj = {
         text: message,
@@ -325,6 +330,15 @@ function send(message, data, silent=false) {
         },
         data: JSON.stringify({ message: msgObj, sender: user_id }),
         success: function (botResponse, status) {
+            // ADDED JUST NOW
+            if (silent === false && botResponse[0] && !botResponse[0].hasOwnProperty("toast")) {
+                $(".chart-container").remove();
+                $(".chart-container1").remove();
+                $(".chartWrapper").remove();
+                if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
+                $("#paginated_cards").remove();
+                $(".quickReplies").remove();
+            }
             console.log("Response from Chatbot: ", botResponse, "\nStatus: ", status);
 
             // if user wants to restart the chat and clear the existing chat contents
@@ -335,9 +349,12 @@ function send(message, data, silent=false) {
                 // action_trigger();
                 return;
             }
-
+            if(botResponse[0] && botResponse[0].hasOwnProperty("toast")){
+                M.toast({html: botResponse[0].toast});
+                return;
+            }
             // now set the response
-            if(silent === false){
+            if (silent === false) {
                 setBotResponse(botResponse);
             }
             // If no response from chatbot
@@ -349,16 +366,16 @@ function send(message, data, silent=false) {
                     }
                 }
                 ];
-                if(silent === false){
+                if (silent === false) {
                     setBotResponse(goBackReply);
                 }
-                else{
+                else {
                     return {
-                        status:"failed",
+                        status: "failed",
                         message: "No Repponse"
                     };
                 }
-                
+
             }
 
         },
@@ -373,21 +390,22 @@ function send(message, data, silent=false) {
             }
 
             // if there is no response from Chatbot server
-            if(silent ==  false){
+            if (silent == false) {
                 console.log("...");
-            setBotResponse("");
-            let goBackReply = [{
-                "custom": {
-                    "payload": "quickReplies",
-                    "data": [{ "title": "Back to Menu", "payload": action_name },]
+                setBotResponse("");
+                let goBackReply = [{
+                    "custom": {
+                        "payload": "quickReplies",
+                        "data": [{ "title": "Back to Menu", "payload": action_name },]
+                    }
                 }
+                ];
+                setBotResponse(goBackReply);
             }
-            ];
-            setBotResponse(goBackReply);
-            }
-            else{
+
+            else {
                 return {
-                    status:"failed",
+                    status: "failed",
                     message: textStatus
                 };
             }
@@ -415,9 +433,14 @@ function setBotResponse(response) {
             //if we get response from Chatbot
             for (i = 0; i < response.length; i++) {
 
+                // // check if the type is toast
+                // if (response[i].hasOwnProperty("toast")) {
+                //     M.toast({html:response[i].toast});
+                // }
+
                 //check if the response contains "text"
                 if (response[i].hasOwnProperty("text")) {
-                    var BotResponse = '<img class="botAvatar" src="./static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text.replace(/undefined/g,'-') + '</p><div class="clearfix"></div>';
+                    var BotResponse = '<img class="botAvatar" src="./static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text.replace(/undefined/g, '-') + '</p><div class="clearfix"></div>';
                     $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
                 }
 
@@ -609,8 +632,8 @@ function setBotResponse(response) {
                     if (response[i].custom.payload == "createExpenseForm") {
                         let resData = (response[i].custom.data);
                         uploadedAttachmentStore = {
-                                    filled:false
-                                };
+                            filled: false
+                        };
                         showCreateExpenseForm(resData);
                         // continue;
                         // return;
@@ -1165,7 +1188,7 @@ function createGraphCardsCarousel(cardsData) {
 // ===================================== multiSimpleCardCarousel =============================================
 
 function showMultiSimpleCardsCarousel(cardsToAdd, cardLimit) {
-    if(cardsToAdd.length<1){
+    if (cardsToAdd.length < 1) {
         return;
     }
     var cards = createMultiSimpleCardsCarousel(cardsToAdd, cardLimit);
@@ -1525,7 +1548,7 @@ function createGroupedSimpleCardsCarousel(cardsData, cardLimit) {
 // ===================================== groupedSimpleCardCarousel2 =============================================
 // UI Is same for groupedSimpleCardCarousel and multiSimpleCardCarousel
 function showGroupedSimpleCardsCarousel2(cardsToAdd, cardLimit) {
-    if(cardsToAdd.length<1){
+    if (cardsToAdd.length < 1) {
         return;
     }
     var cards = createGroupedSimpleCardsCarousel2(cardsToAdd, cardLimit);
@@ -1563,7 +1586,7 @@ function showGroupedSimpleCardsCarousel2(cardsToAdd, cardLimit) {
 }
 
 
-function createGroupedSimpleCardsCarousel2(cardsData, miniCardRowLimit, cardLimit ) {
+function createGroupedSimpleCardsCarousel2(cardsData, miniCardRowLimit, cardLimit) {
 
     let cards = "";
     const MINICARDROWLIMIT = miniCardRowLimit || 2;
@@ -1597,8 +1620,8 @@ function createGroupedSimpleCardsCarousel2(cardsData, miniCardRowLimit, cardLimi
                 let metadata = miniCardsData[j].metadata;
                 let miniCard;
                 // minicardrows building
-                for(let m = 0; m < MINICARDROWLIMIT; m++){
-                    if(miniCardsData[j].metadata.data[m]){
+                for (let m = 0; m < MINICARDROWLIMIT; m++) {
+                    if (miniCardsData[j].metadata.data[m]) {
                         eles = eles + `<span class="multi_simpleCardAmount2 col s12">${miniCardsData[j].metadata.data[m].title}:<br /><span
                         class="countamount">${miniCardsData[j].metadata.data[m].value || "-"}</span></span>`;
                     }
@@ -1606,7 +1629,7 @@ function createGroupedSimpleCardsCarousel2(cardsData, miniCardRowLimit, cardLimi
                 }
 
                 if (table && metadata.data.length > MINICARDROWLIMIT) {
-                
+
                     miniCard = `
                 <div class="row multi_simpleCardContents2">
                         <div class="multi_simpleCardMiniHeader2">
@@ -1691,8 +1714,8 @@ function createGroupedSimpleCardsCarousel2(cardsData, miniCardRowLimit, cardLimi
         }
 
     }
-// //                             <span class="arrow prev fa fa-chevron-circle-left "></span> 
-// <span class="arrow next fa fa-chevron-circle-right" ></span> 
+    // //                             <span class="arrow prev fa fa-chevron-circle-left "></span> 
+    // <span class="arrow next fa fa-chevron-circle-right" ></span> 
     let cardContents = `<div id="paginated_cards">
                             <div class="multi_simple_carousel_wrapper2 cards">
                             <div class="multi_simple_cards_scroller2">${cards}
@@ -1765,11 +1788,11 @@ $(document).on("click", ".quickReplies .chip", function () {
 
 // ===================================== showCountsNotifications =======================================
 function showCountsNotifications(countsData) {
-        
 
-        const countNotifications = `<div class="countNotifications"><span>Approved</span><span>100</span></div>`;
-        $(countNotifications).appendTo(".chats").fadeIn(1000);
-        scrollToBottomOfResults();
+
+    const countNotifications = `<div class="countNotifications"><span>Approved</span><span>100</span></div>`;
+    $(countNotifications).appendTo(".chats").fadeIn(1000);
+    scrollToBottomOfResults();
 }
 
 
@@ -2165,7 +2188,7 @@ function createChartScroll(titles, labels, data1, data2) {
     // making expand{id} as an unique id and chat-chart{id} ids for canvas
 
     // creating unique id
-    if(labels.length<1){
+    if (labels.length < 1) {
         return;
     }
     let uniqueID = getCurrentChartIndex() + 1;
@@ -2378,21 +2401,21 @@ function createChartinModal(chartName, titles, labels, backgroundColor, chartsDa
 
 // ========================================createForm==============================================
 
-function previewAttachments(){
-    if(!uploadedAttachmentStore.filled){
-        M.toast({html:"No files are uploaded!..."});
+function previewAttachments() {
+    if (!uploadedAttachmentStore.filled) {
+        M.toast({ html: "No files are uploaded!..." });
         return;
     }
-    M.toast({html:"Displaying preview...!"});
+    M.toast({ html: "Displaying preview...!" });
 }
-function fillAttachment(file){
+function fillAttachment(file) {
     console.log(file);
     uploadedAttachmentStore = {
-        preview:file.preview,
-        url:file.uploadURL,
-        name:file.name,
-        type:file.type,
-        filled:true
+        preview: file.preview,
+        url: file.uploadURL,
+        name: file.name,
+        type: file.type,
+        filled: true
     };
     let icon = $('#attachment-icon');
     icon.addClass('filledFiles');
@@ -2404,91 +2427,103 @@ function fillAttachment(file){
     // 3. on trigger of the new icon run another function
     // $('#attachment-icon')
 }
-function triggerUploadFile(token, cb){
-    var uppy = Uppy.Core({restrictions:{maxNumberOfFiles:1},
-    browserBackButtonClose: true,
-    onBeforeFileAdded: (currentFile, files) => {
-      const modifiedFile = {
-        ...currentFile,
-        name:  currentFile.name.replace(/ +/g, "-").trim()
-      }
-      return modifiedFile
-    }})
-    .use(Uppy.Dashboard,  { target: '#drag-drop-area'})
-    .use(Uppy.ImageEditor, {
-     target:Uppy.Dashboard,
-     quality: 0.8,
-     cropperOptions: {
-          viewMode: 1,
-          background: false,
-          autoCropArea: 1,
-          responsive: true
-     },
-     actions: {
-          revert: true,
-          rotate: true,
-         flip: true,
-          zoomIn: true,
-          zoomOut: true,
-           cropSquare: true,
-           cropWidescreen: true,
-           cropWidescreenVertical: true
-     }
-})
-    // .use(Uppy.Webcam, { target: Uppy.Dashboard,
-    //     countdown: false,
-    //     mirror: false,
-    //     showVideoSourceDropdown: true,
-    //     videoConstraints: {
-    //         facingMode: { exact: "environment" },
-    //         width: { min: 720, ideal: 1280, max: 1920 },
-    //         height: { min: 480, ideal: 800, max: 1080 },
-    //       },
-    //        showRecordingLength: true,
-    //  })
-    .use(Uppy.XHRUpload, {
-    endpoint: 'https://mindfulautomations.com/chat_bot_test/api/v1/expense/insert_expense_document',
-    method:"post",
-    fieldName: 'files',
-    responseUrlFieldName: 'data',
-    headers: {
-        'Authorization': `Bearer ${token}`
-    }
+function triggerUploadFile(token, cb) {
+    var uppy = Uppy.Core({
+        restrictions: { maxNumberOfFiles: 1 },
+        browserBackButtonClose: true,
+        onBeforeFileAdded: (currentFile, files) => {
+            const modifiedFile = {
+                ...currentFile,
+                name: currentFile.name.replace(/ +/g, "-").trim()
+            }
+            return modifiedFile
+        }
     })
+        .use(Uppy.Dashboard, { target: '#drag-drop-area' })
+        .use(Uppy.ImageEditor, {
+            target: Uppy.Dashboard,
+            quality: 0.8,
+            cropperOptions: {
+                viewMode: 1,
+                background: false,
+                autoCropArea: 1,
+                responsive: true
+            },
+            actions: {
+                revert: true,
+                rotate: true,
+                flip: true,
+                zoomIn: true,
+                zoomOut: true,
+                cropSquare: true,
+                cropWidescreen: true,
+                cropWidescreenVertical: true
+            }
+        })
+        // .use(Uppy.Webcam, { target: Uppy.Dashboard,
+        //     countdown: false,
+        //     mirror: false,
+        //     showVideoSourceDropdown: true,
+        //     videoConstraints: {
+        //         facingMode: { exact: "environment" },
+        //         width: { min: 720, ideal: 1280, max: 1920 },
+        //         height: { min: 480, ideal: 800, max: 1080 },
+        //       },
+        //        showRecordingLength: true,
+        //  })
+        .use(Uppy.XHRUpload, {
+            endpoint: 'https://mindfulautomations.com/botdemo/chat_bot_test/api/v1/expense/insert_expense_document',
+            method: "post",
+            fieldName: 'files',
+            responseUrlFieldName: 'data',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
     //   .use(Uppy.Tus, {endpoint: 'http://mindfulautomations.com/chat_bot_test/api/v1/expense/insert_expense_document',
     //  fieldName: 'files'                 
     // })
 
     uppy.on('complete', (result) => {
         console.log(result);
-      console.log('Upload complete! We’ve uploaded these files:', result.successful);
-      cb(result);
+        console.log('Upload complete! We’ve uploaded these files:', result.successful);
+        cb(result);
 
     })
 
 
     uppy.getPlugin('Dashboard').openModal()
 
-// setTimeout(() => {
-//   uppy.getPlugin('Dashboard').closeModal()
-// }, 5000)
-// 
+    // setTimeout(() => {
+    //   uppy.getPlugin('Dashboard').closeModal()
+    // }, 5000)
+    // 
 }
 
-function showCreateExpenseForm(formData){
+function showCreateExpenseForm(formData) {
     let tags = {};
     let cats = {};
+    let outs = {};
     expenseFormMemory = formData;
-    formData.tags.forEach((tag)=>{
-        tags[tag.title] = null;
+    formData.tags.forEach((tag) => {
+        tags[tag.title] = "/static/img/desktop_searchbox.webp";
     });
-    formData.categories.forEach((cat)=>{
-        cats[cat.title] = null;
+    formData.categories.forEach((cat) => {
+        cats[cat.title] = "/static/img/desktop_searchbox.webp";
     });
-// background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
-// style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
+    formData.outlets.forEach((out) => {
+        outs[out.title] = "/static/img/desktop_searchbox.webp";
+    });
+    // background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
+    // style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
     const eles = `
     <div class="input-field col s12 expense-input-field" style="margin-top:9px">
+    <input type="text" name="out" id="auto-complete-outs" autocomplete="off" class="autocomplete validate" required="" maxlength="25" placeholder="Search Outlets">
+    <span style="display:none" id="warning-out"> <span class="material-icons" style="font-size: small;margin-right: 3px;top: 3px;position: relative;" style="font-size: small;margin-right: 3px;top: 3px;position: relative;">warning</span>No such Outlet</>
+        <!-- <label for="auto-complete-tags1" style="font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;">Search Tags</label> -->
+    </div>
+    <!-- style="margin-top:9px" -->
+    <div class="input-field col s12 expense-input-field">
     <input type="text" name="tag" id="auto-complete-tags1" autocomplete="off" class="autocomplete validate" required="" maxlength="25" placeholder="Search Tags">
     <span style="display:none" id="warning-tag"> <span class="material-icons" style="font-size: small;margin-right: 3px;top: 3px;position: relative;" style="font-size: small;margin-right: 3px;top: 3px;position: relative;">warning</span>No such tag</>
         <!-- <label for="auto-complete-tags1" style="font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;">Search Tags</label> -->
@@ -2520,7 +2555,7 @@ function showCreateExpenseForm(formData){
     </span>
         <textarea class="materialize-textarea" name="comment" placeholder="Write any Comments..." class="validate" maxlength="50" required autocomplete="off"></textarea>
     </div>`;
-    const miniCard =   `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
+    const miniCard = `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
                                 ${eles}
                         </div>`;
     const card = `<div class="multi_simple_carousel_cards2 in-left">
@@ -2548,105 +2583,191 @@ function showCreateExpenseForm(formData){
     //     data: cats,
     //   });
 
-      const autoCompleteTagElems = document.querySelectorAll('#auto-complete-tags1');
-      const autoCompleteCatElems = document.querySelectorAll('#auto-complete-cats1');
-      const options = {};
+    const autoCompleteTagElems = document.querySelectorAll('#auto-complete-tags1');
+    const autoCompleteCatElems = document.querySelectorAll('#auto-complete-cats1');
+    const autoCompleteOutElems = document.querySelectorAll('#auto-complete-outs');
+    const options = {};
 
-      const autoCompleteTaginstances = M.Autocomplete.init(autoCompleteTagElems, {
+    let autoCompleteTaginstances = M.Autocomplete.init(autoCompleteTagElems, {
         data: tags,
-        minLength: 0, 
-      });
-      const autoCompleteCatinstances = M.Autocomplete.init(autoCompleteCatElems, {
+        minLength: 0,
+    });
+    let autoCompleteCatinstances = M.Autocomplete.init(autoCompleteCatElems, {
         data: cats,
-        minLength: 0, 
-      });
-      
-      $('#auto-complete-tags1').on('focusin',function(){
+        minLength: 0,
+    });
+    let autoCompleteOutinstances = M.Autocomplete.init(autoCompleteOutElems, {
+        data: outs,
+        minLength: 0,
+    });
+    $('#auto-complete-tags1').attr('disabled', "disabled");
+    $('#auto-complete-cats1').attr('disabled', "disabled");
+    $('#auto-complete-tags1').on('focusin', function () {
         $('.quickReplies').toggle();
-      })
-      $('#auto-complete-tags1').on('focusout',function(){
-        $('.quickReplies').toggle();   
-      })
-      $('#auto-complete-cats1').on('focusin',function(){
+    })
+    $('#auto-complete-tags1').on('focusout', function () {
         $('.quickReplies').toggle();
-      })
-      $('#auto-complete-cats1').on('focusout',function(){
-        $('.quickReplies').toggle();   
-      })
-      $('#auto-complete-tags1').on('keyup',function(){
-            // console.log(autoCompleteTaginstances);
-            if ( autoCompleteTaginstances[0].count === 0 ) {
-              console.log('no matches');
-              $('#auto-complete-tags1').val('');
-              $('#warning-tag').show();
-              $(this).trigger("click");
-            }
-            else{
-                $('#warning-tag').hide();
-            }
+    })
+    $('#auto-complete-cats1').on('focusin', function () {
+        $('.quickReplies').toggle();
+    })
+    $('#auto-complete-cats1').on('focusout', function () {
+        $('.quickReplies').toggle();
+    })
+    $('#auto-complete-outs').on('focusin', function () {
+        $('.quickReplies').toggle();
+    })
+    $('#auto-complete-outs').on('focusout', function () {
+        $('.quickReplies').toggle();
+    })
+    $('#auto-complete-outs').on('change', function (e) {
+        let filteredTags = {};
+        let filteredCats = {};
+        let outletSel = e.target.value;
+        const imgLink = "/static/img/desktop_searchbox.webp";
+        outletSel = formData.outlets.filter(e => e.title.toLowerCase() == outletSel.toLowerCase())[0];
+        if (outletSel.length < 1) {
+            M.toast({ html: "Please select a valid outlet" });
             return;
-      })
-      $('#auto-complete-cats1').on('keyup',function(){
-        // console.log('keyup');
-            if ( autoCompleteCatinstances[0].count === 0 ) {
-                console.log('no matches');
-                $('#auto-complete-cats1').val('');
-                $('#warning-cat').show();
-                $(this).trigger("click");
-              }
-              else{
-                $('#warning-cat').hide();
-            }
-            return;
-      })
+        }
+        expenseFormMemory.selectedOutlet = outletSel;
+        // Show Outlet POPUP
+        Swal.fire("Outlet Info", `<div style="display:flex;flex-direction:column"><span><b>Budget</b> ${outletSel.amount_limit}</span><span> <b> Spent </b> ${outletSel.spent_amount} <br></span> <span> <b>Remaining </b> ${outletSel.remaining_amount} </span> </div>`);
 
-    $('#attachment-area').on('click', (e)=> {
-        if(uploadedAttachmentStore.filled){
+        console.log(outletSel);
+        let isCatsAvailable = false;
+        let isTagsAvailable = false;
+        for (let i = 0, j = 0; i < formData.categories.length || j < formData.tags.length; i++, j++) {
+            let tag = formData.tags[j];
+            let cat = formData.categories[i];
+            let obj = {};
+            console.log(outletSel.outlet_id);
+            if (tag && tag.outlet_id == outletSel.outlet_id) {
+                filteredTags[tag.title] = imgLink;
+                isTagsAvailable = true;
+            }
+            if (cat && cat.outlet_id == outletSel.outlet_id) {
+                filteredCats[cat.title] = imgLink;
+                isCatsAvailable = true;
+            }
+        }
+        if (!isCatsAvailable) {
+            $("#auto-complete-cats1").attr('disabled', 'disabled');
+        }
+        if (!isTagsAvailable) {
+            $("#auto-complete-tags1").attr('disabled', 'disabled');
+        }
+        if (isCatsAvailable) {
+            $("#auto-complete-cats1").removeAttr('disabled');
+        }
+        if (isTagsAvailable) {
+            $("#auto-complete-tags1").removeAttr('disabled');
+        }
+        expenseFormMemory.isCatsAvailable = isCatsAvailable;
+        expenseFormMemory.isTagsAvailable = isTagsAvailable;
+        autoCompleteTaginstances = M.Autocomplete.init(autoCompleteTagElems, {
+            data: filteredTags,
+            minLength: 0,
+        });
+        autoCompleteCatinstances = M.Autocomplete.init(autoCompleteCatElems, {
+            data: filteredCats,
+            minLength: 0,
+        });
+    })
+    $('#auto-complete-tags1').on('keyup', function () {
+        // console.log(autoCompleteTaginstances);
+        if (autoCompleteTaginstances[0].count === 0) {
+            console.log('no matches');
+            $('#auto-complete-tags1').val('');
+            $('#warning-tag').show();
+            $(this).trigger("click");
+        }
+        else {
+            $('#warning-tag').hide();
+        }
+        return;
+    })
+    $('#auto-complete-cats1').on('keyup', function () {
+        // console.log('keyup');
+        if (autoCompleteCatinstances[0].count === 0) {
+            console.log('no matches');
+            $('#auto-complete-cats1').val('');
+            $('#warning-cat').show();
+            $(this).trigger("click");
+        }
+        else {
+            $('#warning-cat').hide();
+        }
+        return;
+    })
+
+    $('#auto-complete-outs').on('keyup', function () {
+        // console.log('keyup');
+        if (autoCompleteOutinstances[0].count === 0) {
+            console.log('no matches');
+            $('#auto-complete-outs').val('');
+            $('#warning-out').show();
+            $(this).trigger("click");
+        }
+        else {
+            $('#warning-out').hide();
+        }
+        return;
+    })
+    $('#attachment-area').on('click', (e) => {
+        if (uploadedAttachmentStore.filled) {
             alert("Filled");
             return;
         }
         const token = formData.token;
-        triggerUploadFile(token , (result)=>{
-        const {successful, failed} = result;
+        expenseFormMemory.token = token;
+        triggerUploadFile(token, (result) => {
+            const { successful, failed } = result;
             console.log(failed)
-        if(failed.length>0){
-            M.toast({html: `Failed due to:  ${failed[0].error}`});
-        }
-        else{
-            const url = `https://mindfulautomations.com/${successful[0].response.uploadURL}`;
-            M.toast({html:`successfully uploaded at ${url}`});
-            fillAttachment(successful[0]);
-        }
+            if (failed.length > 0) {
+                M.toast({ html: `Failed due to:  ${failed[0].error}` });
+            }
+            else {
+                const url = `https://mindfulautomations.com/${successful[0].response.uploadURL}`;
+                M.toast({ html: `successfully uploaded at ${url}` });
+                fillAttachment(successful[0]);
+            }
         });
-        
-        
+
+
     });
 
-    $('form').on('submit', (e)=>{
+    $('form').on('submit', (e) => {
         e.preventDefault();
         // Disabling the multi clicks
         $('#saveExpense').prop('disabled', true);
         const serialisedData = $('form').serializeArray();
         formExpenseSubmit(serialisedData);
         $('#saveExpense').prop('disabled', false);
-        
+
     });
 
     scrollToBottomOfResults();
 }
 
-function formExpenseSubmit(serialiseddata){
+function formExpenseSubmit(serialiseddata) {
     console.log(serialiseddata);
     let expenseData = {};
-    for(let i=0;i<serialiseddata.length;i++){
+    for (let i = 0; i < serialiseddata.length; i++) {
         let ele = serialiseddata[i];
-        if(typeof ele.value ==="undefined"){
-            M.toast({html: 'Please fill out the details properly'});
+        if (typeof ele.value === "undefined") {
+            M.toast({ html: 'Please fill out the details properly' });
             return;
         }
         let singleSpacedText = ele.value.replace(/ +/g, " ").trim();
-        if(singleSpacedText.length<1){
-            M.toast({html: 'Please fill out the details properly'});
+        if (ele.name === "cat" && expenseFormMemory.isCatsAvailable && expenseFormMemory.isCatsAvailable == false) {
+            continue;
+        }
+        if (ele.name === "tag" && expenseFormMemory.isTagsAvailable && expenseFormMemory.isTagsAvailable == false) {
+            continue;
+        }
+        if (singleSpacedText.length < 1) {
+            M.toast({ html: 'Please fill out the details properly' });
             return;
         }
 
@@ -2654,66 +2775,187 @@ function formExpenseSubmit(serialiseddata){
     }
     let tag_found;
     let cat_found;
-    for(i=0,j=0;i<expenseFormMemory.tags.length || j<expenseFormMemory.categories.length;i++, j++){
+    let out_found;
+    for (i = 0, j = 0, k = 0; i < expenseFormMemory.tags.length || j < expenseFormMemory.categories.length || j < expenseFormMemory.outlets.length; i++, j++, k++) {
         let tag = expenseFormMemory.tags[i];
         let cat = expenseFormMemory.categories[i];
-        if(tag){
-            if(tag.title.toLowerCase().trim() === expenseData.tag.toLowerCase()){
+        let out = expenseFormMemory.outlets[i];
+        console.log(tag);
+        if (tag && expenseData.tag) {
+            if (tag.title.toLowerCase().trim() === expenseData.tag.toLowerCase()) {
                 tag_found = tag;
             }
         }
-        if(cat){
-            if(cat.title.toLowerCase().trim() === expenseData.cat.toLowerCase()){
+        if (cat && expenseData.cat) {
+            if (cat.title.toLowerCase().trim() === expenseData.cat.toLowerCase()) {
                 cat_found = cat;
             }
         }
+        if (out) {
+            if (out.title.toLowerCase().trim() === expenseData.out.toLowerCase()) {
+                out_found = out;
+            }
+        }
     }
-    if(typeof tag_found==="undefined" || typeof cat_found=== "undefined") {
-        M.toast({html: 'Please select valid option'});
+    if ((expenseFormMemory.isTagsAvailable && typeof tag_found === "undefined") || (expenseFormMemory.isCatsAvailable && typeof cat_found === "undefined") || typeof out_found === "undefined") {
+        M.toast({ html: 'Please select valid option' });
         return;
     }
     expenseData.tag = tag_found;
     expenseData.cat = cat_found;
+    expenseData.outlet_id = out_found.outlet_id;
+    const token = expenseFormMemory.token;
+    // Check Amount is greater than limited
+    // console.log(out_found.remaining_amount);
+    // console.log(tag_found.amount_limit);
+    // console.log(cat_found.amount_limit);
+    // console.log(expenseData.amount);
+    if (parseInt(expenseData.amount) > parseInt(out_found.remaining_amount) || (tag_found && parseInt(expenseData.amount) > parseInt(tag_found.amount_limit)) || (cat_found && parseInt(expenseData.amount) > parseInt(cat_found.amount_limit))) {
+        Swal.fire({
+            title: "OTP Required",
+            text: "Requested Amount is more than limit, OTP verification is must.",
+            icon: "info",
+            confirmButtonText: 'Send OTP',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return $.ajax({
+                    type: "post",
+                    url: "https://mindfulautomations.com/botdemo/chat_bot_test/api/v1/expense/send_otp",
+                    dataType: "json",
+                    contentType: "application/json",
+                    crossDomain: true,
+                    "headers": {
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
+                    },
+                }).done(function (data) {
+                    console.log(data);
+                    return data;
+                }).fail((err) => {
+                    console.log(err);
+                    alert("failed");
+                })
+            },
+            allowOutsideClick: () => false
+        }).then((response) => {
+            console.log(response);
+            if (response.isDenied || response.isDismissed) {
+                Swal.fire("Cancelled", "OTP Sending cancelled.", "success");
+            }
+            else if (response.value.status === 'success') {
+                Swal.fire({
+                    title: "OTP Sent",
+                    text: "Enter OTP sent to your device",
+                    icon: "success",
+                    input: 'text',
+                    inputAttributes: {
+                        autocapitalize: 'off'
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Verify',
+                    showLoaderOnConfirm: true,
+                    preConfirm: (otp) => {
+                        return $.ajax({
+                            type: "post",
+                            url: "https://mindfulautomations.com/botdemo/chat_bot_test/api/v1/expense/verify_otp",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify({ otp: otp + "" }),
+                            crossDomain: true,
+                            "headers": {
+                                'Content-Type': 'application/json',
+                                //   c74d97b01eae257e44aa9d5bade97baf45c48cce2e2d7fbdea1afc51c7c6ad26
+                                "Authorization": `Bearer ${token}`
+                            },
+                        }).done(function (data) {
+                            console.log(data);
+                            return data;
+                        }).fail((err) => {
+                            console.log(err);
+                            Swal.hideLoading();
+                            // return false;
+                            Swal.showValidationMessage(
+                                `Wrong OTP`
+                            )
+
+                        })
+                    },
+                    allowOutsideClick: () => false
+                }).then((response) => {
+                    if (response.isDenied || response.isDismissed) {
+                        console.log("deinied or dismissed");
+                        // Swal.showValidationMessage(`Are you sure to close`);
+                        Swal.fire("Cancelled", "OTP Verification cancelled :)", "error");
+                    }
+                    else if (response.value.is_valid_otp == "yes") {
+                        Swal.fire("Verified", "Successfully OTP has been verified.", "success");
+                        expenseData.timestamp = new Date().getTime();
+                        if (uploadedAttachmentStore.filled) {
+                            expenseData.file_path = uploadedAttachmentStore.url;
+                        }
+                        expenseData.is_verified = "yes";
+                        console.log(expenseData);
+                        const CREATE_EXPENSE_INTENT = "/main.expense.create_expense.save";
+                        send(CREATE_EXPENSE_INTENT, expenseData);
+                        console.log("Submitted");
+                    }
+                    else {
+                        Swal.showValidationMessage(`Wrong OTP`);
+                    }
+                })
+            }
+            else {
+                Swal.fire("Failed OTP Sending", "OTP Sending failed :)", "error");
+            }
+        });
+        return;
+    }
+
+
     // timestamp in ms
     expenseData.timestamp = new Date().getTime();
-    if(uploadedAttachmentStore.filled){
+    if (uploadedAttachmentStore.filled) {
         expenseData.file_path = uploadedAttachmentStore.url;
     }
+    expenseData.is_verified = "no";
     console.log(expenseData);
     const CREATE_EXPENSE_INTENT = "/main.expense.create_expense.save";
-    send(CREATE_EXPENSE_INTENT, expenseData);
+    const res = send(CREATE_EXPENSE_INTENT, expenseData);
+    console.log(res);
     console.log("Submitted");
 }
 
 
 // ========================================saveExpense==============================================
-function showApproveExpense(formData){
+function showApproveExpense(formData) {
     let tags = {};
     let cats = {};
     approveExpenseFormMemory = formData;
     let forms = '';
-    if(approveExpenseFormMemory.length < 1){
+    if (approveExpenseFormMemory.length < 1) {
         setBotResponse([{
             text: "No More to Approve."
         }]);
         return;
     }
     let noPreviewUrl = 'data:image/png;base64,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';
-    for(let i=0;i< approveExpenseFormMemory.length;i++){
+    for (let i = 0; i < approveExpenseFormMemory.length; i++) {
         let expense = approveExpenseFormMemory[i];
         let comments = '';
         let totalComments = expense.comments.length;
         let attachmentUrl = expense.document_path;
-        if(attachmentUrl.split('://')[0] == 'http'){
-            attachmentUrl = 'https://'+attachmentUrl.split('://')[1];
+        if (attachmentUrl.split('://')[0] == 'http') {
+            attachmentUrl = 'https://' + attachmentUrl.split('://')[1];
         }
         let attachmentDisplay = attachmentUrl.length > 0 ? 'inline-block' : 'none';
-        let imgUrl = attachmentUrl.length>0 ? attachmentUrl: noPreviewUrl;
-        for(let j=0;j< totalComments;j++){
+        let imgUrl = attachmentUrl.length > 0 ? attachmentUrl : noPreviewUrl;
+        for (let j = 0; j < totalComments; j++) {
             let comment = expense.comments[j];
             let commentHtml = `
             <fieldset class="input-field col s12 expense-text-area" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border:none !important;">
-            <legend><label for="previousComments${j}" style="color:grey">${comment['created_date']} ${j+1}/${totalComments}</label></legend>
+            <legend><label for="previousComments${j}" style="color:grey">${comment['created_date']} ${j + 1}/${totalComments}</label></legend>
             <textarea class="materialize-textarea" name="previousComments${j}" placeholder="Write any Comments..." class="validate"  maxlength="50" required disabled style="border-bottom:6px solid rgb(9, 84, 132) !important;overflow-y:scroll;width:50vh">${comment.comment}</textarea>
             </fieldset>
             `;
@@ -2742,7 +2984,7 @@ function showApproveExpense(formData){
     
         <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
         <legend><label for="attachment" style="color:grey">Attachment</label></legend>
-        <img  title="${expense.expense_name}" href="${imgUrl}" class="${attachmentUrl.length>0 ? 'gallery1':''}" src="${imgUrl}"  style="height:25px; width:auto;margin-left:45%;border:2px dashed dodgerblue">
+        <img  title="${expense.expense_name}" href="${imgUrl}" class="${attachmentUrl.length > 0 ? 'gallery1' : ''}" src="${imgUrl}"  style="height:25px; width:auto;margin-left:45%;border:2px dashed dodgerblue">
         </fieldset>
 
         <div style="overflow-x:scroll;display:flex;flex-direction:row">
@@ -2754,7 +2996,7 @@ function showApproveExpense(formData){
         <textarea class="materialize-textarea" autocomplete="off" name="comment" placeholder="Write any Comments..." class="validate"  maxlength="50" required  style="border-bottom:6px solid rgb(9, 84, 132) !important;overflow-y:scroll;height:15vh;"></textarea>
         </fieldset>
         `;
-        let miniCard =   `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
+        let miniCard = `<div class="multi_simpleCardMiniBody2" style="width:100%; border-radius: 20px !important;">
                                     ${fields}
                             </div>`;
         let card = `<div class="multi_simple_carousel_cards2 in-left">
@@ -2773,8 +3015,8 @@ function showApproveExpense(formData){
         </form>`;
         forms = forms + form;
     }
-// background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
-// style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
+    // background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
+    // style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
 
 
 
@@ -2789,19 +3031,21 @@ function showApproveExpense(formData){
     $(approveForm).appendTo(".chats").show();
 
     // adding preview for the img tags
-    $('.gallery1').EZView();
+    if ($('.gallery1').length > 0) {
+        $('.gallery1').EZView();
+    }
 
     // on click of approve button remove required comment box
-    $('button[name=approve]').on('click',(e)=>{
+    $('button[name=approve]').on('click', (e) => {
         $('textarea[name=comment]').removeAttr('required');
     });
-    $('button[name=cancel]').on('click',(e)=>{
-        $('textarea[name=comment]').attr('required','false');
+    $('button[name=cancel]').on('click', (e) => {
+        $('textarea[name=comment]').attr('required', 'false');
     });
-    $('button[name=reject]').on('click',(e)=>{
-        $('textarea[name=comment]').attr('required','false');
+    $('button[name=reject]').on('click', (e) => {
+        $('textarea[name=comment]').attr('required', 'false');
     });
-    $('form').on('submit', (e)=>{
+    $('form').on('submit', (e) => {
         console.log("Submitted");
         e.preventDefault();
         // Disabling the multi clicks
@@ -2813,45 +3057,45 @@ function showApproveExpense(formData){
         console.log($('button[type=submit]:focus'));
         // const button_name = e.originalEvent.submitter.innerText.toLowerCase();
         const button_name = clickedBtn.attr('value').toLowerCase();
-        console.log("BUTTONNAME: "+button_name);
+        console.log("BUTTONNAME: " + button_name);
         const id = btnId.split(button_name)[1];
-        console.log('id: '+id);
+        console.log('id: ' + id);
         const FORM_SELECTOR = `form#approval${id}`;
         const serialisedData = $(FORM_SELECTOR).serializeArray();
         formApproveSubmit(serialisedData, id, button_name);
 
-        
-   
+
+
         // $('#saveExpense').prop('disabled', false);
-        
+
     });
 
     scrollToBottomOfResults();
 }
 
-function formApproveSubmit(serialiseddata, id, selOption){
+function formApproveSubmit(serialiseddata, id, selOption) {
     // console.log(serialiseddata);
     const FORM_SELECTOR = `form#approval${id}`;
     let approveExpenseData = {};
-    for(let i=0;i<serialiseddata.length;i++){
+    for (let i = 0; i < serialiseddata.length; i++) {
         let ele = serialiseddata[i];
         console.log(ele);
-        if(typeof ele.value ==="undefined"){
-            M.toast({html: 'Please fill out the details properly'});
+        if (typeof ele.value === "undefined") {
+            M.toast({ html: 'Please fill out the details properly' });
             return;
         }
         let singleSpacedText = ele.value.replace(/ +/g, " ").trim();
-        if(singleSpacedText.length<1){
-            if(ele.name=='comment'){
+        if (singleSpacedText.length < 1) {
+            if (ele.name == 'comment') {
                 continue;
             }
-            M.toast({html: 'Please fill out the details properly'});
+            M.toast({ html: 'Please fill out the details properly' });
             return;
         }
 
         approveExpenseData[ele.name] = singleSpacedText;
     }
-    
+
     approveExpenseData.id = id;
     // approval status: approve , reject, cancel
     approveExpenseData.approval = selOption.toLowerCase().trim();
@@ -2861,11 +3105,11 @@ function formApproveSubmit(serialiseddata, id, selOption){
     console.log(approveExpenseData);
     const CREATE_EXPENSE_INTENT = "/main.expense.approve_expense.approval";
     // send(CREATE_EXPENSE_INTENT, approveExpenseData);
-    send('/main.expense.approve_expense.save', approveExpenseData, silent=true);
-    console.log("Counts "+$('#approvalCounts').html());
-    let counts = parseInt($('#approvalCounts').html())-1;
+    send('/main.expense.approve_expense.save', approveExpenseData, silent = true);
+    console.log("Counts " + $('#approvalCounts').html());
+    let counts = parseInt($('#approvalCounts').html()) - 1;
     console.log(counts);
-    $('#approvalCounts').html(counts+"");
+    $('#approvalCounts').html(counts + "");
     // $('#approvalCounts').show();
     console.log("Submitted");
 
@@ -2904,10 +3148,10 @@ function formApproveSubmit(serialiseddata, id, selOption){
     // }
 
     // Remove the card now
-    $(FORM_SELECTOR).fadeOut(300, function(){ 
+    $(FORM_SELECTOR).fadeOut(300, function () {
         $(this).remove();
         let len = $(".multi_simple_carousel_wrapper2").children().length;
-        if(len === 0){
+        if (len === 0) {
             $(".multi_simple_carousel_wrapper2").remove();
         }
     });
