@@ -109,8 +109,8 @@ $(document).ready(function () {
     // $("#userInput").prop('disabled', true);
 
     //global variables
-    // action_name = "/greetings.welcome";
-    action_name = "/main.expense.create_expense";
+    action_name = "/greetings.welcome";
+    // action_name = "/main.expense.create_expense";
     // currently not neccesary, if require better use cookie
     user_id = "userid_unique";
 
@@ -2472,7 +2472,7 @@ function triggerUploadFile(token, cb) {
         //        showRecordingLength: true,
         //  })
         .use(Uppy.XHRUpload, {
-            endpoint: 'https://mindfulautomations.com/botdemo/chat_bot_test/api/v1/expense/insert_expense_document',
+            endpoint: 'https://mindfulautomations.com/chat_bot_test/api/v1/expense/insert_expense_document',
             method: "post",
             fieldName: 'files',
             responseUrlFieldName: 'data',
@@ -2835,7 +2835,11 @@ function formExpenseSubmit(serialiseddata) {
                     return data;
                 }).fail((err) => {
                     console.log(err);
-                    alert("failed");
+                    // alert("failed");
+                    Swal.hideLoading();
+                    Swal.showValidationMessage(
+                     `Failed to send OTP, Check your Network!`);
+
                 })
             },
             allowOutsideClick: () => false
@@ -2876,9 +2880,14 @@ function formExpenseSubmit(serialiseddata) {
                             console.log(err);
                             Swal.hideLoading();
                             // return false;
+                            if(err.responseJSON && err.responseJSON.status==="failed"){
                             Swal.showValidationMessage(
-                                `Wrong OTP`
+                                err.responseJSON.message
                             )
+                        	}
+                        	else{
+							Swal.showValidationMessage("Something went wrong, Check your Network.");
+                        	}
 
                         })
                     },
@@ -2962,6 +2971,11 @@ function showApproveExpense(formData) {
             comments = comments + commentHtml;
         }
         let fields = `
+        <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
+        <legend><label for="tag" style="color:grey">Outlet</label></legend>
+        <input type="text" name="out" id="auto-complete-outs${i}" class="validate" required="" disabled value="${expense.outlet_name}" maxlength="25" style="height: auto;">
+        </fieldset>
+
         <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
         <legend><label for="tag" style="color:grey">Tag</label></legend>
         <input type="text" name="tag" id="auto-complete-tags${i}" class="validate" required="" disabled value="${expense.tag}" maxlength="25" style="height: auto;">
