@@ -2514,6 +2514,8 @@ function showCreateExpenseForm(formData) {
     formData.outlets.forEach((out) => {
         outs[out.title] = "/static/img/desktop_searchbox.webp";
     });
+
+
     // background: linear-gradient(45deg, rgb(47 61 138), #e6cfcf96);background-color: rgb(44, 60, 146);
     // style="border: solid 2px #cababad1;margin: 5px;margin-bottom: 2px;margin-top:0px"
     const eles = `
@@ -2538,6 +2540,10 @@ function showCreateExpenseForm(formData) {
     </div>
     <div class="input-field col s12 expense-input-field">
         <input type="number" autocomplete="off" name="amount" placeholder="Amount"  class="validate" required onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57) || event.keyCode==46 " min="0" >
+    </div>
+    <div class="input-field col s12 expense-input-field">
+    <!-- onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57) || event.keyCode==46 " -->
+        <input type="text" autocomplete="off" name="create_date" placeholder="Expense Create on"  class="datepicker validate" required>
     </div>
     <!--<div class="input-field col s12 expense-input-field">
         <input type="file" accept="image/*"  name="image" placeholder="Upload Image"  class="validate" required>
@@ -2599,6 +2605,20 @@ function showCreateExpenseForm(formData) {
     let autoCompleteOutinstances = M.Autocomplete.init(autoCompleteOutElems, {
         data: outs,
         minLength: 0,
+    });
+    // add select datepicker
+    var today =  new Date();
+    var currYear = today.getFullYear();
+    $(".datepicker").datepicker({
+        // defaultDate: new Date(currYear,1,31),
+        // setDefaultDate: new Date(2000,01,31),
+        autoClose:true,
+        maxDate: new Date(currYear,
+                        today.getMonth(),today.getDate()+1),
+        minDate: new Date(currYear,
+                        today.getMonth(),today.getDate()-1),
+        yearRange: [currYear, currYear],
+        format: "dd/mm/yyyy"    
     });
     $('#auto-complete-tags1').attr('disabled', "disabled");
     $('#auto-complete-cats1').attr('disabled', "disabled");
