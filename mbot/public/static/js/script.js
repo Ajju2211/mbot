@@ -2610,7 +2610,7 @@ function showCreateExpenseForm(formData) {
     var today =  new Date();
     var currYear = today.getFullYear();
     $(".datepicker").datepicker({
-        // defaultDate: new Date(currYear,1,31),
+        defaultDate: new Date(currYear,today.getMonth(),today.getDate()),
         // setDefaultDate: new Date(2000,01,31),
         autoClose:true,
         maxDate: new Date(currYear,
@@ -3019,6 +3019,11 @@ function showApproveExpense(formData) {
         <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
         <legend><label for="attachment" style="color:grey">Attachment</label></legend>
         <img  title="${expense.expense_name}" href="${imgUrl}" class="${attachmentUrl.length > 0 ? 'gallery1' : ''}" src="${imgUrl}"  style="height:25px; width:auto;margin-left:45%;border:2px dashed dodgerblue">
+        </fieldset>
+
+        <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
+        <legend><label for="create_date" style="color:grey">Created on</label></legend>
+        <input type="text" name="create_date"  class="validate" required="" disabled value="${expense.create_date || expense.created_date}" maxlength="25" style="height: auto;">
         </fieldset>
 
         <div style="overflow-x:scroll;display:flex;flex-direction:row">
