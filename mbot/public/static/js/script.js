@@ -2543,7 +2543,7 @@ function showCreateExpenseForm(formData) {
     </div>
     <div class="input-field col s12 expense-input-field">
     <!-- onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57) || event.keyCode==46 " -->
-        <input type="text" autocomplete="off" name="create_date" placeholder="Expense Create on"  class="datepicker validate" required>
+        <input type="text" autocomplete="off" name="create_date" placeholder="Expense Date"  class="datepicker validate" required>
     </div>
     <!--<div class="input-field col s12 expense-input-field">
         <input type="file" accept="image/*"  name="image" placeholder="Upload Image"  class="validate" required>
@@ -3022,7 +3022,7 @@ function showApproveExpense(formData) {
         </fieldset>
 
         <fieldset class="input-field col s12 expense-input-field" style="border: 1px solid rgba(202, 186, 186) !important;padding: 0px;padding-left: 15px;border-radius: 0px;border:none !important;box-shadow: none !important;">
-        <legend><label for="create_date" style="color:grey">Created on</label></legend>
+        <legend><label for="create_date" style="color:grey">Expense Date</label></legend>
         <input type="text" name="create_date"  class="validate" required="" disabled value="${expense.create_date || expense.created_date}" maxlength="25" style="height: auto;">
         </fieldset>
 
